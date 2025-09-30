@@ -356,8 +356,6 @@ def find_matching_videos(douyin_url, reference_image_path, output_csv='matching_
                         try:
                             is_match = future.result(timeout=30)
                             if is_match:
-                                # Add source page URL to the result
-                                video['source_page_url'] = douyin_url
                                 matching_videos.append(video)
                                 batch_matches += 1
                         except Exception as e:
@@ -372,7 +370,13 @@ def find_matching_videos(douyin_url, reference_image_path, output_csv='matching_
             # Save results to CSV
             print(f"\n💾 Saving results to {output_csv}...")
             with open(output_csv, 'w', newline='', encoding='utf-8') as f:
-                writer = csv.DictWriter(f, fieldnames=['source_page_url', 'video_url', 'thumbnail_url', 'index'])
+                # Write source page URL as a comment at the top
+                f.write(f"# Source Page: {douyin_url}\n")
+                f.write(f"# Total Matches: {len(matching_videos)}\n")
+                f.write(f"# Date: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+                
+                # Write CSV data
+                writer = csv.DictWriter(f, fieldnames=['video_url', 'thumbnail_url', 'index'])
                 writer.writeheader()
                 writer.writerows(matching_videos)
             
