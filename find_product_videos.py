@@ -426,6 +426,9 @@ def main():
         print("❌ No image path provided!")
         return
     
+    # Handle escaped spaces from drag-and-drop
+    reference_image = reference_image.replace('\\', '')
+    
     if not os.path.exists(reference_image):
         print(f"❌ Reference image not found: {reference_image}")
         return
