@@ -1,0 +1,446 @@
+#!/usr/bin/env python3
+"""
+Douyin Product Finder
+Finds all videos containing a specific product in their thumbnails using Gemini AI
+"""
+
+import os
+import sys
+import csv
+import time
+import json
+from pathlib import Path
+from playwright.sync_api import sync_playwright, TimeoutError as PlaywrightTimeout
+import google.generativeai as genai
+from PIL import Image
+import io
+import requests
+import asyncio
+from concurrent.futures import ThreadPoolExecutor
+import threading
+
+def setup_gemini_api():
+    """Setup Gemini API with user's API key"""
+    api_key = os.getenv('GEMINI_API_KEY')
+    
+    if not api_key:
+        print("🔑 Gemini API Key Setup")
+        print("=" * 30)
+        api_key = input("Enter your Google AI Studio API key: ").strip()
+        
+        if not api_key:
+            print("❌ No API key provided!")
+            return None
+    
+    try:
+        genai.configure(api_key=api_key)
+        # Use latest Gemini 2.5 Flash model (September 2025)
+        model = genai.GenerativeModel('gemini-2.5-flash-preview-09-2025')
+        print("✅ Gemini API configured successfully (using gemini-2.5-flash-preview-09-2025)")
+        return model
+    except Exception as e:
+        print(f"❌ Error configuring Gemini API: {e}")
+        return None
+
+def load_reference_image(image_path):
+    """Load reference product image"""
+    try:
+        if not os.path.exists(image_path):
+            print(f"❌ Reference image not found: {image_path}")
+            return None
+        
+        image = Image.open(image_path)
+        print(f"✅ Reference image loaded: {image_path}")
+        print(f"   Size: {image.size}, Format: {image.format}")
+        return image
+    except Exception as e:
+        print(f"❌ Error loading reference image: {e}")
+        return None
+
+def download_thumbnail(url):
+    """Download thumbnail from URL"""
+    try:
+        headers = {
+            'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15'
+        }
+        response = requests.get(url, headers=headers, timeout=10)
+        response.raise_for_status()
+        
+        image = Image.open(io.BytesIO(response.content))
+        return image
+    except Exception as e:
+        print(f"  ⚠️ Error downloading thumbnail: {e}")
+        return None
+
+def compare_images_with_gemini(model, reference_image, thumbnail_image, video_index=None):
+    """Compare thumbnail with reference image using Gemini"""
+    max_retries = 2
+    retry_delay = 2
+    
+    for attempt in range(max_retries):
+        try:
+            prompt = """Compare these two images. 
+            
+The FIRST image is the reference product I'm looking for.
+The SECOND image is a video thumbnail.
+
+Does the video thumbnail contain the EXACT SAME product as shown in the reference image? 
+
+Look for:
+- Same product type
+- Same design/shape
+- Same or very similar appearance
+
+Answer with ONLY ONE WORD:
+- "MATCH" if the thumbnail clearly contains this exact product
+- "NO" if the product is not present or is different
+
+Be strict - only say MATCH if you're confident it's the same product."""
+
+            response = model.generate_content([prompt, reference_image, thumbnail_image])
+            
+            if response and response.text:
+                answer = response.text.strip().upper()
+                return "MATCH" in answer
+            else:
+                return False
+                
+        except Exception as e:
+            error_msg = str(e).lower()
+            
+            # Handle rate limit errors
+            if "quota" in error_msg or "rate limit" in error_msg or "429" in error_msg:
+                if attempt < max_retries - 1:
+                    time.sleep(retry_delay)
+                    retry_delay *= 2
+                    continue
+                else:
+                    return False
+            else:
+                return False
+    
+    return False
+
+def process_single_video(model, reference_image, video, video_num, total_videos):
+    """Process a single video - download and compare"""
+    try:
+        # Download thumbnail
+        thumbnail = download_thumbnail(video['thumbnail_url'])
+        if not thumbnail:
+            print(f"  [{video_num}/{total_videos}] ⚠️ Failed to download thumbnail")
+            return False
+        
+        # Compare with reference image
+        is_match = compare_images_with_gemini(model, reference_image, thumbnail, video_num)
+        
+        if is_match:
+            print(f"  [{video_num}/{total_videos}] ✅ MATCH FOUND!")
+        else:
+            print(f"  [{video_num}/{total_videos}] ❌ No match")
+        
+        return is_match
+        
+    except Exception as e:
+        print(f"  [{video_num}/{total_videos}] ⚠️ Error: {e}")
+        return False
+
+def scroll_and_load_all_videos(page, max_duration_minutes=30):
+    """Scroll page to load all videos with time limit"""
+    print(f"⏬ Scrolling to load all videos (max {max_duration_minutes} minutes)...")
+    
+    start_time = time.time()
+    max_duration_seconds = max_duration_minutes * 60
+    max_scrolls = 200  # Maximum scroll attempts
+    scroll_pause_time = 2  # Wait between scrolls
+    
+    previous_height = None
+    scroll_count = 0
+    
+    # Find the scroll container (Douyin uses a div with class 'route-scroll-container')
+    scroll_container_selector = "document.querySelector('.route-scroll-container')"
+    
+    while scroll_count < max_scrolls:
+        # Check time limit
+        elapsed = time.time() - start_time
+        if elapsed > max_duration_seconds:
+            print(f"  ⏱️ Reached {max_duration_minutes} minute time limit")
+            break
+        
+        # Scroll the container to bottom
+        page.evaluate(f"{scroll_container_selector}.scrollTo(0, {scroll_container_selector}.scrollHeight)")
+        
+        # Wait for new content to load
+        time.sleep(scroll_pause_time)
+        
+        # Get current scroll height of the container
+        current_height = page.evaluate(f"{scroll_container_selector}.scrollHeight")
+        
+        # Count videos for progress
+        video_count = page.locator('a[href*="/video/"]').count()
+        
+        # Check if height changed (new content loaded)
+        if current_height == previous_height:
+            print(f"  ✅ No more content to load. Found {video_count} videos.")
+            break
+        
+        print(f"  📊 Loaded {video_count} videos... (elapsed: {int(elapsed)}s)")
+        previous_height = current_height
+        scroll_count += 1
+    
+    final_count = page.locator('a[href*="/video/"]').count()
+    print(f"✅ Finished scrolling. Total videos: {final_count}")
+    return final_count
+
+def extract_videos_from_page(page):
+    """Extract video URLs and thumbnail URLs from page - FAST version"""
+    print("🔍 Extracting video data from page...")
+    
+    try:
+        # Wait for content to load
+        page.wait_for_selector('img', timeout=10000)
+        
+        # Extract ALL video data in ONE JavaScript call (much faster!)
+        videos = page.evaluate("""
+            () => {
+                const videoLinks = document.querySelectorAll('a[href*="/video/"]');
+                const videos = [];
+                
+                videoLinks.forEach((link, index) => {
+                    const videoUrl = link.href;
+                    const img = link.querySelector('img');
+                    const thumbnailUrl = img ? (img.src || img.getAttribute('data-src')) : null;
+                    
+                    if (videoUrl && thumbnailUrl) {
+                        videos.push({
+                            video_url: videoUrl,
+                            thumbnail_url: thumbnailUrl,
+                            index: index + 1
+                        });
+                    }
+                });
+                
+                return videos;
+            }
+        """)
+        
+        print(f"✅ Extracted {len(videos)} videos with thumbnails")
+        return videos
+        
+    except Exception as e:
+        print(f"❌ Error extracting videos: {e}")
+        return []
+
+def find_matching_videos(douyin_url, reference_image_path, output_csv='matching_videos.csv', max_duration_minutes=30):
+    """Main function to find matching videos"""
+    
+    print("🎬 Douyin Product Finder")
+    print("=" * 50)
+    
+    # Setup Gemini API
+    model = setup_gemini_api()
+    if not model:
+        return False
+    
+    # Load reference image
+    reference_image = load_reference_image(reference_image_path)
+    if not reference_image:
+        return False
+    
+    print(f"\n🌐 Opening Douyin page: {douyin_url}")
+    
+    with sync_playwright() as p:
+        # Launch browser with anti-detection settings
+        browser = p.chromium.launch(
+            headless=False,
+            args=[
+                '--disable-blink-features=AutomationControlled',
+                '--disable-dev-shm-usage',
+                '--no-sandbox',
+                '--disable-setuid-sandbox',
+                '--disable-web-security',
+                '--disable-features=IsolateOrigins,site-per-process'
+            ]
+        )
+        
+        # Load cookies if available
+        cookies_file = 'douyin_cookies.json'
+        storage_state = None
+        
+        if os.path.exists(cookies_file):
+            print(f"✅ Loading cookies from {cookies_file}")
+            with open(cookies_file, 'r') as f:
+                storage_state = json.load(f)
+        else:
+            print(f"ℹ️ No cookies file found. Create '{cookies_file}' to avoid login.")
+            print(f"   Instructions will be shown after the run.")
+        
+        # Create context with realistic browser fingerprint
+        context = browser.new_context(
+            viewport={'width': 1920, 'height': 1080},
+            user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+            locale='en-US',
+            timezone_id='America/New_York',
+            extra_http_headers={
+                'Accept-Language': 'en-US,en;q=0.9',
+                'Accept-Encoding': 'gzip, deflate, br',
+                'Accept': 'text/html,application/xhtml+xml,application/xml;q=0.9,image/avif,image/webp,image/apng,*/*;q=0.8',
+                'Referer': 'https://www.douyin.com/',
+            },
+            storage_state=storage_state
+        )
+        
+        # Hide automation indicators
+        page = context.new_page()
+        
+        # Override navigator.webdriver
+        page.add_init_script("""
+            Object.defineProperty(navigator, 'webdriver', {
+                get: () => undefined
+            });
+        """)
+        
+        try:
+            # Navigate to page
+            page.goto(douyin_url, wait_until='networkidle', timeout=60000)
+            
+            # Wait for CAPTCHA (if any) - give user 30 seconds to complete it
+            print("\n⏳ Waiting 30 seconds for you to complete any CAPTCHA...")
+            print("   (If no CAPTCHA appears, just wait - the script will continue automatically)")
+            for i in range(30, 0, -1):
+                print(f"   Starting in {i} seconds...", end='\r')
+                time.sleep(1)
+            print("\n✅ Starting video collection...                    ")
+            
+            # Scroll and load all videos
+            total_videos = scroll_and_load_all_videos(page, max_duration_minutes)
+            
+            # Extract video data
+            videos = extract_videos_from_page(page)
+            
+            if not videos:
+                print("❌ No videos found on page!")
+                browser.close()
+                return False
+            
+            print(f"\n🔎 Analyzing {len(videos)} videos with parallel processing...")
+            print("=" * 50)
+            
+            matching_videos = []
+            
+            # Process in batches for parallel requests
+            batch_size = 10  # Process 10 videos at a time
+            total_batches = (len(videos) + batch_size - 1) // batch_size
+            
+            with ThreadPoolExecutor(max_workers=10) as executor:
+                for batch_num in range(total_batches):
+                    start_idx = batch_num * batch_size
+                    end_idx = min(start_idx + batch_size, len(videos))
+                    batch = videos[start_idx:end_idx]
+                    
+                    print(f"\n📦 Processing batch {batch_num + 1}/{total_batches} ({len(batch)} videos)")
+                    print(f"   Videos {start_idx + 1}-{end_idx} of {len(videos)}")
+                    
+                    # Submit all videos in batch to thread pool
+                    futures = []
+                    for i, video in enumerate(batch):
+                        video_num = start_idx + i + 1
+                        future = executor.submit(
+                            process_single_video,
+                            model, reference_image, video, video_num, len(videos)
+                        )
+                        futures.append((future, video))
+                    
+                    # Collect results
+                    batch_matches = 0
+                    for future, video in futures:
+                        try:
+                            is_match = future.result(timeout=30)
+                            if is_match:
+                                matching_videos.append(video)
+                                batch_matches += 1
+                        except Exception as e:
+                            print(f"  ⚠️ Error processing video: {e}")
+                    
+                    print(f"   ✅ Batch complete: {batch_matches} matches found")
+                    
+                    # Small delay between batches to respect rate limits
+                    if batch_num < total_batches - 1:
+                        time.sleep(0.5)
+            
+            # Save results to CSV
+            print(f"\n💾 Saving results to {output_csv}...")
+            with open(output_csv, 'w', newline='', encoding='utf-8') as f:
+                writer = csv.DictWriter(f, fieldnames=['video_url', 'thumbnail_url', 'index'])
+                writer.writeheader()
+                writer.writerows(matching_videos)
+            
+            print(f"\n🎉 Search complete!")
+            print(f"📊 Analyzed: {len(videos)} videos")
+            print(f"✅ Found: {len(matching_videos)} matching videos")
+            print(f"📄 Results saved to: {output_csv}")
+            
+            # Save cookies for future use if not already saved
+            if not os.path.exists('douyin_cookies.json'):
+                try:
+                    storage = context.storage_state()
+                    with open('douyin_cookies.json', 'w') as f:
+                        json.dump(storage, f, indent=2)
+                    print(f"💾 Cookies saved to douyin_cookies.json for future use!")
+                except:
+                    pass
+            
+            browser.close()
+            return True
+            
+        except Exception as e:
+            print(f"❌ Error during search: {e}")
+            browser.close()
+            return False
+
+def main():
+    """Main entry point"""
+    # Try to load API key from .env file
+    if os.path.exists('.env'):
+        try:
+            with open('.env', 'r') as f:
+                for line in f:
+                    if line.startswith('GEMINI_API_KEY='):
+                        api_key = line.split('=', 1)[1].strip()
+                        os.environ['GEMINI_API_KEY'] = api_key
+                        break
+        except:
+            pass
+    
+    print("🎬 Douyin Product Video Finder")
+    print("=" * 50)
+    
+    # Check for ref.png in current directory
+    reference_image = 'ref.png'
+    if not os.path.exists(reference_image):
+        print(f"\n❌ Reference image not found!")
+        print(f"   Please place your product image as 'ref.png' in the current directory:")
+        print(f"   {os.getcwd()}")
+        return
+    
+    print(f"✅ Found reference image: {reference_image}")
+    
+    # Get inputs from user
+    douyin_url = input("\n🌐 Enter Douyin page URL: ").strip()
+    if not douyin_url:
+        print("❌ No URL provided!")
+        return
+    
+    # Optional: custom output file
+    output_csv = input("💾 Output CSV filename (press Enter for 'matching_videos.csv'): ").strip()
+    if not output_csv:
+        output_csv = 'matching_videos.csv'
+    
+    # Run the search
+    success = find_matching_videos(douyin_url, reference_image, output_csv)
+    
+    if not success:
+        print("\n💥 Search failed!")
+        sys.exit(1)
+
+if __name__ == "__main__":
+    main()

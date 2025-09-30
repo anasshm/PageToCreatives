@@ -1,0 +1,28 @@
+# Personal data - DO NOT COMMIT
+douyin_cookies.json
+chrome_cookies_raw.json
+*.csv
+ref.png
+.env
+
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+ENV/
+.venv
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+*~
+
+# OS
+.DS_Store
+Thumbs.db
