@@ -303,13 +303,13 @@ def find_matching_videos(douyin_url, reference_image_path, output_csv='matching_
             # Navigate to page
             page.goto(douyin_url, wait_until='networkidle', timeout=60000)
             
-            # Wait for CAPTCHA (if any) - give user 30 seconds to complete it
-            print("\n⏳ Waiting 30 seconds for you to complete any CAPTCHA...")
-            print("   (If no CAPTCHA appears, just wait - the script will continue automatically)")
-            for i in range(30, 0, -1):
-                print(f"   Starting in {i} seconds...", end='\r')
-                time.sleep(1)
-            print("\n✅ Starting video collection...                    ")
+            # Wait for user to complete CAPTCHA manually
+            print("\n⏸️  CAPTCHA Check")
+            print("=" * 50)
+            print("If you see a CAPTCHA, please complete it now.")
+            print("When ready, press ENTER to start collecting videos...")
+            input()
+            print("\n✅ Starting video collection...")
             
             # Scroll and load all videos
             total_videos = scroll_and_load_all_videos(page, max_duration_minutes)
