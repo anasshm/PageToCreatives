@@ -435,6 +435,13 @@ def main():
     # Auto-generate CSV filename from image name
     image_name = os.path.splitext(os.path.basename(reference_image))[0]
     output_csv = f"{image_name}.csv"
+    
+    # If file exists, add number suffix
+    counter = 1
+    while os.path.exists(output_csv):
+        output_csv = f"{image_name}{counter}.csv"
+        counter += 1
+    
     print(f"💾 Output will be saved to: {output_csv}")
     
     # Get Douyin page URL
