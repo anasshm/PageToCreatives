@@ -328,10 +328,10 @@ def find_matching_videos(douyin_url, reference_image_path, output_csv='matching_
             matching_videos = []
             
             # Process in batches for parallel requests
-            batch_size = 10  # Process 10 videos at a time
+            batch_size = 30  # Process 30 videos at a time
             total_batches = (len(videos) + batch_size - 1) // batch_size
             
-            with ThreadPoolExecutor(max_workers=10) as executor:
+            with ThreadPoolExecutor(max_workers=30) as executor:
                 for batch_num in range(total_batches):
                     start_idx = batch_num * batch_size
                     end_idx = min(start_idx + batch_size, len(videos))
