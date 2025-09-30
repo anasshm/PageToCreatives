@@ -420,26 +420,28 @@ def main():
     print("🎬 Douyin Product Video Finder")
     print("=" * 50)
     
-    # Check for ref.png in current directory
-    reference_image = 'ref.png'
+    # Get reference image path from user
+    reference_image = input("\n📸 Enter path to reference product image: ").strip()
+    if not reference_image:
+        print("❌ No image path provided!")
+        return
+    
     if not os.path.exists(reference_image):
-        print(f"\n❌ Reference image not found!")
-        print(f"   Please place your product image as 'ref.png' in the current directory:")
-        print(f"   {os.getcwd()}")
+        print(f"❌ Reference image not found: {reference_image}")
         return
     
     print(f"✅ Found reference image: {reference_image}")
     
-    # Get inputs from user
+    # Auto-generate CSV filename from image name
+    image_name = os.path.splitext(os.path.basename(reference_image))[0]
+    output_csv = f"{image_name}.csv"
+    print(f"💾 Output will be saved to: {output_csv}")
+    
+    # Get Douyin page URL
     douyin_url = input("\n🌐 Enter Douyin page URL: ").strip()
     if not douyin_url:
         print("❌ No URL provided!")
         return
-    
-    # Optional: custom output file
-    output_csv = input("💾 Output CSV filename (press Enter for 'matching_videos.csv'): ").strip()
-    if not output_csv:
-        output_csv = 'matching_videos.csv'
     
     # Run the search
     success = find_matching_videos(douyin_url, reference_image, output_csv)
