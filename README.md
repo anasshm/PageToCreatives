@@ -6,12 +6,14 @@ Find all videos containing a specific product in their thumbnails using AI-power
 
 - ✅ Auto-scrolls Douyin pages to load all videos
 - ✅ Extracts video thumbnails and URLs
-- ✅ **Parallel processing** - Analyzes 10 videos simultaneously
+- ✅ **Parallel processing** - Analyzes 50 videos simultaneously
 - ✅ Uses Google Gemini 2.5 Flash AI for precise product matching
-- ✅ Exports matching videos to CSV
+- ✅ Exports matching videos to CSV (new file per run)
+- ✅ **Accumulative research.csv** - Saves all non-matches for analysis
+- ✅ **Smart deduplication** - Prevents re-processing same pages
 - ✅ Chrome cookie support to bypass login
 - ✅ 30-minute time limit with progress tracking
-- ✅ **~10x faster** than sequential processing
+- ✅ **~50x faster** than sequential processing
 
 ## Installation
 
@@ -60,9 +62,19 @@ python3 find_product_videos.py
 
 ## Output
 
-The script generates a CSV file with:
-- `video_url` - Direct link to the video
-- `thumbnail_url` - URL of the video thumbnail
+The script generates **two CSV files** per run:
+
+### 1. Matches File (e.g., `Neckadele.csv`)
+- Creates a **new file** for each run
+- Contains only videos that match your product
+- Columns: `video_url`, `thumbnail_url`, `index`
+
+### 2. Research File (`research.csv`)
+- **Accumulative** - keeps growing with each run
+- Contains all non-matching videos
+- Automatically prevents duplicates by checking if page was already processed
+- Same structure: `video_url`, `thumbnail_url`, `index`
+- Includes source page URLs in header comments
 
 ## Configuration
 
@@ -105,7 +117,14 @@ Edit `find_product_videos.py` to adjust:
 
 ## Notes
 
-- Uses the same Gemini model (`gemini-2.0-flash-exp`) as your working jewelry tagger
+- Uses Gemini 2.5 Flash Lite model (`gemini-2.5-flash-lite-preview-09-2025`)
 - Browser runs in visible mode by default so you can monitor progress
 - Respects Gemini API rate limits (1,000 RPM)
 - Each comparison takes ~0.2-0.3 seconds to stay within limits
+
+### Duplicate Prevention
+
+- The script checks `research.csv` for previously processed page URLs
+- If a page was already analyzed, matches are still saved to a new file
+- Non-matches from duplicate pages are **skipped** to avoid bloating research.csv
+- This allows you to re-run the same page with different product images without polluting your research data
