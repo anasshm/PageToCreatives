@@ -67,14 +67,24 @@ The script generates **two CSV files** per run:
 ### 1. Matches (saved to `Matches/` folder)
 - Creates a **new file** for each run (e.g., `Matches/Neckadele.csv`)
 - Contains only videos that match your product
-- Columns: `video_url`, `thumbnail_url`, `index`
+- Columns: `video_url`, `thumbnail_url`, `likes`, `index`
 
 ### 2. Research (saved to `Research/` folder)
 - Saves non-matches to `Research/{user_id}.csv`
 - **Overwrites** previous data for same user (not accumulative)
 - Prevents 10k+ line files - each user has separate file
-- Same structure: `video_url`, `thumbnail_url`, `index`
+- Same structure: `video_url`, `thumbnail_url`, `likes`, `index`
 - Includes source page URLs in header comments
+
+**CSV Format:**
+```csv
+video_url,thumbnail_url,likes,index
+https://www.douyin.com/video/123...,https://...,1.2w,1
+https://www.douyin.com/video/456...,https://...,8520,2
+https://www.douyin.com/video/789...,https://...,N/A,3
+```
+
+**Note:** Likes are shown in Douyin's format (e.g., "1.2w" for 12,000 or "N/A" if unavailable)
 
 ## Configuration
 

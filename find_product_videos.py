@@ -109,7 +109,7 @@ def save_non_matches_to_research(douyin_url, non_matching_videos):
             f.write(f"# Date: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
             
             # Write CSV data
-            writer = csv.DictWriter(f, fieldnames=['video_url', 'thumbnail_url', 'index'])
+            writer = csv.DictWriter(f, fieldnames=['video_url', 'thumbnail_url', 'likes', 'index'])
             writer.writeheader()
             writer.writerows(non_matching_videos)
         
@@ -263,7 +263,7 @@ def scroll_and_load_all_videos(page, max_duration_minutes=30):
     return final_count
 
 def extract_videos_from_page(page):
-    """Extract video URLs and thumbnail URLs from page - FAST version"""
+    """Extract video URLs, thumbnail URLs, and likes from page - FAST version"""
     print("🔍 Extracting video data from page...")
     
     try:
@@ -281,10 +281,40 @@ def extract_videos_from_page(page):
                     const img = link.querySelector('img');
                     const thumbnailUrl = img ? (img.src || img.getAttribute('data-src')) : null;
                     
+                    // Try to find likes count (Douyin shows it in various places)
+                    let likes = '';
+                    
+                    // Look for common like count patterns in the video card
+                    const container = link.closest('li') || link.closest('div[class*="video"]');
+                    if (container) {
+                        // Try different selectors for like count
+                        const likeSelectors = [
+                            'span[class*="count"]',
+                            'span[class*="like"]',
+                            'div[class*="count"]',
+                            'div[class*="digg"]',
+                            'span[class*="digg"]'
+                        ];
+                        
+                        for (const selector of likeSelectors) {
+                            const elements = container.querySelectorAll(selector);
+                            for (const el of elements) {
+                                const text = el.textContent.trim();
+                                // Check if it looks like a number (could be "1.2w", "10k", "1234", etc.)
+                                if (text && /[\d.]+[wkm万千]?/i.test(text)) {
+                                    likes = text;
+                                    break;
+                                }
+                            }
+                            if (likes) break;
+                        }
+                    }
+                    
                     if (videoUrl && thumbnailUrl) {
                         videos.push({
                             video_url: videoUrl,
                             thumbnail_url: thumbnailUrl,
+                            likes: likes || 'N/A',
                             index: index + 1
                         });
                     }
@@ -294,7 +324,7 @@ def extract_videos_from_page(page):
             }
         """)
         
-        print(f"✅ Extracted {len(videos)} videos with thumbnails")
+        print(f"✅ Extracted {len(videos)} videos with thumbnails and likes")
         return videos
         
     except Exception as e:
@@ -467,7 +497,7 @@ def find_matching_videos(douyin_url, reference_image_path, output_csv='matching_
                 f.write(f"# Date: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
                 
                 # Write CSV data
-                writer = csv.DictWriter(f, fieldnames=['video_url', 'thumbnail_url', 'index'])
+                writer = csv.DictWriter(f, fieldnames=['video_url', 'thumbnail_url', 'likes', 'index'])
                 writer.writeheader()
                 writer.writerows(matching_videos)
             
