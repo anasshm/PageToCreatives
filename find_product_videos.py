@@ -72,56 +72,51 @@ def download_thumbnail(url):
         print(f"  ⚠️ Error downloading thumbnail: {e}")
         return None
 
-def get_processed_pages_from_research():
-    """Get list of source page URLs already in research.csv"""
-    research_file = 'research.csv'
-    processed_pages = []
-    
-    if not os.path.exists(research_file):
-        return processed_pages
-    
+def extract_user_id_from_url(url):
+    """Extract user ID from Douyin URL"""
     try:
-        with open(research_file, 'r', encoding='utf-8') as f:
-            for line in f:
-                # Look for source page comments
-                if line.startswith('# Source Page:'):
-                    url = line.replace('# Source Page:', '').strip()
-                    processed_pages.append(url)
-        
-        return processed_pages
+        # Format: https://www.douyin.com/user/MS4wLjABAAAA...
+        if '/user/' in url:
+            user_id = url.split('/user/')[-1].split('?')[0].split('/')[0]
+            return user_id
+        return None
     except Exception as e:
-        print(f"  ⚠️ Error reading research.csv: {e}")
-        return []
+        print(f"  ⚠️ Error extracting user ID: {e}")
+        return None
 
-def append_non_matches_to_research(douyin_url, non_matching_videos):
-    """Append non-matching videos to research.csv"""
-    research_file = 'research.csv'
+def save_non_matches_to_research(douyin_url, non_matching_videos):
+    """Save non-matching videos to Research folder (overwrites if exists)"""
+    
+    # Extract user ID from URL
+    user_id = extract_user_id_from_url(douyin_url)
+    if not user_id:
+        print(f"  ⚠️ Could not extract user ID from URL")
+        return False
+    
+    # Create Research folder if it doesn't exist
+    research_folder = 'Research'
+    if not os.path.exists(research_folder):
+        os.makedirs(research_folder)
+    
+    # Create filename based on user ID
+    research_file = os.path.join(research_folder, f"{user_id}.csv")
     
     try:
-        # Check if file exists to determine if we need to write header
-        file_exists = os.path.exists(research_file)
-        
-        with open(research_file, 'a', newline='', encoding='utf-8') as f:
-            # Add separator and source page info
-            if file_exists:
-                f.write('\n')  # Add blank line between different runs
-            
+        with open(research_file, 'w', newline='', encoding='utf-8') as f:
+            # Write header comments
             f.write(f"# Source Page: {douyin_url}\n")
             f.write(f"# Non-Matches: {len(non_matching_videos)}\n")
             f.write(f"# Date: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
             
-            # If first time, write CSV header
-            if not file_exists:
-                writer = csv.DictWriter(f, fieldnames=['video_url', 'thumbnail_url', 'index'])
-                writer.writeheader()
-            
-            # Write non-match data
+            # Write CSV data
             writer = csv.DictWriter(f, fieldnames=['video_url', 'thumbnail_url', 'index'])
+            writer.writeheader()
             writer.writerows(non_matching_videos)
         
+        print(f"✅ Saved non-matches to {research_file}")
         return True
     except Exception as e:
-        print(f"  ⚠️ Error writing to research.csv: {e}")
+        print(f"  ⚠️ Error writing to {research_file}: {e}")
         return False
 
 def compare_images_with_gemini(model, reference_image, thumbnail_image, video_index=None):
@@ -288,16 +283,6 @@ def find_matching_videos(douyin_url, reference_image_path, output_csv='matching_
     print("🎬 Douyin Product Finder")
     print("=" * 50)
     
-    # Check if this page was already processed
-    processed_pages = get_processed_pages_from_research()
-    page_already_processed = douyin_url in processed_pages
-    
-    if page_already_processed:
-        print(f"\n⚠️  This page was already processed!")
-        print(f"   Found in research.csv: {douyin_url}")
-        print(f"   Non-matches from this page will NOT be added to research.csv")
-        print(f"   (Matches will still be saved to a new file)\n")
-    
     # Setup Gemini API
     model = setup_gemini_api()
     if not model:
@@ -432,9 +417,15 @@ def find_matching_videos(douyin_url, reference_image_path, output_csv='matching_
                     if batch_num < total_batches - 1:
                         time.sleep(0.5)
             
-            # Save results to CSV
-            print(f"\n💾 Saving results to {output_csv}...")
-            with open(output_csv, 'w', newline='', encoding='utf-8') as f:
+            # Save matches to Matches folder
+            matches_folder = 'Matches'
+            if not os.path.exists(matches_folder):
+                os.makedirs(matches_folder)
+            
+            matches_file = os.path.join(matches_folder, output_csv)
+            
+            print(f"\n💾 Saving matches to {matches_file}...")
+            with open(matches_file, 'w', newline='', encoding='utf-8') as f:
                 # Write source page URL as a comment at the top
                 f.write(f"# Source Page: {douyin_url}\n")
                 f.write(f"# Total Matches: {len(matching_videos)}\n")
@@ -448,18 +439,12 @@ def find_matching_videos(douyin_url, reference_image_path, output_csv='matching_
             print(f"\n🎉 Search complete!")
             print(f"📊 Analyzed: {len(videos)} videos")
             print(f"✅ Found: {len(matching_videos)} matching videos")
-            print(f"📄 Results saved to: {output_csv}")
+            print(f"📄 Matches saved to: {matches_file}")
             
-            # Save non-matches to research.csv if page not already processed
-            if not page_already_processed and non_matching_videos:
-                print(f"\n💾 Saving non-matches to research.csv...")
-                success = append_non_matches_to_research(douyin_url, non_matching_videos)
-                if success:
-                    print(f"✅ Added {len(non_matching_videos)} non-matches to research.csv")
-                else:
-                    print(f"⚠️  Failed to save non-matches to research.csv")
-            elif page_already_processed:
-                print(f"\n⏭️  Skipping research.csv (page already processed)")
+            # Save non-matches to Research folder
+            if non_matching_videos:
+                print(f"\n💾 Saving non-matches to Research folder...")
+                save_non_matches_to_research(douyin_url, non_matching_videos)
             
             # Save cookies for future use if not already saved
             if not os.path.exists('douyin_cookies.json'):

@@ -8,9 +8,9 @@ Find all videos containing a specific product in their thumbnails using AI-power
 - ✅ Extracts video thumbnails and URLs
 - ✅ **Parallel processing** - Analyzes 50 videos simultaneously
 - ✅ Uses Google Gemini 2.5 Flash AI for precise product matching
-- ✅ Exports matching videos to CSV (new file per run)
-- ✅ **Accumulative research.csv** - Saves all non-matches for analysis
-- ✅ **Smart deduplication** - Prevents re-processing same pages
+- ✅ Exports matching videos to `Matches/` folder (new file per run)
+- ✅ **Organized research** - Saves non-matches by user ID to `Research/` folder
+- ✅ **Overwrite strategy** - Latest data replaces old for each user
 - ✅ Chrome cookie support to bypass login
 - ✅ 30-minute time limit with progress tracking
 - ✅ **~50x faster** than sequential processing
@@ -64,15 +64,15 @@ python3 find_product_videos.py
 
 The script generates **two CSV files** per run:
 
-### 1. Matches File (e.g., `Neckadele.csv`)
-- Creates a **new file** for each run
+### 1. Matches (saved to `Matches/` folder)
+- Creates a **new file** for each run (e.g., `Matches/Neckadele.csv`)
 - Contains only videos that match your product
 - Columns: `video_url`, `thumbnail_url`, `index`
 
-### 2. Research File (`research.csv`)
-- **Accumulative** - keeps growing with each run
-- Contains all non-matching videos
-- Automatically prevents duplicates by checking if page was already processed
+### 2. Research (saved to `Research/` folder)
+- Saves non-matches to `Research/{user_id}.csv`
+- **Overwrites** previous data for same user (not accumulative)
+- Prevents 10k+ line files - each user has separate file
 - Same structure: `video_url`, `thumbnail_url`, `index`
 - Includes source page URLs in header comments
 
@@ -122,9 +122,23 @@ Edit `find_product_videos.py` to adjust:
 - Respects Gemini API rate limits (1,000 RPM)
 - Each comparison takes ~0.2-0.3 seconds to stay within limits
 
-### Duplicate Prevention
+### File Organization
 
-- The script checks `research.csv` for previously processed page URLs
-- If a page was already analyzed, matches are still saved to a new file
-- Non-matches from duplicate pages are **skipped** to avoid bloating research.csv
-- This allows you to re-run the same page with different product images without polluting your research data
+**Folder Structure:**
+```
+Matches/          # All match results
+├── product1.csv
+├── product2.csv
+└── ...
+
+Research/         # Non-matches by user ID
+├── MS4wLjABAAAA6rykbXnNyLG1RCTlO2nhuOOljilzHfGAsyXu-Dl1PVc.csv
+├── MS4wLjABAAAAHtxdmKXJfK7qVSv1yKywiwMh-pZvbc1VmoPGFHtrkho.csv
+└── ...
+```
+
+**Benefits:**
+- No growing file problem - each user has separate research file
+- Re-running same user **overwrites** old data with latest
+- Fast file access - no need to read 10k+ line files
+- Clean organization - matches and research separated
