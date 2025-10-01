@@ -101,19 +101,42 @@ Edit `find_product_videos.py` to adjust:
 - `tag_images_old.py` - Old version of tagging script
 - `generate_tagged_master.py` - Gallery generator
 
+## Error Handling
+
+The script now provides **clear error reporting** to distinguish between:
+- ❌ **No match** - Product not found (normal)
+- 🚫 **Rate limit (429)** - API quota exceeded
+- ❌ **API errors** - Server connection issues
+- ⚠️  **Download failed** - Thumbnail download issues
+
+### Error Summary Example:
+```
+⚠️  ERRORS ENCOUNTERED: 15 videos failed
+==================================================
+  🚫 Rate Limit (429): 12 videos
+     → Your Gemini API quota is exceeded
+     → Wait for quota reset or upgrade API plan
+  ⚠️  Download Failed: 3 thumbnails
+==================================================
+⚠️  15 videos were skipped due to errors
+💡 Consider re-running later or checking your API key
+```
+
 ## Troubleshooting
 
-### No videos found
-- The Douyin page structure may have changed. Check browser console for errors.
-- Try adjusting the CSS selector in `extract_videos_from_page()` function.
+### Rate limit errors (429)
+- Your Gemini API quota is exhausted
+- **Free tier**: 60 requests per minute (RPM)
+- **Solution**: Wait for quota reset or upgrade to paid plan
 
-### Rate limit errors
-- The script will automatically retry with exponential backoff.
-- If persistent, increase the delay in line 317.
+### API connection errors
+- Check your internet connection
+- Verify your `GEMINI_API_KEY` is valid
+- Check Google AI Studio status
 
 ### Can't download thumbnails
-- Some thumbnails may require authentication or have anti-bot measures.
-- The script will skip failed downloads and continue.
+- Some thumbnails require authentication
+- The script will skip failed downloads and continue
 
 ## Notes
 

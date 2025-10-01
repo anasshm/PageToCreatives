@@ -120,7 +120,13 @@ def save_non_matches_to_research(douyin_url, non_matching_videos):
         return False
 
 def compare_images_with_gemini(model, reference_image, thumbnail_image, video_index=None):
-    """Compare thumbnail with reference image using Gemini"""
+    """Compare thumbnail with reference image using Gemini
+    
+    Returns:
+        tuple: (result, error_type)
+        - result: True if match, False if no match, None if error
+        - error_type: None if success, 'rate_limit', 'api_error', etc.
+    """
     max_retries = 2
     retry_delay = 2
     
@@ -148,9 +154,10 @@ Be strict - only say MATCH if you're confident it's the same product."""
             
             if response and response.text:
                 answer = response.text.strip().upper()
-                return "MATCH" in answer
+                is_match = "MATCH" in answer
+                return (is_match, None)  # Success - no error
             else:
-                return False
+                return (None, 'empty_response')  # API returned empty response
                 
         except Exception as e:
             error_msg = str(e).lower()
@@ -158,38 +165,55 @@ Be strict - only say MATCH if you're confident it's the same product."""
             # Handle rate limit errors
             if "quota" in error_msg or "rate limit" in error_msg or "429" in error_msg:
                 if attempt < max_retries - 1:
+                    print(f"  ⚠️ Rate limit hit, retrying in {retry_delay}s...")
                     time.sleep(retry_delay)
                     retry_delay *= 2
                     continue
                 else:
-                    return False
+                    return (None, 'rate_limit')  # Rate limit error
             else:
-                return False
+                # Other API errors
+                return (None, f'api_error: {str(e)[:100]}')
     
-    return False
+    return (None, 'max_retries_exceeded')
 
 def process_single_video(model, reference_image, video, video_num, total_videos):
-    """Process a single video - download and compare"""
+    """Process a single video - download and compare
+    
+    Returns:
+        tuple: (is_match, error_type)
+        - is_match: True/False/None (None means error)
+        - error_type: None if success, or error description
+    """
     try:
         # Download thumbnail
         thumbnail = download_thumbnail(video['thumbnail_url'])
         if not thumbnail:
             print(f"  [{video_num}/{total_videos}] ⚠️ Failed to download thumbnail")
-            return False
+            return (None, 'download_failed')
         
         # Compare with reference image
-        is_match = compare_images_with_gemini(model, reference_image, thumbnail, video_num)
+        result, error = compare_images_with_gemini(model, reference_image, thumbnail, video_num)
         
-        if is_match:
+        if error:
+            # API error occurred
+            if 'rate_limit' in error:
+                print(f"  [{video_num}/{total_videos}] 🚫 RATE LIMIT - API quota exceeded")
+            elif 'api_error' in error:
+                print(f"  [{video_num}/{total_videos}] ❌ API ERROR: {error}")
+            else:
+                print(f"  [{video_num}/{total_videos}] ⚠️ ERROR: {error}")
+            return (None, error)
+        elif result:
             print(f"  [{video_num}/{total_videos}] ✅ MATCH FOUND!")
+            return (True, None)
         else:
             print(f"  [{video_num}/{total_videos}] ❌ No match")
-        
-        return is_match
+            return (False, None)
         
     except Exception as e:
-        print(f"  [{video_num}/{total_videos}] ⚠️ Error: {e}")
-        return False
+        print(f"  [{video_num}/{total_videos}] ⚠️ Processing error: {e}")
+        return (None, f'processing_error: {str(e)}')
 
 def scroll_and_load_all_videos(page, max_duration_minutes=30):
     """Scroll page to load all videos with time limit"""
@@ -374,6 +398,8 @@ def find_matching_videos(douyin_url, reference_image_path, output_csv='matching_
             
             matching_videos = []
             non_matching_videos = []
+            error_count = 0
+            error_types = {}
             
             # Process in batches for parallel requests
             batch_size = 50  # Process 50 videos at a time
@@ -400,18 +426,27 @@ def find_matching_videos(douyin_url, reference_image_path, output_csv='matching_
                     
                     # Collect results
                     batch_matches = 0
+                    batch_errors = 0
                     for future, video in futures:
                         try:
-                            is_match = future.result(timeout=30)
-                            if is_match:
+                            is_match, error = future.result(timeout=30)
+                            
+                            if error:
+                                # Track error
+                                error_count += 1
+                                batch_errors += 1
+                                error_types[error] = error_types.get(error, 0) + 1
+                            elif is_match:
                                 matching_videos.append(video)
                                 batch_matches += 1
                             else:
                                 non_matching_videos.append(video)
                         except Exception as e:
-                            print(f"  ⚠️ Error processing video: {e}")
+                            print(f"  ⚠️ Thread error: {e}")
+                            error_count += 1
+                            batch_errors += 1
                     
-                    print(f"   ✅ Batch complete: {batch_matches} matches found")
+                    print(f"   ✅ Batch complete: {batch_matches} matches, {batch_errors} errors")
                     
                     # Small delay between batches to respect rate limits
                     if batch_num < total_batches - 1:
@@ -437,8 +472,30 @@ def find_matching_videos(douyin_url, reference_image_path, output_csv='matching_
                 writer.writerows(matching_videos)
             
             print(f"\n🎉 Search complete!")
-            print(f"📊 Analyzed: {len(videos)} videos")
-            print(f"✅ Found: {len(matching_videos)} matching videos")
+            print(f"📊 Total videos: {len(videos)}")
+            print(f"✅ Matches: {len(matching_videos)}")
+            print(f"❌ Non-matches: {len(non_matching_videos)}")
+            
+            # Show error summary if any errors occurred
+            if error_count > 0:
+                print(f"\n⚠️  ERRORS ENCOUNTERED: {error_count} videos failed")
+                print(f"=" * 50)
+                for error_type, count in sorted(error_types.items(), key=lambda x: x[1], reverse=True):
+                    if 'rate_limit' in error_type:
+                        print(f"  🚫 Rate Limit (429): {count} videos")
+                        print(f"     → Your Gemini API quota is exceeded")
+                        print(f"     → Wait for quota reset or upgrade API plan")
+                    elif 'api_error' in error_type:
+                        print(f"  ❌ API Error: {count} videos")
+                        print(f"     → {error_type}")
+                    elif 'download_failed' in error_type:
+                        print(f"  ⚠️  Download Failed: {count} thumbnails")
+                    else:
+                        print(f"  ⚠️  {error_type}: {count} videos")
+                print(f"=" * 50)
+                print(f"⚠️  {error_count} videos were skipped due to errors")
+                print(f"💡 Consider re-running later or checking your API key\n")
+            
             print(f"📄 Matches saved to: {matches_file}")
             
             # Save non-matches to Research folder
