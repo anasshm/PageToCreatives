@@ -587,13 +587,14 @@ def main():
     image_name = os.path.splitext(os.path.basename(reference_image))[0]
     output_csv = f"{image_name}.csv"
     
-    # If file exists, add number suffix
+    # If file exists in Matches folder, add number suffix
+    matches_folder = 'Matches'
     counter = 1
-    while os.path.exists(output_csv):
+    while os.path.exists(os.path.join(matches_folder, output_csv)):
         output_csv = f"{image_name}{counter}.csv"
         counter += 1
     
-    print(f"💾 Output will be saved to: {output_csv}")
+    print(f"💾 Output will be saved to: Matches/{output_csv}")
     
     # Get Douyin page URL
     douyin_url = input("\n🌐 Enter Douyin page URL: ").strip()
