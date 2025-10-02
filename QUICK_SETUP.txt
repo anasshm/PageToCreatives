@@ -1,0 +1,58 @@
+╔════════════════════════════════════════════════════════════╗
+║        🚀 DOUYIN VIDEO FINDER - QUICK SETUP 🚀            ║
+╚════════════════════════════════════════════════════════════╝
+
+Copy and paste these commands one by one:
+
+1️⃣  Clone the repository:
+   git clone https://github.com/anasshm/PageToCreatives.git
+   cd PageToCreatives
+
+2️⃣  Install Python dependencies:
+   pip3 install -r requirements.txt
+
+3️⃣  Install Playwright browser:
+   playwright install chromium
+
+4️⃣  Set up Google Gemini API key:
+   Get your API key from: https://aistudio.google.com/app/apikey
+   
+   Then run:
+   export GOOGLE_API_KEY="your-api-key-here"
+
+5️⃣  Create required folders:
+   mkdir -p Products Matches Research
+
+6️⃣  Add reference images to Products folder:
+   Place your product images in the Products/ folder
+
+7️⃣  Run the script:
+   python3 Find_Multiple_Products.py
+
+✅ DONE! You're ready to find videos!
+
+═══════════════════════════════════════════════════════════════
+
+📚 HELPFUL COMMANDS:
+
+Single product search:
+   python3 find_product_videos.py
+
+Multi-product search:
+   python3 Find_Multiple_Products.py
+
+Remove duplicates:
+   python3 remove_duplicates.py Matches/GAMEBOY.csv
+
+═══════════════════════════════════════════════════════════════
+
+🆘 TROUBLESHOOTING:
+
+If you get "No module found" errors:
+   pip3 install playwright google-generativeai Pillow requests imagehash
+   playwright install chromium
+
+For cookie setup (to bypass Douyin login):
+   Read COOKIE_INSTRUCTIONS.md
+
+═══════════════════════════════════════════════════════════════
