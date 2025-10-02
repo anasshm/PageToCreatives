@@ -128,6 +128,15 @@ def remove_duplicates(input_csv, output_csv=None, similarity_threshold=0):
         
         original_count = len(unique_videos) + duplicate_count
         
+        print(f"\n")
+        print(f"=" * 50)
+        print(f"📊 Analysis Complete:")
+        print(f"  Total processed: {original_count}")
+        print(f"  Unique (keeping): {len(unique_videos)}")
+        print(f"  Duplicates (removing): {duplicate_count}")
+        if download_errors > 0:
+            print(f"  Download errors (kept): {download_errors}")
+        print(f"=" * 50)
         print(f"\n💾 Writing: {output_csv}")
         
         with open(output_csv, 'w', newline='', encoding='utf-8') as f:
