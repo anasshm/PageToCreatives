@@ -165,51 +165,10 @@ def process_single_video(model, reference_image, video, video_num, total_videos)
     except Exception as e:
         return (None, f'processing_error: {str(e)}')
 
-def scroll_and_load_all_videos(page, page_num, total_pages, max_duration_minutes=30):
-    """Scroll page to load all videos with time limit"""
-    print(f"\n⏬ Scrolling Page {page_num}/{total_pages} to load all videos (max {max_duration_minutes} minutes)...")
-    
-    start_time = time.time()
-    max_duration_seconds = max_duration_minutes * 60
-    max_scrolls = 200
-    scroll_pause_time = 1  # Reduced from 2s to 1s for faster scrolling
-    
-    previous_height = None
-    scroll_count = 0
-    
-    scroll_container_selector = "document.querySelector('.route-scroll-container')"
-    
-    while scroll_count < max_scrolls:
-        elapsed = time.time() - start_time
-        if elapsed > max_duration_seconds:
-            print(f"  ⏱️ Reached {max_duration_minutes} minute time limit")
-            break
-        
-        page.evaluate(f"{scroll_container_selector}.scrollTo(0, {scroll_container_selector}.scrollHeight)")
-        time.sleep(scroll_pause_time)
-        
-        current_height = page.evaluate(f"{scroll_container_selector}.scrollHeight")
-        video_count = page.locator('a[href*="/video/"]').count()
-        
-        if current_height == previous_height:
-            print(f"  ✅ No more content to load. Found {video_count} videos.")
-            break
-        
-        print(f"  📊 Loaded {video_count} videos... (elapsed: {int(elapsed)}s)")
-        previous_height = current_height
-        scroll_count += 1
-    
-    final_count = page.locator('a[href*="/video/"]').count()
-    print(f"✅ Page {page_num}/{total_pages} finished scrolling. Total videos: {final_count}")
-    return final_count
-
-def extract_videos_from_page(page, page_url):
-    """Extract video URLs, thumbnail URLs, and likes from page"""
-    print(f"🔍 Extracting video data from page...")
-    
+def extract_and_clear_batch(page, page_url, batch_num, total_extracted):
+    """Extract current batch of videos and clear them from DOM"""
     try:
-        page.wait_for_selector('img', timeout=10000)
-        
+        # Extract videos and mark them for removal
         videos = page.evaluate("""
             () => {
                 const videoLinks = document.querySelectorAll('a[href*="/video/"]');
@@ -254,20 +213,91 @@ def extract_videos_from_page(page, page_url):
                     }
                 });
                 
+                // Clear all video links from DOM to free memory
+                videoLinks.forEach(link => {
+                    const container = link.closest('li') || link.closest('div[class*="video"]');
+                    if (container) {
+                        container.remove();
+                    } else {
+                        link.remove();
+                    }
+                });
+                
                 return videos;
             }
         """)
         
-        # Add page_url to each video for tracking
-        for video in videos:
+        # Add page_url and adjust index based on total extracted
+        for i, video in enumerate(videos):
             video['source_page'] = page_url
+            video['index'] = total_extracted + i + 1
         
-        print(f"✅ Extracted {len(videos)} videos")
+        print(f"  🗑️  Batch {batch_num}: Extracted {len(videos)} videos, cleared from DOM")
         return videos
         
     except Exception as e:
-        print(f"❌ Error extracting videos: {e}")
+        print(f"  ⚠️ Error extracting batch: {e}")
         return []
+
+def scroll_and_extract_with_cleanup(page, page_url, page_num, total_pages, max_duration_minutes=30):
+    """Scroll page, extract videos in batches, and clear DOM periodically"""
+    print(f"\n⏬ Scrolling Page {page_num}/{total_pages} with periodic extraction (max {max_duration_minutes} min)...")
+    
+    start_time = time.time()
+    max_duration_seconds = max_duration_minutes * 60
+    max_scrolls = 300
+    scroll_pause_time = 1
+    batch_size = 500  # Extract and clear every 500 videos
+    
+    all_videos = []
+    previous_video_count = 0
+    no_new_videos_count = 0
+    scroll_count = 0
+    batch_num = 1
+    
+    scroll_container_selector = "document.querySelector('.route-scroll-container')"
+    
+    while scroll_count < max_scrolls:
+        elapsed = time.time() - start_time
+        if elapsed > max_duration_seconds:
+            print(f"  ⏱️ Reached {max_duration_minutes} minute time limit")
+            break
+        
+        # Scroll to bottom
+        page.evaluate(f"{scroll_container_selector}.scrollTo(0, {scroll_container_selector}.scrollHeight)")
+        time.sleep(scroll_pause_time)
+        
+        # Check current video count
+        current_video_count = page.locator('a[href*="/video/"]').count()
+        
+        # If we've loaded batch_size new videos, extract and clear
+        if current_video_count >= batch_size:
+            batch_videos = extract_and_clear_batch(page, page_url, batch_num, len(all_videos))
+            all_videos.extend(batch_videos)
+            batch_num += 1
+            previous_video_count = 0
+            no_new_videos_count = 0
+            print(f"  📊 Total extracted: {len(all_videos)} videos (elapsed: {int(elapsed)}s)")
+        
+        # Check if no new videos are being loaded
+        elif current_video_count == previous_video_count:
+            no_new_videos_count += 1
+            if no_new_videos_count >= 3:  # No new videos for 3 scrolls
+                # Extract remaining videos
+                if current_video_count > 0:
+                    print(f"  ✅ No more new videos. Extracting final batch...")
+                    batch_videos = extract_and_clear_batch(page, page_url, batch_num, len(all_videos))
+                    all_videos.extend(batch_videos)
+                break
+        else:
+            previous_video_count = current_video_count
+            no_new_videos_count = 0
+            print(f"  📊 Loaded {current_video_count} videos in DOM... (elapsed: {int(elapsed)}s)")
+        
+        scroll_count += 1
+    
+    print(f"✅ Page {page_num}/{total_pages} complete. Total extracted: {len(all_videos)} videos")
+    return all_videos
 
 def save_results(all_matching_videos, all_non_matching_videos, output_csv, all_page_urls):
     """Save matching and non-matching videos to files"""
@@ -402,12 +432,10 @@ def find_matching_videos_multi(page_urls, reference_image_path, output_csv='matc
                     """)
                     
                     print(f"  Tab {i}: Loading {url[:60]}...")
-                    # Increase timeout to 2 minutes and use 'domcontentloaded' for faster loading
                     page.goto(url, wait_until='domcontentloaded', timeout=120000)
                     pages.append(page)
                     print(f"    ✅ Tab {i} loaded successfully")
                     
-                    # Small delay between opening tabs to avoid overwhelming the browser
                     time.sleep(1)
                     
                 except Exception as e:
@@ -434,8 +462,8 @@ def find_matching_videos_multi(page_urls, reference_image_path, output_csv='matc
             print("When ALL CAPTCHAs are done, press ENTER to start scrolling...")
             input()
             
-            # Phase 2: Process each page one by one (HEAVY scroll → extract → close)
-            print("\n🔄 Phase 2: Processing pages one by one...")
+            # Phase 2: Process each page one by one (scroll → extract batches → close)
+            print("\n🔄 Phase 2: Processing pages with periodic extraction...")
             print("=" * 50)
             
             all_videos = []
@@ -444,25 +472,21 @@ def find_matching_videos_multi(page_urls, reference_image_path, output_csv='matc
             for i, page in enumerate(pages, 1):
                 print(f"\n📄 Processing Page {i}/{len(pages)}...")
                 
-                # Bring this tab to front
                 page.bring_to_front()
                 
-                # Scroll this page fully (HEAVY - loads 10,000+ videos)
-                scroll_and_load_all_videos(page, i, len(pages), max_duration_minutes)
-                
-                # Extract videos from this page
-                videos = extract_videos_from_page(page, successfully_loaded_urls[i-1])
+                # Scroll and extract with periodic DOM cleanup
+                videos = scroll_and_extract_with_cleanup(page, successfully_loaded_urls[i-1], i, len(pages), max_duration_minutes)
                 all_videos.extend(videos)
                 
                 print(f"✅ Page {i}/{len(pages)} extracted: {len(videos)} videos")
                 
-                # CLOSE THIS TAB immediately to free RAM
+                # Close tab to free RAM
                 print(f"🗑️  Closing Tab {i} to free RAM...")
                 page.close()
                 print(f"✅ Tab {i} closed. Moving to next page...")
             
             print(f"\n✅ All pages processed! Total videos collected: {len(all_videos)}")
-            print(f"💾 All tabs are now closed. RAM freed.")
+            print(f"💾 All tabs closed. RAM freed.")
             
             if not all_videos:
                 print("❌ No videos found across all pages!")
