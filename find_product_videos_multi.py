@@ -385,23 +385,47 @@ def find_matching_videos_multi(page_urls, reference_image_path, output_csv='matc
         )
         
         pages = []
+        failed_urls = []
         
         try:
             # Open all URLs in separate tabs
             print(f"\n🌐 Opening {len(page_urls)} pages in separate tabs...")
             for i, url in enumerate(page_urls, 1):
-                page = context.new_page()
-                
-                # Hide automation indicators
-                page.add_init_script("""
-                    Object.defineProperty(navigator, 'webdriver', {
-                        get: () => undefined
-                    });
-                """)
-                
-                print(f"  Tab {i}: {url}")
-                page.goto(url, wait_until='networkidle', timeout=60000)
-                pages.append(page)
+                try:
+                    page = context.new_page()
+                    
+                    # Hide automation indicators
+                    page.add_init_script("""
+                        Object.defineProperty(navigator, 'webdriver', {
+                            get: () => undefined
+                        });
+                    """)
+                    
+                    print(f"  Tab {i}: Loading {url[:60]}...")
+                    # Increase timeout to 2 minutes and use 'domcontentloaded' for faster loading
+                    page.goto(url, wait_until='domcontentloaded', timeout=120000)
+                    pages.append(page)
+                    print(f"    ✅ Tab {i} loaded successfully")
+                    
+                    # Small delay between opening tabs to avoid overwhelming the browser
+                    time.sleep(1)
+                    
+                except Exception as e:
+                    print(f"    ⚠️ Tab {i} failed to load: {str(e)[:80]}")
+                    print(f"    Skipping this page and continuing...")
+                    failed_urls.append(url)
+                    continue
+            
+            if not pages:
+                print("❌ No pages loaded successfully!")
+                browser.close()
+                return False
+            
+            print(f"\n✅ Successfully loaded {len(pages)} out of {len(page_urls)} pages")
+            if failed_urls:
+                print(f"⚠️  Failed to load {len(failed_urls)} pages:")
+                for url in failed_urls:
+                    print(f"   - {url}")
             
             # Wait for user to complete ALL CAPTCHAs
             print("\n⏸️  CAPTCHA Check - MULTI-PAGE MODE")
@@ -413,6 +437,8 @@ def find_matching_videos_multi(page_urls, reference_image_path, output_csv='matc
             
             # Scroll each page sequentially
             all_videos = []
+            successfully_loaded_urls = [url for url in page_urls if url not in failed_urls]
+            
             for i, page in enumerate(pages, 1):
                 # Bring this tab to front
                 page.bring_to_front()
@@ -421,7 +447,7 @@ def find_matching_videos_multi(page_urls, reference_image_path, output_csv='matc
                 scroll_and_load_all_videos(page, i, len(pages), max_duration_minutes)
                 
                 # Extract videos from this page
-                videos = extract_videos_from_page(page, page_urls[i-1])
+                videos = extract_videos_from_page(page, successfully_loaded_urls[i-1])
                 all_videos.extend(videos)
                 
                 print(f"✅ Page {i}/{len(pages)} complete: {len(videos)} videos extracted")
@@ -491,7 +517,7 @@ def find_matching_videos_multi(page_urls, reference_image_path, output_csv='matc
                         time.sleep(0.5)
             
             # Save all results
-            save_results(all_matching_videos, all_non_matching_videos, output_csv, page_urls)
+            save_results(all_matching_videos, all_non_matching_videos, output_csv, successfully_loaded_urls)
             
             # Print summary
             print(f"\n🎉 Multi-page search complete!")
@@ -600,4 +626,3 @@ def main():
 
 if __name__ == "__main__":
     main()
-
