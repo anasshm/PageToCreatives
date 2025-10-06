@@ -11,6 +11,8 @@ from pathlib import Path
 import cloudinary
 import cloudinary.uploader
 from cloudinary.exceptions import Error as CloudinaryError
+from concurrent.futures import ThreadPoolExecutor, as_completed
+import threading
 
 def load_env():
     """Load environment variables from .env file"""
@@ -148,55 +150,73 @@ def backup_thumbnails(csv_path):
         fieldnames = list(fieldnames) + [backup_column]
         print(f"➕ Adding '{backup_column}' column")
     
-    # Process thumbnails
+    # Process thumbnails with parallel uploads
     successful = 0
     failed = 0
-    consecutive_failures = 0
-    max_consecutive_failures = 10
+    lock = threading.Lock()
     
-    print(f"\n🔄 Uploading thumbnails to Cloudinary...")
+    print(f"\n🔄 Uploading thumbnails to Cloudinary (parallel processing)...")
     print("=" * 50)
     
-    for i, row in enumerate(rows, 1):
+    def process_thumbnail(index, row):
+        """Process a single thumbnail upload"""
         thumbnail_url = row.get('thumbnail_url', '')
         
         # Skip if already backed up
         if row.get(backup_column):
-            print(f"  [{i}/{len(rows)}] ⏭️  Already backed up, skipping")
-            successful += 1
-            consecutive_failures = 0
-            continue
+            with lock:
+                print(f"  [{index + 1}/{len(rows)}] ⏭️  Already backed up, skipping")
+            return 'skipped', row
         
         if not thumbnail_url:
-            print(f"  [{i}/{len(rows)}] ⚠️  No thumbnail URL, skipping")
-            failed += 1
-            consecutive_failures += 1
+            with lock:
+                print(f"  [{index + 1}/{len(rows)}] ⚠️  No thumbnail URL, skipping")
             row[backup_column] = 'No URL'
-            continue
+            return 'failed', row
         
-        print(f"  [{i}/{len(rows)}] Uploading thumbnail...")
+        with lock:
+            print(f"  [{index + 1}/{len(rows)}] Uploading thumbnail...")
+        
         backup_url = upload_to_cloudinary(thumbnail_url)
         
         if backup_url:
             row[backup_column] = backup_url
-            successful += 1
-            consecutive_failures = 0
-            print(f"  [{i}/{len(rows)}] ✅ Success")
+            with lock:
+                print(f"  [{index + 1}/{len(rows)}] ✅ Success")
+            return 'success', row
         else:
             row[backup_column] = 'Failed'
-            failed += 1
-            consecutive_failures += 1
-            print(f"  [{i}/{len(rows)}] ❌ Failed")
+            with lock:
+                print(f"  [{index + 1}/{len(rows)}] ❌ Failed")
+            return 'failed', row
+    
+    # Use ThreadPoolExecutor for parallel uploads (10 concurrent uploads recommended by Cloudinary)
+    max_workers = 10
+    with ThreadPoolExecutor(max_workers=max_workers) as executor:
+        # Submit all upload tasks
+        futures = {executor.submit(process_thumbnail, i, row): i for i, row in enumerate(rows)}
         
-        # Check for too many consecutive failures
-        if consecutive_failures >= max_consecutive_failures:
-            print(f"\n⚠️  WARNING: {max_consecutive_failures} consecutive failures detected!")
-            print("Stopping script to prevent further issues.")
-            print("\nPossible causes:")
-            print("  - Cloudinary API quota exceeded")
-            print("  - Network connection issues")
-            print("  - Invalid Cloudinary credentials")
-            return False
+        # Process results as they complete
+        for future in as_completed(futures):
+            try:
+                status, updated_row = future.result()
+                if status == 'success' or status == 'skipped':
+                    successful += 1
+                else:
+                    failed += 1
+            except Exception as e:
+                print(f"  ❌ Thread error: {e}")
+                failed += 1
+    
+    # Check if too many failures overall (not consecutive since we're parallel)
+    failure_rate = failed / len(rows) if len(rows) > 0 else 0
+    if failure_rate > 0.5 and failed > 10:
+        print(f"\n⚠️  WARNING: High failure rate detected ({failed}/{len(rows)} failed)!")
+        print("Possible causes:")
+        print("  - Cloudinary API quota exceeded")
+        print("  - Network connection issues")
+        print("  - Invalid Cloudinary credentials")
+        return False
     
     # Create output filename
     csv_name = Path(csv_path).stem
