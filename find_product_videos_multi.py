@@ -246,7 +246,7 @@ def scroll_and_extract_with_cleanup(page, page_url, page_num, total_pages, max_d
     start_time = time.time()
     max_duration_seconds = max_duration_minutes * 60
     max_scrolls = 300
-    scroll_pause_time = 1
+    scroll_pause_time = 2  # Back to 2 seconds - 1 second was triggering anti-bot
     batch_size = 500  # Extract and clear every 500 videos
     
     all_videos = []
