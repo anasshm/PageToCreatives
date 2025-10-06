@@ -14,6 +14,7 @@ Find all videos containing a specific product in their thumbnails using AI-power
 - ✅ Chrome cookie support to bypass login
 - ✅ 30-minute time limit with progress tracking
 - ✅ **~50x faster** than sequential processing
+- ✅ **Thumbnail backup** - Save expiring URLs to Cloudinary for permanent storage
 
 ## Installation
 
@@ -102,11 +103,51 @@ Edit `find_product_videos.py` to adjust:
 - **Pillow (PIL)** - Image processing
 - **Requests** - Thumbnail downloading
 
+## Thumbnail Backup Tool
+
+**Problem:** Douyin thumbnail URLs expire after some time.  
+**Solution:** Backup thumbnails to Cloudinary (permanent cloud storage).
+
+### Quick Start
+
+1. **One-time setup:**
+   ```bash
+   # Install cloudinary
+   pip3 install cloudinary
+   
+   # Get free Cloudinary account at https://cloudinary.com
+   # Add credentials to .env file (see BACKUP_QUICK_START.txt)
+   ```
+
+2. **Backup a Research CSV:**
+   ```bash
+   python3 backup_thumbnails.py
+   # Drag and drop your CSV when prompted
+   ```
+
+3. **Result:**
+   - Creates `{filename}_backed.csv` with new `backup_thumbnail_url` column
+   - All thumbnails permanently stored on Cloudinary
+   - Shows summary: successful/failed uploads
+
+**Features:**
+- ✅ Preserves all CSV data and comments
+- ✅ Adds permanent backup URLs
+- ✅ Smart retry on failures (up to 3 attempts)
+- ✅ Stops if 10+ consecutive failures
+- ✅ Skips already backed-up images
+- ✅ Free tier: 25GB storage (thousands of thumbnails)
+
+**See detailed guide:** `BACKUP_THUMBNAILS_USAGE.md`
+
 ## File Directory
 
-- `find_product_videos.py` - Main script
+- `find_product_videos.py` - Main product finder script
+- `backup_thumbnails.py` - Thumbnail backup to Cloudinary
 - `requirements.txt` - Python dependencies
 - `README.md` - This file
+- `BACKUP_THUMBNAILS_USAGE.md` - Detailed backup tool guide
+- `BACKUP_QUICK_START.txt` - Quick setup instructions
 - `tag_images.py` - Legacy jewelry tagging script
 - `tag_images_old.py` - Old version of tagging script
 - `generate_tagged_master.py` - Gallery generator

@@ -1,0 +1,56 @@
+THUMBNAIL BACKUP - QUICK START GUIDE
+====================================
+
+FIRST TIME SETUP:
+-----------------
+1. Install Cloudinary:
+   pip3 install cloudinary
+
+2. Get Cloudinary account (FREE):
+   → Go to: https://cloudinary.com/users/register/free
+   → Sign up for free account
+   → Go to dashboard: https://cloudinary.com/console
+   → Copy these 3 values:
+     - Cloud Name
+     - API Key  
+     - API Secret
+
+3. Update .env file:
+   → Open .env file in this folder
+   → Replace these lines with your actual values:
+   
+   CLOUDINARY_CLOUD_NAME=your_actual_cloud_name
+   CLOUDINARY_API_KEY=your_actual_api_key
+   CLOUDINARY_API_SECRET=your_actual_api_secret
+
+DONE! You only do this once.
+
+HOW TO USE:
+-----------
+1. Run: python3 backup_thumbnails.py
+2. Drag and drop your CSV file when asked
+3. Wait for completion
+4. Get your backed-up CSV: {original_name}_backed.csv
+
+EXAMPLE:
+--------
+Input:  Research/MS4wLjABAAAA...csv
+Output: Research/MS4wLjABAAAA..._backed.csv
+
+The output CSV will have a new column: backup_thumbnail_url
+
+WHAT IT DOES:
+-------------
+✓ Uploads all thumbnails to Cloudinary (permanent storage)
+✓ Adds backup_thumbnail_url column with permanent links
+✓ Shows progress and summary (successful/failed)
+✓ Stops if 10+ consecutive failures
+✓ Skips already backed-up images
+
+FREE TIER LIMITS:
+-----------------
+25 GB storage - enough for thousands of thumbnails!
+25 GB bandwidth/month
+
+For detailed guide, see: BACKUP_THUMBNAILS_USAGE.md
+
