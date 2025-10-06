@@ -172,7 +172,7 @@ def scroll_and_load_all_videos(page, page_num, total_pages, max_duration_minutes
     start_time = time.time()
     max_duration_seconds = max_duration_minutes * 60
     max_scrolls = 200
-    scroll_pause_time = 2
+    scroll_pause_time = 1  # Reduced from 2s to 1s for faster scrolling
     
     previous_height = None
     scroll_count = 0
@@ -388,8 +388,8 @@ def find_matching_videos_multi(page_urls, reference_image_path, output_csv='matc
         failed_urls = []
         
         try:
-            # Open all URLs in separate tabs
-            print(f"\n🌐 Opening {len(page_urls)} pages in separate tabs...")
+            # Phase 1: Open all URLs in separate tabs (LIGHT - just initial load with CAPTCHA)
+            print(f"\n🌐 Phase 1: Opening {len(page_urls)} pages (light initial load)...")
             for i, url in enumerate(page_urls, 1):
                 try:
                     page = context.new_page()
@@ -433,26 +433,36 @@ def find_matching_videos_multi(page_urls, reference_image_path, output_csv='matc
             print(f"Please complete CAPTCHAs in ALL {len(pages)} tabs if needed.")
             print("When ALL CAPTCHAs are done, press ENTER to start scrolling...")
             input()
-            print("\n✅ Starting sequential scrolling of all pages...")
             
-            # Scroll each page sequentially
+            # Phase 2: Process each page one by one (HEAVY scroll → extract → close)
+            print("\n🔄 Phase 2: Processing pages one by one...")
+            print("=" * 50)
+            
             all_videos = []
             successfully_loaded_urls = [url for url in page_urls if url not in failed_urls]
             
             for i, page in enumerate(pages, 1):
+                print(f"\n📄 Processing Page {i}/{len(pages)}...")
+                
                 # Bring this tab to front
                 page.bring_to_front()
                 
-                # Scroll this page fully
+                # Scroll this page fully (HEAVY - loads 10,000+ videos)
                 scroll_and_load_all_videos(page, i, len(pages), max_duration_minutes)
                 
                 # Extract videos from this page
                 videos = extract_videos_from_page(page, successfully_loaded_urls[i-1])
                 all_videos.extend(videos)
                 
-                print(f"✅ Page {i}/{len(pages)} complete: {len(videos)} videos extracted")
+                print(f"✅ Page {i}/{len(pages)} extracted: {len(videos)} videos")
+                
+                # CLOSE THIS TAB immediately to free RAM
+                print(f"🗑️  Closing Tab {i} to free RAM...")
+                page.close()
+                print(f"✅ Tab {i} closed. Moving to next page...")
             
-            print(f"\n✅ All pages scrolled! Total videos collected: {len(all_videos)}")
+            print(f"\n✅ All pages processed! Total videos collected: {len(all_videos)}")
+            print(f"💾 All tabs are now closed. RAM freed.")
             
             if not all_videos:
                 print("❌ No videos found across all pages!")
