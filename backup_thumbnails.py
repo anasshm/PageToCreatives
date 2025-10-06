@@ -243,7 +243,7 @@ def main():
         sys.exit(1)
     
     # Get CSV file paths from user
-    csv_input = input("\n📂 Drag and drop CSV file(s) here (or enter path): ").strip()
+    csv_input = input("\n📂 Drag and drop CSV file(s) or folder here (or enter path): ").strip()
     
     if not csv_input:
         print("❌ No file path provided!")
@@ -252,32 +252,70 @@ def main():
     # Parse multiple file paths
     csv_paths = []
     
-    # Check if input has escaped spaces (single file drag-and-drop)
+    # Check if input has escaped spaces (single file/folder drag-and-drop)
     if '\\ ' in csv_input:
-        # Single file with escaped spaces - just remove the backslashes
+        # Single file/folder with escaped spaces - just remove the backslashes
         csv_path = csv_input.replace('\\', '').strip('"').strip("'")
-        csv_paths = [csv_path]
+        
+        # Check if it's a directory
+        if os.path.isdir(csv_path):
+            print(f"📁 Detected folder: {csv_path}")
+            print(f"🔍 Finding all CSV files in folder...")
+            # Get all CSV files in the folder, excluding files that start with "Backed_"
+            all_csv_files = sorted(Path(csv_path).glob('*.csv'))
+            csv_files = [f for f in all_csv_files if not f.name.startswith('Backed_')]
+            csv_paths = [str(f) for f in csv_files]
+            
+            skipped_count = len(all_csv_files) - len(csv_files)
+            if skipped_count > 0:
+                print(f"⏭️  Skipped {skipped_count} already backed-up file(s)")
+            
+            if not csv_paths:
+                print(f"❌ No CSV files to backup found in folder!")
+                sys.exit(1)
+            print(f"✅ Found {len(csv_paths)} CSV file(s) to backup")
+        else:
+            csv_paths = [csv_path]
     else:
         # Multiple files or single file without spaces
-        # Split by spaces but respect quotes
-        current_path = ""
-        in_quotes = False
-        
-        for char in csv_input:
-            if char in ('"', "'"):
-                in_quotes = not in_quotes
-            elif char == ' ' and not in_quotes:
-                if current_path:
-                    csv_paths.append(current_path.strip())
-                    current_path = ""
-            else:
-                current_path += char
-        
-        if current_path:
-            csv_paths.append(current_path.strip())
-        
-        # Remove any remaining quotes
-        csv_paths = [p.strip('"').strip("'") for p in csv_paths]
+        # First check if it's a simple folder path
+        clean_input = csv_input.strip('"').strip("'")
+        if os.path.isdir(clean_input):
+            print(f"📁 Detected folder: {clean_input}")
+            print(f"🔍 Finding all CSV files in folder...")
+            # Get all CSV files in the folder, excluding files that start with "Backed_"
+            all_csv_files = sorted(Path(clean_input).glob('*.csv'))
+            csv_files = [f for f in all_csv_files if not f.name.startswith('Backed_')]
+            csv_paths = [str(f) for f in csv_files]
+            
+            skipped_count = len(all_csv_files) - len(csv_files)
+            if skipped_count > 0:
+                print(f"⏭️  Skipped {skipped_count} already backed-up file(s)")
+            
+            if not csv_paths:
+                print(f"❌ No CSV files to backup found in folder!")
+                sys.exit(1)
+            print(f"✅ Found {len(csv_paths)} CSV file(s) to backup")
+        else:
+            # Split by spaces but respect quotes
+            current_path = ""
+            in_quotes = False
+            
+            for char in csv_input:
+                if char in ('"', "'"):
+                    in_quotes = not in_quotes
+                elif char == ' ' and not in_quotes:
+                    if current_path:
+                        csv_paths.append(current_path.strip())
+                        current_path = ""
+                else:
+                    current_path += char
+            
+            if current_path:
+                csv_paths.append(current_path.strip())
+            
+            # Remove any remaining quotes
+            csv_paths = [p.strip('"').strip("'") for p in csv_paths]
     
     # Validate all paths exist
     invalid_paths = [p for p in csv_paths if not os.path.exists(p)]
