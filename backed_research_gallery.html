@@ -1,0 +1,796 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Backed Research Gallery</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+            background-color: #0a0a0a;
+            color: #ffffff;
+            margin: 0;
+            padding: 20px;
+        }
+        
+        h1 {
+            text-align: center;
+            color: #fe2c55;
+            margin-bottom: 10px;
+            font-size: 2.5em;
+        }
+        
+        .subtitle {
+            text-align: center;
+            color: #8a8b91;
+            margin-bottom: 30px;
+            font-size: 1.1em;
+        }
+        
+        .search-section {
+            max-width: 1400px;
+            margin: 0 auto 20px;
+            padding: 25px;
+            background-color: #161823;
+            border-radius: 12px;
+        }
+        
+        .search-box {
+            display: flex;
+            gap: 10px;
+            margin-bottom: 20px;
+        }
+        
+        .search-box input {
+            flex: 1;
+            padding: 12px 16px;
+            background-color: #0a0a0a;
+            border: 2px solid #333;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 1em;
+        }
+        
+        .search-box input:focus {
+            outline: none;
+            border-color: #fe2c55;
+        }
+        
+        .search-box button {
+            padding: 12px 24px;
+            background-color: #fe2c55;
+            border: none;
+            border-radius: 8px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 1em;
+        }
+        
+        .search-box button:hover {
+            background-color: #d91d45;
+        }
+        
+        .search-hint {
+            color: #8a8b91;
+            font-size: 0.9em;
+            margin-bottom: 15px;
+        }
+        
+        .search-expansion {
+            background-color: #1a1d29;
+            padding: 10px 15px;
+            border-radius: 6px;
+            margin-bottom: 15px;
+            font-size: 0.9em;
+            color: #8a8b91;
+            display: none;
+        }
+        
+        .search-expansion.active {
+            display: block;
+        }
+        
+        .search-expansion strong {
+            color: #fe2c55;
+        }
+        
+        .filter-row {
+            display: flex;
+            gap: 15px;
+            flex-wrap: wrap;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        
+        .filter-group {
+            display: flex;
+            gap: 8px;
+            align-items: center;
+            background-color: #0a0a0a;
+            padding: 8px 12px;
+            border-radius: 6px;
+        }
+        
+        .filter-group label {
+            color: #8a8b91;
+            font-size: 0.85em;
+            font-weight: 600;
+            min-width: 60px;
+        }
+        
+        .filter-group input {
+            padding: 6px 10px;
+            background-color: #161823;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #ffffff;
+            width: 80px;
+            font-size: 0.85em;
+        }
+        
+        .filter-group select {
+            padding: 6px 10px;
+            background-color: #161823;
+            border: 1px solid #333;
+            border-radius: 4px;
+            color: #ffffff;
+            font-size: 0.85em;
+        }
+        
+        .filter-buttons {
+            display: flex;
+            gap: 10px;
+        }
+        
+        .filter-buttons button {
+            padding: 8px 16px;
+            background-color: #333;
+            border: none;
+            border-radius: 6px;
+            color: white;
+            font-weight: 600;
+            cursor: pointer;
+            font-size: 0.85em;
+        }
+        
+        .filter-buttons button:hover {
+            background-color: #444;
+        }
+        
+        .filter-buttons button.primary {
+            background-color: #fe2c55;
+        }
+        
+        .filter-buttons button.primary:hover {
+            background-color: #d91d45;
+        }
+        
+        .stats {
+            text-align: center;
+            color: #8a8b91;
+            margin-bottom: 20px;
+            font-size: 1.1em;
+        }
+        
+        .gallery {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            max-width: 1400px;
+            margin: 0 auto;
+        }
+        
+        .video-card {
+            position: relative;
+            border-radius: 12px;
+            overflow: hidden;
+            background-color: #161823;
+            transition: transform 0.2s ease;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.3);
+        }
+        
+        .video-card:hover {
+            transform: scale(1.03);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+        }
+        
+        .video-card a {
+            display: block;
+            text-decoration: none;
+        }
+        
+        .video-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+            aspect-ratio: 9/16;
+            object-fit: cover;
+        }
+        
+        .video-info {
+            padding: 12px;
+            background-color: #161823;
+        }
+        
+        .video-stats {
+            color: #ffffff;
+            font-size: 0.9em;
+            margin-bottom: 8px;
+        }
+        
+        .video-tags {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 4px;
+            margin-bottom: 8px;
+        }
+        
+        .tag {
+            padding: 3px 8px;
+            border-radius: 12px;
+            font-size: 0.75em;
+            font-weight: 600;
+        }
+        
+        .tag.shape {
+            background-color: #2d5a87;
+            color: #ffffff;
+        }
+        
+        .tag.type {
+            background-color: #744c9e;
+            color: #ffffff;
+        }
+        
+        .tag.color {
+            background-color: #4a5568;
+            color: #ffffff;
+        }
+        
+        .tag.material {
+            background-color: #2a5a3e;
+            color: #ffffff;
+        }
+        
+        .tag.pairing {
+            background-color: #fe2c55;
+            color: #ffffff;
+        }
+        
+        .pagination {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 10px;
+            margin-top: 40px;
+            flex-wrap: wrap;
+        }
+        
+        .pagination button {
+            padding: 8px 16px;
+            background-color: #161823;
+            color: #ffffff;
+            border: 1px solid #333;
+            border-radius: 6px;
+            cursor: pointer;
+        }
+        
+        .pagination button:hover:not(:disabled) {
+            background-color: #fe2c55;
+            border-color: #fe2c55;
+        }
+        
+        .pagination button.active {
+            background-color: #fe2c55;
+            border-color: #fe2c55;
+        }
+        
+        .pagination button:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+        }
+        
+        .pagination span {
+            color: #8a8b91;
+            padding: 0 10px;
+        }
+        
+        .no-results {
+            text-align: center;
+            color: #8a8b91;
+            font-size: 1.2em;
+            margin-top: 50px;
+        }
+        
+        @media (max-width: 1200px) {
+            .gallery {
+                grid-template-columns: repeat(3, 1fr);
+            }
+        }
+        
+        @media (max-width: 900px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 15px;
+            }
+            
+            .filter-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-group {
+                flex-direction: column;
+                align-items: stretch;
+            }
+            
+            .filter-group input,
+            .filter-group select {
+                width: 100%;
+            }
+        }
+        
+        @media (max-width: 600px) {
+            .gallery {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 10px;
+            }
+            
+            h1 {
+                font-size: 1.8em;
+            }
+        }
+    </style>
+</head>
+<body>
+    <h1>☁️ Backed Research Gallery</h1>
+    <div class="subtitle">Using Cloudinary backup URLs - thumbnails won't expire!</div>
+    
+    <div class="search-section">
+        <div class="search-box">
+            <input type="text" id="tagSearch" placeholder="Search by tag (e.g., clover, butterfly, fourleaf...)" />
+            <button onclick="searchByTag()">🔍 Search</button>
+        </div>
+        
+        <div class="search-hint">
+            💡 Try: clover, butterfly, fourleaf, star, leaf, pearl, black, gold, necklace, earring
+        </div>
+        
+        <div class="search-expansion" id="searchExpansion"></div>
+        
+        <div class="filter-row">
+            <div class="filter-group">
+                <label>Product:</label>
+                <select id="productType">
+                    <option value="">All</option>
+                    <option value="necklace">Necklace</option>
+                    <option value="earring">Earring</option>
+                    <option value="ring">Ring</option>
+                    <option value="bracelet">Bracelet</option>
+                    <option value="watch">Watch</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Color:</label>
+                <select id="colorFilter">
+                    <option value="">All</option>
+                    <option value="black">Black</option>
+                    <option value="white">White</option>
+                    <option value="red">Red</option>
+                    <option value="blue">Blue</option>
+                    <option value="green">Green</option>
+                    <option value="pink">Pink</option>
+                    <option value="purple">Purple</option>
+                    <option value="yellow">Yellow</option>
+                    <option value="brown">Brown</option>
+                    <option value="multicolor">Multicolor</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Metal:</label>
+                <select id="metalFilter">
+                    <option value="">All</option>
+                    <option value="gold">Gold</option>
+                    <option value="silver">Silver</option>
+                    <option value="white-gold">White Gold</option>
+                    <option value="rose-gold">Rose Gold</option>
+                    <option value="two-tone">Two-Tone</option>
+                </select>
+            </div>
+            
+            <div class="filter-group">
+                <label>Material:</label>
+                <select id="materialFilter">
+                    <option value="">All</option>
+                    <option value="pearl">Pearl</option>
+                    <option value="mother-of-pearl">Mother of Pearl</option>
+                    <option value="crystal">Crystal</option>
+                    <option value="diamond">Diamond</option>
+                    <option value="enamel">Enamel</option>
+                    <option value="resin">Resin</option>
+                </select>
+            </div>
+        </div>
+        
+        <div class="filter-row">
+            <div class="filter-group">
+                <label>Likes Min:</label>
+                <input type="number" id="likesMin" placeholder="0">
+            </div>
+            <div class="filter-group">
+                <label>Likes Max:</label>
+                <input type="number" id="likesMax" placeholder="∞">
+            </div>
+            
+            <div class="filter-group">
+                <label>Index Min:</label>
+                <input type="number" id="indexMin" placeholder="1">
+            </div>
+            <div class="filter-group">
+                <label>Index Max:</label>
+                <input type="number" id="indexMax" placeholder="∞">
+            </div>
+        </div>
+        
+        <div class="filter-buttons">
+            <button class="primary" onclick="applyFilters()">Apply Filters</button>
+            <button onclick="resetFilters()">Reset All</button>
+            <button onclick="findPairs()">🔗 Find Pairs</button>
+        </div>
+    </div>
+    
+    <div class="stats" id="stats">Loading...</div>
+    
+    <div class="gallery" id="gallery"></div>
+    
+    <div class="pagination" id="pagination"></div>
+    
+    <script>
+        // Video data and taxonomy embedded in JavaScript
+        const allVideos = [{"video_url": "https://www.douyin.com/video/7272183164963949879", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/0b2ac46d2f104dad9ce575f96236c325~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=%2FZptCEhQql8F2qRfkcn9LBJfRGM%3D", "likes": "14.2K", "index": "1", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "delicate", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875034/douyin_thumbnails/oodptupu73u2u6lzi6on.jpg"}, {"video_url": "https://www.douyin.com/video/7555481114052283688", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/b46bed3a3ee3459aafbbfb86f13efd76~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=rWCxSp1%2B4y0I4IcT%2FvY3is9W1Z8%3D", "likes": "2", "index": "2", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875034/douyin_thumbnails/srg2iakvjgcccf577pj3.jpg"}, {"video_url": "https://www.douyin.com/video/7555083265288326452", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/c573e6f35815472b8144783ff91b1d90~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=sKbfJLsv9F7GLkqlJMgJmH%2Bejog%3D", "likes": "5", "index": "3", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875034/douyin_thumbnails/k9icrfsjrb6gbycawaif.jpg"}, {"video_url": "https://www.douyin.com/video/7554704466386177332", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/978c9abec46240f88977c81e61e3a5d2~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=CdsYtRuFPaDF1FDx3u6d1%2BPkHXk%3D", "likes": "6", "index": "4", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": [], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl"], "style": "delicate", "size": "large", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875034/douyin_thumbnails/bqfpfyulgzqepb7utqrg.jpg"}, {"video_url": "https://www.douyin.com/video/7554365265912335631", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/6dc889bf1c564052b0869466952407f5~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=5ldkf0uQCp2nFOW%2FHaAB8wRzvqM%3D", "likes": "2", "index": "5", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["geometric"], "primary_color": "yellow", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "flower-yellow-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875034/douyin_thumbnails/qnssb9p3pwqfjlktgycn.jpg"}, {"video_url": "https://www.douyin.com/video/7553961345671056674", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/517684bca69a4d4496205090a8ab92b9~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=rfgy33YpkyOris0aNFJhZj5urrE%3D", "likes": "3", "index": "6", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "silver", "materials": ["pearl", "crystal"], "style": "luxury", "size": "small", "pairing_key": "circle-white-silver"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875034/douyin_thumbnails/amaqriaek3remoqvfwkk.jpg"}, {"video_url": "https://www.douyin.com/video/7553535608845602084", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/b1718862f64d4bd6bb939f74ef852aaa~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=wts19Xz34mRAMJo3Y%2FK4DNwg5FQ%3D", "likes": "6", "index": "7", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875034/douyin_thumbnails/pbdhmpu0jbmfwmprktoh.jpg"}, {"video_url": "https://www.douyin.com/video/7553215608578477366", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/836360f76e034108983826a20d59fa88~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=Sop7MCt2k9Eh8Icsw4eXhBFm7x4%3D", "likes": "5", "index": "8", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["mother-of-pearl", "crystal"], "style": "luxury", "size": "small", "pairing_key": "flower-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875034/douyin_thumbnails/ne5pt7kzz7xbynidzwzw.jpg"}, {"video_url": "https://www.douyin.com/video/7553214524656979239", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/6d95224d1c2b4ab1a909b5d4916cba97~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=pTOcfuw0aHLxoGwiQjyXtVmOWSI%3D", "likes": "4", "index": "9", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875034/douyin_thumbnails/kszgbnvgwi4qmpfcsqbw.jpg"}, {"video_url": "https://www.douyin.com/video/7552836721059089706", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/af2c2480c1924620bf772b16a1c49391~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=6AWwu7d2DV1ORy198AcPQCFCetc%3D", "likes": "5", "index": "10", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "leaf", "secondary_shapes": ["geometric", "circle"], "primary_color": "yellow", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "leaf-yellow-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875034/douyin_thumbnails/xak06cccc0mztdjjpxc6.jpg"}, {"video_url": "https://www.douyin.com/video/7552834521704549651", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/619ab2895cf047a0b881ef67c5f16551~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=KP44jJY8BeOsnVgLx1%2Bxfidr1nY%3D", "likes": "3", "index": "11", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875035/douyin_thumbnails/kvfnx8ej3drbf2scde1l.jpg"}, {"video_url": "https://www.douyin.com/video/7552471246479461673", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/c3e8001e10f54a4e88e366e703b5ee26~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=lTc9I5PgGWReGOyGXmTpWB6qItM%3D", "likes": "8", "index": "12", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "green", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-green-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875036/douyin_thumbnails/ocg9nuothqlbqi0peqoz.jpg"}, {"video_url": "https://www.douyin.com/video/7552470238978247990", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/68b9efde9e0548dfa4e43efe049a028c~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=NZaquHPwfzfmYnP8DIVkoT6KyfI%3D", "likes": "4", "index": "13", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875035/douyin_thumbnails/rvqckfxymxsa9uvs6igl.jpg"}, {"video_url": "https://www.douyin.com/video/7552101438529244467", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/9126fadd9f4e4186a30d3005f801f5d0~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=dByKarMuIpLvt9BOvgEO0UlDfFU%3D", "likes": "13", "index": "14", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875035/douyin_thumbnails/lesm4xsy1zknj0vkkafq.jpg"}, {"video_url": "https://www.douyin.com/video/7552100574263512346", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/45472ba0667946f2b742dcc86a7734a6~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=110vtClIccS0pidSAusz42j9Mw0%3D", "likes": "3", "index": "15", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["star"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875035/douyin_thumbnails/cn9qej4h7adl16fyj0ba.jpg"}, {"video_url": "https://www.douyin.com/video/7551717869030018313", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/2b60074164534d658c1a42e22febf900~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=sT9D22jmBOmKOWFPyyoQR5slezM%3D", "likes": "6", "index": "16", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875036/douyin_thumbnails/hb1yqw3afmau17l8hnuj.jpg"}, {"video_url": "https://www.douyin.com/video/7551718755311652146", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/5152c5a127b841da992a354967b687ae~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=zGSXJOIBRrHXs9JUeAJ2tXAdi9Q%3D", "likes": "2", "index": "17", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875035/douyin_thumbnails/d8vna3l45hn1su6csgtw.jpg"}, {"video_url": "https://www.douyin.com/video/7551332844614716682", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/94dee2909def4f4f920544c1c6ae2307~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=VMeFrVXYFQI7PhHIUcbdFBN7IlU%3D", "likes": "5", "index": "18", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875035/douyin_thumbnails/uyxzkosfzg5zgqqqs6k1.jpg"}, {"video_url": "https://www.douyin.com/video/7551331881673968923", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/e83a45f72ee04d15aeb0c2c14113eea6~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=tcqTsfDF7Lz1vK3H3B4EblZ9AyY%3D", "likes": "4", "index": "19", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875035/douyin_thumbnails/xyqznfwismvozywkiakv.jpg"}, {"video_url": "https://www.douyin.com/video/7550984502873427209", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/ffb4b80061604f28bec39e7b23fedd5d~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=EOuJPuew05wN1r8UQSqbEF36Pdo%3D", "likes": "5", "index": "20", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": [], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "delicate", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875035/douyin_thumbnails/jllxfvs0eb37i8swzjvq.jpg"}, {"video_url": "https://www.douyin.com/video/7550983721382448434", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/19018627765146939ee8c38142aebe52~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=MK3XKHs7h44p67eTy2eQPnflV%2B4%3D", "likes": "3", "index": "21", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875036/douyin_thumbnails/qw50mrj2vpqoeozeuxhc.jpg"}, {"video_url": "https://www.douyin.com/video/7550620770758593843", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/62551b5eef924aee85cc81b44107d611~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=b%2Fjaxuafthho8SR7tOG9yHOVUXY%3D", "likes": "32", "index": "22", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl"], "style": "delicate", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875036/douyin_thumbnails/jtuyml7zqc7romw32kev.jpg"}, {"video_url": "https://www.douyin.com/video/7550619895872949530", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/fe25dd5c96194c78b34a868a0f5962a9~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=eJlNgsgeKxmSlZHXr2wDbUkdlRs%3D", "likes": "5", "index": "23", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["circle"], "primary_color": "yellow", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "flower-yellow-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875036/douyin_thumbnails/houigbrpg7lmgblb887g.jpg"}, {"video_url": "https://www.douyin.com/video/7550255082458058036", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/1a8e36d0b067462d9da146d2eac84da1~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=ahIxQr%2FkL1AwcRJnNK12es042Vo%3D", "likes": "5", "index": "24", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": [], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875036/douyin_thumbnails/qm6oxyo1yzd5nu2jvjjl.jpg"}, {"video_url": "https://www.douyin.com/video/7550253564451425551", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/04a99bf938314574b561e28979711d80~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=WS4wOHdybdakHz8NXjrmk8ioOko%3D", "likes": "4", "index": "25", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "flower-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875036/douyin_thumbnails/vioduaotcfhc7e1ilr1g.jpg"}, {"video_url": "https://www.douyin.com/video/7549839621513809204", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/0f5698cf59df43ab8c6f61ad1e2d98de~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=TI%2B6hQ39Ja737FpDWp1MN1WPJcw%3D", "likes": "7", "index": "26", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": [], "primary_color": "white", "secondary_colors": [], "metal_color": "silver", "materials": ["pearl"], "style": "modern", "size": "small", "pairing_key": "circle-white-silver"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875036/douyin_thumbnails/egpijqukq1wvcv9hmsus.jpg"}, {"video_url": "https://www.douyin.com/video/7549838725031742754", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/f6a2c865f938425f8b0b6196fe04af54~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=AV2%2BxLpvu%2BTAPPaPocRo9r9cCbo%3D", "likes": "1", "index": "27", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875036/douyin_thumbnails/tr4clpddlxtl9gajrzyy.jpg"}, {"video_url": "https://www.douyin.com/video/7549504607207116072", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/ee4a576eb7c74a938a82527ac87f3eb4~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=qTCrLEjK%2BKBs%2BWPUvb4k9sG2vX4%3D", "likes": "4", "index": "28", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875037/douyin_thumbnails/y8p9ci2ybz8b3oo0grdo.jpg"}, {"video_url": "https://www.douyin.com/video/7549503878220369152", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/b008119c59054627b7154780b715f8ed~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=gWwkwdEQacCacvISZFl7y81eZRc%3D", "likes": "3", "index": "29", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875037/douyin_thumbnails/rcpy2iwcth2wzohazq4m.jpg"}, {"video_url": "https://www.douyin.com/video/7549130365449800994", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/343ae493882444258e3b55aabf281fbb~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=MOIlEseiiv0aarluQD07BznntgU%3D", "likes": "3", "index": "30", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875037/douyin_thumbnails/vng1tew2ie1bzxfxrylo.jpg"}, {"video_url": "https://www.douyin.com/video/7549129652187434280", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/589f2a575a0b45489a7f2f09bdd32da8~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=vzdBIfgEBOBo1bnkZu1Qr26j6AU%3D", "likes": "2", "index": "31", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875037/douyin_thumbnails/jc6sc9argohar5bl70vh.jpg"}, {"video_url": "https://www.douyin.com/video/7548780061986524479", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/9018612712034fb3b8220a9d45d1a4e3~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=NF1j0084Nky7PYJigD1Fjz6NwmM%3D", "likes": "6", "index": "32", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875037/douyin_thumbnails/ysjw0dzolxanlhhlva1c.jpg"}, {"video_url": "https://www.douyin.com/video/7548779342810205481", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/c0cd3478ca9e4edb8bc872c568ac130c~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=TZ%2FFb8n8%2Bew143%2FvvkP7%2B%2FkcPLY%3D", "likes": "3", "index": "33", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["leaf"], "primary_color": "white", "secondary_colors": ["green"], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875037/douyin_thumbnails/zkezssqheqq1vhawc5ex.jpg"}, {"video_url": "https://www.douyin.com/video/7548388975837334838", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/3659b6f91e0a4e7cbb06b4725ce0ae98~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=zFR9IVzz2ZxhdUFI6i26nQWJ7QI%3D", "likes": "8", "index": "34", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["flower"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal", "mother-of-pearl"], "style": "delicate", "size": "medium", "pairing_key": "flower-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875037/douyin_thumbnails/jzd7fnpmguizhagmkpxy.jpg"}, {"video_url": "https://www.douyin.com/video/7548388313623743786", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/f973c6fe345c43b08d95f686bfc1f18e~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=dV4Jd4HBSH1OpLktkyNWiXbmz1w%3D", "likes": "6", "index": "35", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "delicate", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875037/douyin_thumbnails/dbd0fdcbzxrn4mei3ean.jpg"}, {"video_url": "https://www.douyin.com/video/7548020069536697636", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/c2d309976381401198c7e7b10f50636a~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=k%2F62EisYcDB%2BNN2gjvFCSxucwsQ%3D", "likes": "10", "index": "36", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["circle", "geometric"], "primary_color": "yellow", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "flower-yellow-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875037/douyin_thumbnails/enceywes3xkvqkbbybjf.jpg"}, {"video_url": "https://www.douyin.com/video/7548018903171992874", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/05c4bdc1da674689b52999058930ee9d~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=SRGWApDPUvVJuoAvXuxsyJLtjRg%3D", "likes": "2", "index": "37", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "flower-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875037/douyin_thumbnails/ayvqywkx6bbuown6luo2.jpg"}, {"video_url": "https://www.douyin.com/video/7547623269340417343", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/fba7990f1eb340df9174aea5befc2e3a~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=tQu4NtpLEUeoMwkyWQcRsCLyQt4%3D", "likes": "1", "index": "38", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "flower-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875038/douyin_thumbnails/uwavhs25ra7rjqabryve.jpg"}, {"video_url": "https://www.douyin.com/video/7547622561354419497", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/cae2e65b34cf4bb4a879d08da1f272e6~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=NXekX1dKIbRbLxmzVFScphiiOPM%3D", "likes": "5", "index": "39", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875038/douyin_thumbnails/bxdtufzblozzdts34rps.jpg"}, {"video_url": "https://www.douyin.com/video/7547188001139346728", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/19caae8043e1400fb5abb2d96548e4dc~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=qC8KyEZIGckXigkq4kF8l58f53M%3D", "likes": "6", "index": "40", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875038/douyin_thumbnails/lxavosqwq1qytpxq76fp.jpg"}, {"video_url": "https://www.douyin.com/video/7547186548974931234", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/c749a2cbdb9e410cbc454529a3dcbeb7~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=q6uUdtYhUftIqsID6%2BQNs4RmqL0%3D", "likes": "1", "index": "41", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "yellow", "secondary_colors": ["white"], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-yellow-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875038/douyin_thumbnails/oclcur9xtqcjjw9u0rl2.jpg"}, {"video_url": "https://www.douyin.com/video/7546936950704459023", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/b67e2df4a878406ab912994360860566~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=sU98rqFpTBmP1N5uBtQJGT12n30%3D", "likes": "5", "index": "42", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": [], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl"], "style": "delicate", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875038/douyin_thumbnails/d7fvtwdd5jm8m3lmo9yn.jpg"}, {"video_url": "https://www.douyin.com/video/7546936188771323171", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/a52ef2f9bc2f40ca84cc4d08868ff6f9~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=9ptKI41ggcU7wpM0gCxSUdc1KB8%3D", "likes": "7", "index": "43", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875038/douyin_thumbnails/bgf600zhxh9y7dhidxba.jpg"}, {"video_url": "https://www.douyin.com/video/7546544325165944099", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/eae7bdab8ea24f38a5d55e6fea0f773d~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=M%2BjBzw0MZGxBio1FaMWoG6D15%2F8%3D", "likes": "5", "index": "44", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875038/douyin_thumbnails/zjoojobojuj7ya2gqpse.jpg"}, {"video_url": "https://www.douyin.com/video/7546487217041034548", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/e0efc8e8c0ca4f1b9d6b958de515557a~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=5LtLaGaQYEftQGp7Wn1ms8H1FhI%3D", "likes": "4", "index": "45", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875038/douyin_thumbnails/ldnk8alkuvlescnbn306.jpg"}, {"video_url": "https://www.douyin.com/video/7546200844732075304", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/cbe4878f98094105bc5f44fdaf77d3e9~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=Y%2BN%2F8ZKCsUaASVI9GxcKf%2FtQI%2BY%3D", "likes": "2", "index": "46", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": ["silver"], "metal_color": "silver", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-silver"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875038/douyin_thumbnails/ef4nlke9mmj6ffcc9zye.jpg"}, {"video_url": "https://www.douyin.com/video/7546120162022395171", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/b72581f3ef964fc4893bd49c318d4fb6~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=%2FFQH4H8SPOVqnk2RCU9zIwpQmko%3D", "likes": "3", "index": "47", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["circle"], "primary_color": "yellow", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "flower-yellow-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875038/douyin_thumbnails/lur8aksuaznanydyqjxd.jpg"}, {"video_url": "https://www.douyin.com/video/7545781725897428233", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/667fc090f43f46008e06adfeb19986d3~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=6QD%2B5gNlD4Y9E5W4jF7it7sB64s%3D", "likes": "4", "index": "48", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "silver", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-silver"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875038/douyin_thumbnails/p9gk5opplctlb80p2avq.jpg"}, {"video_url": "https://www.douyin.com/video/7545774185159707955", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/d775fd762fdc4b29892c7679ea2f1290~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=uR7%2BHqSrCm%2FSy94Nb77BxnJirdE%3D", "likes": "3", "index": "49", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "flower-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875039/douyin_thumbnails/j2paqvraccxsglonegqm.jpg"}, {"video_url": "https://www.douyin.com/video/7545295684895788298", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/ac18100fd2574c64bbb0068f09a3d058~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=s2fxoHMT1xaqTAuX9aG2xYG7C5k%3D", "likes": "3", "index": "50", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "silver", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-silver"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875039/douyin_thumbnails/mgwvc1kgs3m9rii16bhp.jpg"}, {"video_url": "https://www.douyin.com/video/7545294404341255475", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/9f9fefbd22574071985a0664de0ae9cd~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=qiRCzOTby%2FNnh%2BqBK54noZepSvk%3D", "likes": "10", "index": "51", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "flower-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875039/douyin_thumbnails/iqsw2fyoq1faruyheqrt.jpg"}, {"video_url": "https://www.douyin.com/video/7545021157854973211", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/b09f9e7ca05e4eea82a960aa3d4821f1~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=9Ci20HXsd0zVeKFyX9WDCEy2l%2FY%3D", "likes": "5", "index": "52", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "statement", "size": "medium", "pairing_key": "flower-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875039/douyin_thumbnails/dkyqmcnta0wbinggyih4.jpg"}, {"video_url": "https://www.douyin.com/video/7545019643388235035", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/0e9ebe79310f4351b08c4772bd9a7c70~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=fD%2B3rd%2FnqJI9cC7YhGKgSicsYtU%3D", "likes": "3", "index": "53", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875039/douyin_thumbnails/s7urctn01henvzxr7yuq.jpg"}, {"video_url": "https://www.douyin.com/video/7544653454300466482", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/a44f59f2fe4f4e369ae0f303c1e9e37c~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=wp0CAxKvNz2V%2FNKmQl0ixcArMS8%3D", "likes": "3", "index": "54", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "flower-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875039/douyin_thumbnails/giqfvq3kcxogfsx73nnm.jpg"}, {"video_url": "https://www.douyin.com/video/7544652001343229234", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/255e94c3f1a3420d87e7976e45f4ed3c~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=89BkpivszzQSp%2BgYDyelBLUHlJk%3D", "likes": "1", "index": "55", "source_page": "https://www.douyin.com/user/MS4wLjABAAAASipfcTRAX75HZ5pZPW14M5LJjT740Px4ttRTq9wyKOkXbdB_aCptoF-hTZF3NwEq", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875039/douyin_thumbnails/pxjdealtboc1fipvi57i.jpg"}, {"video_url": "https://www.douyin.com/video/7376586780482571520", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oAuagANDmC5uZvlFEAAuiAIQAAaefXKgF9QqCi~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=jf6C%2FHPFjsW3YhVRu%2BzjT7aeiFk%3D", "likes": "49", "index": "1", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875039/douyin_thumbnails/x6c2vckjfzrjilvraoof.jpg"}, {"video_url": "https://www.douyin.com/video/7374433734914821410", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/i75e81846ca584803ba3e173b51791ab4~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=Hlox41C8HLFEn0CvAPa9%2BI3bGr8%3D", "likes": "17", "index": "2", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "bracelet", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875039/douyin_thumbnails/htczdvrmszudy7lumlnp.jpg"}, {"video_url": "https://www.douyin.com/video/7374432949778795810", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/1ca939db0ec3479ba1854e99d3611546~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=nZ59FtuLTptwHqzUZzuYj3SWjgU%3D", "likes": "13", "index": "3", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": [], "primary_color": "green", "secondary_colors": [], "metal_color": "silver", "materials": ["crystal"], "style": "vintage", "size": "small", "pairing_key": "flower-green-silver"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875039/douyin_thumbnails/mi1ttwhgppuwh6faah6h.jpg"}, {"video_url": "https://www.douyin.com/video/7374432565035388212", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-dy/dc5d2bb4b7e24b538dd6eca42a7a403f~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=y5ILcrkHmUX5tYjBNi6JFKfJhbc%3D", "likes": "16", "index": "4", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["heart"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875040/douyin_thumbnails/ispdrthrwqgbdapcyms9.jpg"}, {"video_url": "https://www.douyin.com/video/7372837397068811535", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/o8leKZfS8AEXFWMrDSfjeEgAmX24kRFSP0QQCI~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=ff64gzshsz4s8LaqqhY6gyvKly4%3D", "likes": "17", "index": "5", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": [], "primary_color": "black", "secondary_colors": [], "metal_color": "silver", "materials": ["crystal"], "style": "luxury", "size": "small", "pairing_key": "flower-black-silver"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875040/douyin_thumbnails/ebpuqnb4zkayrugppsdh.jpg"}, {"video_url": "https://www.douyin.com/video/7371783608379460879", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/okACQ1AS1bipERo83PiTu8iUI7NvkZl9A6BIW~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=i6Q3KyM9y2Wve2AsxG3LwNY%2FWL4%3D", "likes": "28", "index": "6", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["resin"], "style": "modern", "size": "medium", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875040/douyin_thumbnails/whcc5ok1etevayvfjbrw.jpg"}, {"video_url": "https://www.douyin.com/video/7369855520070536483", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/os3KAkbnNQVb9HmAlefoERtvbCSAlDyA8AAWgg~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=XTZdMOsbhpyVOrj4dJkRplrgDjY%3D", "likes": "20", "index": "7", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "small", "pairing_key": "flower-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875040/douyin_thumbnails/ouxokkbozajpx2bpagoc.jpg"}, {"video_url": "https://www.douyin.com/video/7369493545683619106", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYePeATmRA8uAjqADONbC9ZCNrLbQMBAACUgIn~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=CvLYAV5IaTXY0KRVXDBx4SdfokQ%3D", "likes": "14", "index": "8", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle", "flower"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["mother-of-pearl", "crystal"], "style": "luxury", "size": "small", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875040/douyin_thumbnails/mmpmfhg25lf7hwq9xxbh.jpg"}, {"video_url": "https://www.douyin.com/video/7369151733399964968", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oQIAIemDHBnPAjnVQbdSgNCgDrfLkRQBNiyA9I~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=Pp9pNtftBlNuDMnN14M%2Fctu7d4M%3D", "likes": "26", "index": "9", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "small", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875040/douyin_thumbnails/n2fcpo5ev9bbss1jcpgy.jpg"}, {"video_url": "https://www.douyin.com/video/7368747431581748520", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oEDPnfMAhIhEgBI2YDNV1F6AeGPwzzNzABAMBX~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=ElOUiVSq9EOu4heHEgxlZ4Un%2BVg%3D", "likes": "18", "index": "10", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "black", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-black-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875040/douyin_thumbnails/sdaeb26ic0r55b9irmxq.jpg"}, {"video_url": "https://www.douyin.com/video/7321375166838115622", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/okDqfIfDAb2DAg8QrI8WAfJnAgMPACqfbvaDhz~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=iGJvO40adBPdrWFSoeNhOEpMLlQ%3D", "likes": "36", "index": "11", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["circle"], "primary_color": "black", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "small", "pairing_key": "flower-black-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875040/douyin_thumbnails/rmkroe4mxvlejfrjqhi6.jpg"}, {"video_url": "https://www.douyin.com/video/7321374427793411379", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o0k9EDfEUnA1vUARAredA9lACA9gGCVmIOblaD~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=Dof4RcEJKxjS31l3EKEyrfYM39Q%3D", "likes": "29", "index": "12", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "small", "pairing_key": "flower-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875040/douyin_thumbnails/trkdjb0tqrr3eztcpcku.jpg"}, {"video_url": "https://www.douyin.com/video/7320882875895713051", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oQy1mnn8I8AAQqCmOADDAAAAAeQeb90ylwHEgm~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=6Y5L3jl7Hn2d96qBmnNQsR2U%2BtI%3D", "likes": "16", "index": "13", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["geometric"], "primary_color": "blue", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "statement", "size": "medium", "pairing_key": "geometric-blue-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875040/douyin_thumbnails/rexatcidd1bpmfubvm7h.jpg"}, {"video_url": "https://www.douyin.com/video/7320571416221322534", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o05ANhGzgNACWJwftAl9AAAPEuXxPlI5f4GCdD~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=CYzrjClqkLS%2FOCQSwDuhqI21vSw%3D", "likes": "26", "index": "14", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "bow", "secondary_shapes": ["circle"], "primary_color": "red", "secondary_colors": ["white"], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "statement", "size": "medium", "pairing_key": "bow-red-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875041/douyin_thumbnails/eccelc1cgie8gea2h0m5.jpg"}, {"video_url": "https://www.douyin.com/video/7320152038812224805", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oABFALME6weDBee7cuQAPtAGDzAbwFasAELIwn~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=v7vA6oqWX7wLSDiG%2FuVY5kYsVkA%3D", "likes": "28", "index": "15", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "red", "secondary_colors": [], "metal_color": "gold", "materials": ["enamel"], "style": "modern", "size": "small", "pairing_key": "circle-red-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875041/douyin_thumbnails/qce7o0vtqztqhxwsvnmo.jpg"}, {"video_url": "https://www.douyin.com/video/7319810759347784969", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oAoTlMgrZDAHTASlA8AfQYIqbEAE3CADgnV9le~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=FuUseDV5iiXxoAFKavVKdHFJwHs%3D", "likes": "22", "index": "16", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["square"], "primary_color": "black", "secondary_colors": [], "metal_color": "silver", "materials": ["crystal"], "style": "statement", "size": "medium", "pairing_key": "geometric-black-silver"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875041/douyin_thumbnails/pxivubslusnohigdan52.jpg"}, {"video_url": "https://www.douyin.com/video/7319416321601441061", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oA6AabFo4gv9neAQAOADAVCCtAleIX3Nlxv8AE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=VzDfFqAvvOMjEPiv9HFI9cHRW3U%3D", "likes": "30", "index": "17", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "green", "secondary_colors": [], "metal_color": "silver", "materials": ["crystal"], "style": "statement", "size": "medium", "pairing_key": "geometric-green-silver"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875042/douyin_thumbnails/vzixmqn46xnpf8rwc01k.jpg"}, {"video_url": "https://www.douyin.com/video/7319413645467847974", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oMFA3lACfeIvACCASlda9TgAwDE0bAMnIUXBqw~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=ntwm4TT42wxKpFaD%2Fv3lUTgY8XA%3D", "likes": "19", "index": "18", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "silver", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-silver"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875041/douyin_thumbnails/n6iuvjrakplvga5g2ssy.jpg"}, {"video_url": "https://www.douyin.com/video/7319040832315657509", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/osj5aAA6lCA0SKyXCOfhgLzVAlA9JoAIE1NcDf~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=7jYOaIfQT%2F4EkUWcK2zF2IyXsX4%3D", "likes": "38", "index": "19", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "bow", "secondary_shapes": ["circle"], "primary_color": "red", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "bow-red-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875041/douyin_thumbnails/fwixmpe8kwdukx5wnib7.jpg"}, {"video_url": "https://www.douyin.com/video/7318623216593947955", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/osANXiAUzICGbUA4AOfAC1ewsCNhyAAEh5gGAy~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=gVPw%2BaRow%2FaBKhFzmgK8S9%2FRejI%3D", "likes": "49", "index": "20", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": [], "primary_color": "white", "secondary_colors": [], "metal_color": "silver", "materials": ["pearl"], "style": "modern", "size": "medium", "pairing_key": "circle-white-silver"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875041/douyin_thumbnails/puvjvbyhr8wel5d3emal.jpg"}, {"video_url": "https://www.douyin.com/video/7318622231486041394", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/okQBI4eOARCBQBNoAAnAQylM9PlguCEAAFDKbf~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=Hon99XVfukX1FM%2BmNjPzF6BoSgM%3D", "likes": "27", "index": "21", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "green", "secondary_colors": [], "metal_color": "silver", "materials": ["crystal"], "style": "statement", "size": "medium", "pairing_key": "geometric-green-silver"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875041/douyin_thumbnails/i0wmqhi5j5lg1lcvjumn.jpg"}, {"video_url": "https://www.douyin.com/video/7318618012800568585", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oQAAAPNUHZlIbCPAHCnFmExgClX9DzegAIAAfk~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=60wv8862%2FSecGGSnEXrslX%2B2Enc%3D", "likes": "13", "index": "22", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "red", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "modern", "size": "small", "pairing_key": "geometric-red-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875041/douyin_thumbnails/tvsyljhmkx9tlgdrrolg.jpg"}, {"video_url": "https://www.douyin.com/video/7318613225820409125", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oMQAVbFUugY9nUAIAWSDAGCCXAleE70el60jAC~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=5bIfqxeMxmqieoOCLjU6DzeVFl4%3D", "likes": "15", "index": "23", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": ["red"], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "small", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875042/douyin_thumbnails/vetmschr915sgxqfserl.jpg"}, {"video_url": "https://www.douyin.com/video/7318356392690060556", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o4QrgyzAAIyAfCNNZDtCeQMHpEdkBAA4AhAAAE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=OX6eX5sHTWhTupaEcPWqO7CmrUI%3D", "likes": "32", "index": "24", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["circle"], "primary_color": "red", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl"], "style": "vintage", "size": "small", "pairing_key": "flower-red-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875042/douyin_thumbnails/ez7jkh5ou3q84x9ttfze.jpg"}, {"video_url": "https://www.douyin.com/video/7318343190698872102", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/osYiEzyYIACBqiAAIAXhao7APECegAfbyUCWOt~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=aQ6wM341k5NHYPEjb3EKiMFAeKo%3D", "likes": "23", "index": "25", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["star"], "primary_color": "white", "secondary_colors": ["yellow"], "metal_color": "gold", "materials": ["crystal"], "style": "statement", "size": "large", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875042/douyin_thumbnails/xby7rcxpxr4bxb4lls7b.jpg"}, {"video_url": "https://www.douyin.com/video/7318341541884382502", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oQueFyhC3AIgvUC7AP3dWQgEztAifAAiWCAyiI~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=6i8uUEaZnrGZ4lp2NIvnAeI6wEU%3D", "likes": "40", "index": "26", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "silver", "materials": ["pearl"], "style": "modern", "size": "medium", "pairing_key": "circle-white-silver"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875042/douyin_thumbnails/b6hg8toqamvonyxjql5y.jpg"}, {"video_url": "https://www.douyin.com/video/7317535661244927251", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oQbRA7VCFl2XEgDFXeKewABnC4AWlI9U1JCAAA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=lIZ%2B1ZVrx0moXZrfwhAw3LDqqF0%3D", "likes": "29", "index": "27", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "silver", "materials": ["pearl"], "style": "modern", "size": "medium", "pairing_key": "circle-white-silver"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875042/douyin_thumbnails/xnfmng4zoi0kadzanemx.jpg"}, {"video_url": "https://www.douyin.com/video/7317163800346578212", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ooA0Abn4nACleAUABLDy84EciCDIsfdgWE9knA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=chB6TB9Bp%2BuX4EoUJhuxujcB9fU%3D", "likes": "26", "index": "28", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "red", "secondary_colors": ["white"], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-red-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875042/douyin_thumbnails/jbjdmhhjl12t6mzhd85i.jpg"}, {"video_url": "https://www.douyin.com/video/7317162275918417163", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o8EALlXAUCeAMg9WPCIACfhAQyzvCiALmN7xGD~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=NMq8B6SC66jYPXZ5fnAee88lm5k%3D", "likes": "18", "index": "29", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "small", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875042/douyin_thumbnails/kgfnislibhyxohc3jky5.jpg"}, {"video_url": "https://www.douyin.com/video/7316796844640587071", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oIfQIe7ADQEIg8iHnUbw8AbA9AyulnD4AAqBCg~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=NPdyT40uaFkySzucrY103jTYnKw%3D", "likes": "21", "index": "30", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "red", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal", "enamel"], "style": "luxury", "size": "small", "pairing_key": "circle-red-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875042/douyin_thumbnails/kwx5svfyk3hprxpuljjc.jpg"}, {"video_url": "https://www.douyin.com/video/7316795275941629247", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o0CU9AneiEnbqAlcU2QbDgYDA0FeIAloAQgApl~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=eyKD0PaXOOXunXHTBQ80Ej67xaA%3D", "likes": "18", "index": "31", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["geometric"], "primary_color": "yellow", "secondary_colors": ["multicolor"], "metal_color": "gold", "materials": ["crystal"], "style": "statement", "size": "medium", "pairing_key": "geometric-yellow-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875043/douyin_thumbnails/uijfch6sbtpqevy9jktr.jpg"}, {"video_url": "https://www.douyin.com/video/7316124279341337892", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ocIzyxAJHOrAACmwAYwAzyAAhCDFImAEtgNfeG~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=Up4kHQ%2F9UMCjQtjSyJ4Kf5%2FyiBo%3D", "likes": "35", "index": "32", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "yellow", "secondary_colors": ["white"], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "small", "pairing_key": "geometric-yellow-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875043/douyin_thumbnails/llfcnpzgioq0dvfbobmq.jpg"}, {"video_url": "https://www.douyin.com/video/7316123764574424356", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o0CkAFNzCEAGeOyAypcxCyTlUCyAzhOAfAAQIg~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=7EkjuR0R3JV5%2Biwdb%2BtfGadxbU0%3D", "likes": "14", "index": "33", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "yellow", "secondary_colors": ["white"], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "small", "pairing_key": "geometric-yellow-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875043/douyin_thumbnails/xoqitamvnhbqiw9s5ia0.jpg"}, {"video_url": "https://www.douyin.com/video/7316058323873254692", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ooD0fA9AEAAbwICUAlAg480FCCe86XlnF1wNTH~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=kNaTBJjZxy%2BWlX0EG6s%2F8Hyio7Y%3D", "likes": "22", "index": "34", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "heart", "secondary_shapes": ["heart"], "primary_color": "red", "secondary_colors": ["white"], "metal_color": "gold", "materials": ["pearl"], "style": "statement", "size": "medium", "pairing_key": "heart-red-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875043/douyin_thumbnails/vwt590vlrldliem4exug.jpg"}, {"video_url": "https://www.douyin.com/video/7315676012690394422", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o4q0AAGD9Dib6DCpggAoLIAhEA7leAnDRCMAeC~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=RSc26TO%2B3YA6lOa6Irp2t9sJvEc%3D", "likes": "30", "index": "35", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "heart", "secondary_shapes": [], "primary_color": "white", "secondary_colors": ["red"], "metal_color": "gold", "materials": ["pearl", "resin"], "style": "delicate", "size": "small", "pairing_key": "heart-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875043/douyin_thumbnails/jb3bmkei76fivce8dok0.jpg"}, {"video_url": "https://www.douyin.com/video/7315674500891184423", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ogEhDIVQn9R9nCf3gDb1AUAAe80rAlAA9rq9tM~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=XwviDy18qal6tKfw9Ky1QRN5KFg%3D", "likes": "20", "index": "36", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": [], "primary_color": "yellow", "secondary_colors": ["white"], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "geometric-yellow-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875043/douyin_thumbnails/jzn8fqibhnmzyshtrduq.jpg"}, {"video_url": "https://www.douyin.com/video/7314938626360593683", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oob9QA3wolXfIAkbQKC8gWaegA86AlAvhBnCAD~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=Gqu7yaIRPTgSxZaSFVMHXiBNdNM%3D", "likes": "10", "index": "37", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": ["multicolor"], "metal_color": "gold", "materials": ["mother-of-pearl"], "style": "modern", "size": "small", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875043/douyin_thumbnails/aks00hfju6b666k7haqh.jpg"}, {"video_url": "https://www.douyin.com/video/7314591453336931638", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oAFln6ZRAAAeA9JfgI80gTDnkb4oWMqDAACEFQ~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=geH1cBKlCfE1IEGdgSG0EKd3Wsw%3D", "likes": "43", "index": "38", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["circle"], "primary_color": "red", "secondary_colors": ["white"], "metal_color": "gold", "materials": ["pearl"], "style": "vintage", "size": "medium", "pairing_key": "flower-red-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875043/douyin_thumbnails/wkkyi893jlsluycygpux.jpg"}, {"video_url": "https://www.douyin.com/video/7314589756581530916", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/okbWSqPDgCA8xeKIAQdAeAA7I2TgZlz2nA9FDE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=qYQ12pyuULLgZ5tJYuQ%2FouMuEW4%3D", "likes": "32", "index": "39", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "delicate", "size": "small", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875043/douyin_thumbnails/ntwqawlnfwumqbset7pj.jpg"}, {"video_url": "https://www.douyin.com/video/7213634974799383867", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/64d15078c8c440efb7628a7410ff1174~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=K2bq3ZxgYCfWS2%2FQ5%2Bp5y9X70bk%3D", "likes": "105", "index": "40", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal", "diamond"], "style": "luxury", "size": "small", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875043/douyin_thumbnails/js5shozbk0gps1rjmzcu.jpg"}, {"video_url": "https://www.douyin.com/video/7212325003562437947", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/2f627589be814c5e9f3cf8f77d7e2fd5~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=UCjEYKsq56sUzRaPcS29u%2Bri0SA%3D", "likes": "100", "index": "41", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "necklace", "primary_shape": "flower", "secondary_shapes": ["geometric"], "primary_color": "yellow", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "medium", "pairing_key": "flower-yellow-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875044/douyin_thumbnails/fqacy7abbjjrr0vh4xld.jpg"}, {"video_url": "https://www.douyin.com/video/7211309557644135741", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/cefb6d56b28946d8b21b99fbfff14978~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=3PgFQyXJy7FjemvdUYVlrC3G%2BbE%3D", "likes": "79", "index": "42", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "necklace", "primary_shape": "geometric", "secondary_shapes": [], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "luxury", "size": "small", "pairing_key": "geometric-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875044/douyin_thumbnails/cadqolek5knbfc2jpvhc.jpg"}, {"video_url": "https://www.douyin.com/video/7211298034364206373", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/92e8c89853ca4a149bd715545159c062~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=gtvFbNgPc5WRrrLW7ZRBL4BGL%2Fk%3D", "likes": "91", "index": "43", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "circle", "secondary_shapes": ["geometric"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "circle-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875044/douyin_thumbnails/ucip0i19lat6twipmod2.jpg"}, {"video_url": "https://www.douyin.com/video/7209193004630887735", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/8da9e436cd574a57bd5475662152d35c~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=4i%2BDClemELM%2BbuEv%2BnZJr8gb4GY%3D", "likes": "82", "index": "44", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "geometric", "secondary_shapes": ["circle"], "primary_color": "yellow", "secondary_colors": [], "metal_color": "gold", "materials": ["crystal"], "style": "statement", "size": "medium", "pairing_key": "geometric-yellow-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875044/douyin_thumbnails/umx7gpibj6lsyu2bglud.jpg"}, {"video_url": "https://www.douyin.com/video/7201346389962411276", "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/ef12c0759aa14c89b28c5da38aac1275_1676694127~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075144400&x-signature=kTf%2FupRpUGViZMIV4KatLMEegnY%3D", "likes": "79", "index": "45", "source_page": "https://www.douyin.com/user/MS4wLjABAAAAh5IU5N9T2196IZU3Zv2kqWVT4RvjZNhMDQbIuROY_FiISP9HFFCBFxAeGkKbU6cY", "tags": {"product_type": "earring", "primary_shape": "flower", "secondary_shapes": ["circle"], "primary_color": "white", "secondary_colors": [], "metal_color": "gold", "materials": ["enamel", "pearl", "crystal"], "style": "luxury", "size": "medium", "pairing_key": "flower-white-gold"}, "backup_thumbnail_url": "https://res.cloudinary.com/dbtrdsof7/image/upload/v1759875044/douyin_thumbnails/jloju99qlrqlkclonc7z.jpg"}];
+        
+        const taxonomy = {"shapes": {"clover": {"primary": "clover", "synonyms": ["fourleaf", "four-leaf", "four leaf", "4-leaf", "4leaf", "quatrefoil", "shamrock", "trefoil"], "description": "Four-leaf clover or quatrefoil design"}, "butterfly": {"primary": "butterfly", "synonyms": ["butterflies", "wing", "wings", "winged", "moth", "insect"], "description": "Butterfly shape or wing elements"}, "leaf": {"primary": "leaf", "synonyms": ["leaves", "foliage", "botanical", "plant", "nature"], "description": "Leaf designs (not clover)"}, "star": {"primary": "star", "synonyms": ["stars", "starry", "celestial", "starburst", "5-point", "6-point"], "description": "Star shapes"}, "heart": {"primary": "heart", "synonyms": ["hearts", "love", "heart-shaped", "valentine"], "description": "Heart designs"}, "circle": {"primary": "circle", "synonyms": ["round", "circular", "ring", "hoop", "o-ring"], "description": "Circular or ring shapes"}, "flower": {"primary": "flower", "synonyms": ["flowers", "floral", "bloom", "blossom", "petal", "rose", "daisy"], "description": "Flower designs"}, "shell": {"primary": "shell", "synonyms": ["shells", "oyster", "seashell", "conch", "scallop"], "description": "Shell or oyster designs"}, "geometric": {"primary": "geometric", "synonyms": ["abstract", "modern", "angular", "triangular", "square"], "description": "Geometric or abstract shapes"}, "crown": {"primary": "crown", "synonyms": ["tiara", "coronet", "royal"], "description": "Crown designs"}, "bow": {"primary": "bow", "synonyms": ["ribbon", "knot", "bow-tie"], "description": "Bow or ribbon designs"}, "cross": {"primary": "cross", "synonyms": ["crucifix", "religious", "faith"], "description": "Cross designs"}}, "product_types": {"necklace": {"primary": "necklace", "synonyms": ["pendant", "chain", "choker"], "description": "Necklaces and pendants"}, "earring": {"primary": "earring", "synonyms": ["stud", "drop", "drop-earring", "hoop", "hoop-earring", "dangle", "ear-cuff"], "description": "All types of earrings"}, "ring": {"primary": "ring", "synonyms": ["band", "engagement", "wedding-band"], "description": "Rings"}, "bracelet": {"primary": "bracelet", "synonyms": ["bangle", "cuff", "chain-bracelet", "charm-bracelet"], "description": "Bracelets and bangles"}, "watch": {"primary": "watch", "synonyms": ["timepiece", "wristwatch"], "description": "Watches"}, "brooch": {"primary": "brooch", "synonyms": ["pin", "broach"], "description": "Brooches and pins"}}, "materials": {"pearl": {"primary": "pearl", "synonyms": ["pearls", "pearl-like", "beaded", "bead"], "description": "Pearl materials"}, "mother-of-pearl": {"primary": "mother-of-pearl", "synonyms": ["nacre", "mop", "shell", "iridescent"], "description": "Mother of pearl or nacre"}, "crystal": {"primary": "crystal", "synonyms": ["crystals", "rhinestone", "sparkle", "gem", "stone"], "description": "Crystal or rhinestone elements"}, "diamond": {"primary": "diamond", "synonyms": ["diamonds", "cz", "cubic-zirconia"], "description": "Diamond or diamond-like stones"}, "enamel": {"primary": "enamel", "synonyms": ["enameled", "painted", "lacquer", "colored"], "description": "Enamel coating"}, "resin": {"primary": "resin", "synonyms": ["plastic", "acrylic"], "description": "Resin or acrylic materials"}}, "metal_colors": {"gold": {"primary": "gold", "synonyms": ["golden", "yellow-gold"], "description": "Gold colored metal"}, "silver": {"primary": "silver", "synonyms": ["platinum"], "description": "Silver colored metal"}, "white-gold": {"primary": "white-gold", "synonyms": [], "description": "White gold colored metal"}, "rose-gold": {"primary": "rose-gold", "synonyms": ["rose", "pink-gold"], "description": "Rose gold colored metal"}, "two-tone": {"primary": "two-tone", "synonyms": ["mixed", "multi-metal"], "description": "Multiple metal colors"}}, "colors": {"black": {"primary": "black", "synonyms": ["dark", "noir", "onyx", "jet-black"], "description": "Black color"}, "white": {"primary": "white", "synonyms": ["cream", "ivory", "pearl-white", "off-white"], "description": "White or cream color"}, "red": {"primary": "red", "synonyms": ["ruby", "crimson", "scarlet"], "description": "Red color"}, "blue": {"primary": "blue", "synonyms": ["sapphire", "navy", "turquoise"], "description": "Blue color"}, "green": {"primary": "green", "synonyms": ["emerald", "jade", "olive"], "description": "Green color"}, "pink": {"primary": "pink", "synonyms": ["rose", "blush", "magenta"], "description": "Pink color"}, "purple": {"primary": "purple", "synonyms": ["violet", "amethyst", "lavender"], "description": "Purple color"}, "yellow": {"primary": "yellow", "synonyms": ["citrine", "amber"], "description": "Yellow color"}, "brown": {"primary": "brown", "synonyms": ["tan", "beige", "chocolate"], "description": "Brown or beige color"}, "multicolor": {"primary": "multicolor", "synonyms": ["rainbow", "mixed-color", "colorful"], "description": "Multiple colors"}}, "styles": {"luxury": {"primary": "luxury", "synonyms": ["designer", "high-end", "premium"], "description": "Luxury or designer style"}, "vintage": {"primary": "vintage", "synonyms": ["retro", "antique", "classic"], "description": "Vintage or classic style"}, "modern": {"primary": "modern", "synonyms": ["contemporary", "minimalist", "sleek"], "description": "Modern or contemporary style"}, "statement": {"primary": "statement", "synonyms": ["bold", "large", "dramatic"], "description": "Bold statement pieces"}, "delicate": {"primary": "delicate", "synonyms": ["dainty", "subtle", "fine", "small"], "description": "Delicate or dainty pieces"}}};
+        
+        let currentPage = 1;
+        const itemsPerPage = 100;
+        let filteredVideos = [...allVideos];
+        let currentSearchTerm = '';
+        
+        // Parse likes to number
+        function parseLikes(likesStr) {
+            if (!likesStr || likesStr === 'N/A') return 0;
+            
+            likesStr = String(likesStr).toUpperCase().trim();
+            
+            if (likesStr.includes('K')) {
+                return parseFloat(likesStr.replace('K', '')) * 1000;
+            }
+            if (likesStr.includes('W')) {
+                return parseFloat(likesStr.replace('W', '')) * 10000;
+            }
+            
+            return parseInt(likesStr) || 0;
+        }
+        
+        // Get all synonyms for a search term
+        function getSynonyms(searchTerm) {
+            searchTerm = searchTerm.toLowerCase().trim();
+            const allSynonyms = new Set([searchTerm]);
+            
+            // Check all taxonomy categories
+            for (const category of Object.values(taxonomy)) {
+                for (const [primary, data] of Object.entries(category)) {
+                    if (primary.toLowerCase() === searchTerm || 
+                        (data.synonyms && data.synonyms.some(syn => syn.toLowerCase() === searchTerm))) {
+                        allSynonyms.add(primary.toLowerCase());
+                        if (data.synonyms) {
+                            data.synonyms.forEach(syn => allSynonyms.add(syn.toLowerCase()));
+                        }
+                    }
+                }
+            }
+            
+            return Array.from(allSynonyms);
+        }
+        
+        // Search by tag with synonym support
+        function searchByTag() {
+            const searchInput = document.getElementById('tagSearch').value.trim();
+            
+            if (!searchInput) {
+                currentSearchTerm = '';
+                document.getElementById('searchExpansion').classList.remove('active');
+                applyFilters();
+                return;
+            }
+            
+            currentSearchTerm = searchInput;
+            const synonyms = getSynonyms(searchInput);
+            
+            // Show expansion
+            const expansionDiv = document.getElementById('searchExpansion');
+            if (synonyms.length > 1) {
+                expansionDiv.innerHTML = `<strong>💡 Also searching:</strong> ${synonyms.filter(s => s !== searchInput.toLowerCase()).join(', ')}`;
+                expansionDiv.classList.add('active');
+            } else {
+                expansionDiv.classList.remove('active');
+            }
+            
+            // Apply filters with search
+            applyFilters();
+        }
+        
+        // Find matching pairs
+        function findPairs() {
+            const pairingKeys = {};
+            
+            allVideos.forEach(video => {
+                if (video.tags && video.tags.pairing_key) {
+                    const key = video.tags.pairing_key;
+                    if (!pairingKeys[key]) {
+                        pairingKeys[key] = [];
+                    }
+                    pairingKeys[key].push(video);
+                }
+            });
+            
+            // Filter to only keys with multiple items
+            const pairs = Object.entries(pairingKeys)
+                .filter(([key, videos]) => videos.length > 1)
+                .sort((a, b) => b[1].length - a[1].length);
+            
+            if (pairs.length === 0) {
+                alert('No matching pairs found. Try tagging more videos or adjusting your search.');
+                return;
+            }
+            
+            // Show first pair
+            const [firstKey, firstPair] = pairs[0];
+            alert(`Found ${pairs.length} pairing groups!\nShowing largest group: ${firstKey} (${firstPair.length} items)`);
+            
+            // Filter to show this pair
+            filteredVideos = firstPair;
+            currentPage = 1;
+            renderGallery();
+        }
+        
+        // Apply all filters
+        function applyFilters() {
+            const likesMin = parseInt(document.getElementById('likesMin').value) || 0;
+            const likesMax = parseInt(document.getElementById('likesMax').value) || Infinity;
+            const indexMin = parseInt(document.getElementById('indexMin').value) || 0;
+            const indexMax = parseInt(document.getElementById('indexMax').value) || Infinity;
+            const productType = document.getElementById('productType').value;
+            const colorFilter = document.getElementById('colorFilter').value;
+            const metalFilter = document.getElementById('metalFilter').value;
+            const materialFilter = document.getElementById('materialFilter').value;
+            
+            filteredVideos = allVideos.filter(video => {
+                const likes = parseLikes(video.likes);
+                const index = parseInt(video.index) || 0;
+                
+                // Likes and index filters
+                if (likes < likesMin || likes > likesMax) return false;
+                if (index < indexMin || index > indexMax) return false;
+                
+                // Product type filter
+                if (productType && video.tags && video.tags.product_type !== productType) return false;
+                
+                // Color filter (EXACT match - no synonyms)
+                if (colorFilter && video.tags) {
+                    const videoColors = [
+                        video.tags.primary_color,
+                        ...(video.tags.secondary_colors || [])
+                    ].filter(Boolean).map(c => c.toLowerCase());
+                    
+                    if (!videoColors.includes(colorFilter.toLowerCase())) return false;
+                }
+                
+                // Metal filter (EXACT match - no synonyms)
+                if (metalFilter && video.tags) {
+                    if (video.tags.metal_color?.toLowerCase() !== metalFilter.toLowerCase()) return false;
+                }
+                
+                // Material filter (EXACT match - no synonyms)
+                if (materialFilter && video.tags) {
+                    const videoMaterials = (video.tags.materials || []).map(m => m.toLowerCase());
+                    if (!videoMaterials.includes(materialFilter.toLowerCase())) return false;
+                }
+                
+                // Tag search filter (for shapes - with synonyms)
+                // Multiple search terms are AND logic (all must match)
+                if (currentSearchTerm && video.tags) {
+                    const searchTerms = currentSearchTerm.toLowerCase().split(/\s+/).filter(t => t.length > 0);
+                    
+                    // Get all video tags (shapes only for synonym expansion)
+                    const videoShapes = [
+                        video.tags.primary_shape,
+                        ...(video.tags.secondary_shapes || [])
+                    ].filter(Boolean).map(t => t.toLowerCase());
+                    
+                    const videoOtherTags = [
+                        video.tags.product_type,
+                        video.tags.style
+                    ].filter(Boolean).map(t => t.toLowerCase());
+                    
+                    // For each search term, check if it matches
+                    for (const term of searchTerms) {
+                        // Get synonyms for shapes only
+                        const synonyms = getSynonyms(term);
+                        
+                        // Check if this term matches any video tag
+                        const matchesShape = synonyms.some(syn => 
+                            videoShapes.some(shape => shape.includes(syn) || syn.includes(shape))
+                        );
+                        
+                        const matchesOther = videoOtherTags.some(tag => 
+                            tag.includes(term) || term.includes(tag)
+                        );
+                        
+                        // If this term doesn't match, exclude this video (AND logic)
+                        if (!matchesShape && !matchesOther) {
+                            return false;
+                        }
+                    }
+                }
+                
+                return true;
+            });
+            
+            currentPage = 1;
+            renderGallery();
+        }
+        
+        // Reset all filters
+        function resetFilters() {
+            document.getElementById('tagSearch').value = '';
+            document.getElementById('likesMin').value = '';
+            document.getElementById('likesMax').value = '';
+            document.getElementById('indexMin').value = '';
+            document.getElementById('indexMax').value = '';
+            document.getElementById('productType').value = '';
+            document.getElementById('colorFilter').value = '';
+            document.getElementById('metalFilter').value = '';
+            document.getElementById('materialFilter').value = '';
+            document.getElementById('searchExpansion').classList.remove('active');
+            
+            currentSearchTerm = '';
+            filteredVideos = [...allVideos];
+            currentPage = 1;
+            renderGallery();
+        }
+        
+        // Render gallery
+        function renderGallery() {
+            const totalPages = Math.ceil(filteredVideos.length / itemsPerPage);
+            const startIdx = (currentPage - 1) * itemsPerPage;
+            const endIdx = startIdx + itemsPerPage;
+            const pageVideos = filteredVideos.slice(startIdx, endIdx);
+            
+            // Update stats
+            document.getElementById('stats').textContent = 
+                `Showing ${startIdx + 1}-${Math.min(endIdx, filteredVideos.length)} of ${filteredVideos.length} videos (Page ${currentPage}/${totalPages || 1})`;
+            
+            // Render gallery
+            const gallery = document.getElementById('gallery');
+            
+            if (pageVideos.length === 0) {
+                gallery.innerHTML = '<div class="no-results">No videos match your filters. Try adjusting the search or filters.</div>';
+            } else {
+                gallery.innerHTML = pageVideos.map(video => {
+                    const tags = video.tags || {};
+                    let tagsHTML = '';
+                    
+                    if (tags.product_type) {
+                        tagsHTML += `<span class="tag type">${tags.product_type}</span>`;
+                    }
+                    if (tags.primary_shape) {
+                        tagsHTML += `<span class="tag shape">${tags.primary_shape}</span>`;
+                    }
+                    if (tags.primary_color) {
+                        tagsHTML += `<span class="tag color">${tags.primary_color}</span>`;
+                    }
+                    if (tags.metal_color) {
+                        tagsHTML += `<span class="tag color">${tags.metal_color}</span>`;
+                    }
+                    if (tags.pairing_key) {
+                        tagsHTML += `<span class="tag pairing">${tags.pairing_key}</span>`;
+                    }
+                    
+                    // Use backup_thumbnail_url instead of thumbnail_url
+                    const thumbnailUrl = video.backup_thumbnail_url || video.thumbnail_url || '';
+                    
+                    return `
+                        <div class="video-card">
+                            <a href="${video.video_url}" target="_blank" rel="noopener noreferrer">
+                                <img src="${thumbnailUrl}" alt="Product" loading="lazy">
+                                <div class="video-info">
+                                    <div class="video-stats">❤️ ${video.likes} | #${video.index}</div>
+                                    <div class="video-tags">${tagsHTML || '<span class="tag">No tags</span>'}</div>
+                                </div>
+                            </a>
+                        </div>
+                    `;
+                }).join('');
+            }
+            
+            // Render pagination
+            renderPagination(totalPages);
+        }
+        
+        // Render pagination
+        function renderPagination(totalPages) {
+            const pagination = document.getElementById('pagination');
+            
+            if (totalPages <= 1) {
+                pagination.innerHTML = '';
+                return;
+            }
+            
+            let paginationHTML = '';
+            
+            // Previous button
+            paginationHTML += `<button onclick="changePage(${currentPage - 1})" ${currentPage === 1 ? 'disabled' : ''}>← Previous</button>`;
+            
+            // Page numbers (show max 10 pages)
+            const maxVisible = 10;
+            let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
+            let endPage = Math.min(totalPages, startPage + maxVisible - 1);
+            
+            if (endPage - startPage < maxVisible - 1) {
+                startPage = Math.max(1, endPage - maxVisible + 1);
+            }
+            
+            if (startPage > 1) {
+                paginationHTML += `<button onclick="changePage(1)">1</button>`;
+                if (startPage > 2) {
+                    paginationHTML += `<span>...</span>`;
+                }
+            }
+            
+            for (let i = startPage; i <= endPage; i++) {
+                paginationHTML += `<button onclick="changePage(${i})" class="${i === currentPage ? 'active' : ''}">${i}</button>`;
+            }
+            
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) {
+                    paginationHTML += `<span>...</span>`;
+                }
+                paginationHTML += `<button onclick="changePage(${totalPages})">${totalPages}</button>`;
+            }
+            
+            // Next button
+            paginationHTML += `<button onclick="changePage(${currentPage + 1})" ${currentPage === totalPages ? 'disabled' : ''}>Next →</button>`;
+            
+            pagination.innerHTML = paginationHTML;
+        }
+        
+        // Change page
+        function changePage(page) {
+            const totalPages = Math.ceil(filteredVideos.length / itemsPerPage);
+            if (page < 1 || page > totalPages) return;
+            
+            currentPage = page;
+            renderGallery();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+        
+        // Allow Enter key to search
+        document.getElementById('tagSearch').addEventListener('keypress', function(e) {
+            if (e.key === 'Enter') {
+                searchByTag();
+            }
+        });
+        
+        // Initial render
+        renderGallery();
+    </script>
+</body>
+</html>
