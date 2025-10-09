@@ -140,17 +140,78 @@ Edit `find_product_videos.py` to adjust:
 
 **See detailed guide:** `BACKUP_THUMBNAILS_USAGE.md`
 
+## Watch Finder Tool (1688 Product Search)
+
+Search for similar products on 1688.com using reference images!
+
+### Features
+
+- ✅ **Support for local images** - Drag and drop files or use URLs
+- ✅ **Automatic image upload** - Local files uploaded to ImgBB with proper extensions
+- ✅ **AI-powered matching** - Gemini compares all products
+- ✅ **Parallel processing** - Analyzes 50 products at once
+- ✅ **Proper image URLs** - ImgBB returns URLs with `.jpg`/`.png` extensions
+
+### Quick Setup (First Time Only)
+
+For local file uploads, get a free ImgBB API key (30 seconds):
+1. Go to https://api.imgbb.com/
+2. Click "Get API Key" → Sign up (free forever)
+3. Copy your API key
+4. Add to `.env` file: `IMGBB_API_KEY=your_key_here`
+
+### Quick Start
+
+```bash
+python3 watch_prices.py
+```
+
+**When prompted, you can:**
+- Paste an online image URL
+- **Drag and drop a local image file**
+- Use multiple images (separate with `|||`)
+
+### Example with Local Files
+
+```bash
+python3 watch_prices.py
+
+Image URL(s) or path(s): /path/to/watch.jpg
+# Or drag and drop your file into the terminal!
+
+# First time with local files:
+🔑 ImgBB API Key Setup (FREE - takes 30 seconds!)
+1. Go to: https://api.imgbb.com/
+2. Click 'Get API Key'...
+```
+
+### Multiple Images
+
+```bash
+# Mix URLs and local files:
+|||https://example.com/watch1.jpg|||./Watches/A1.png|||/path/to/watch2.jpg
+```
+
+**Output:** Results saved to `Watched_prices.csv`
+
+**See detailed guide:** `LOCAL_IMAGE_USAGE.md`
+
 ## File Directory
 
 - `find_product_videos.py` - Main product finder script
+- `watch_prices.py` - 1688 product finder with drag-and-drop support
 - `backup_thumbnails.py` - Thumbnail backup to Cloudinary
+- `tag_research_videos.py` - Tag research videos with product taxonomy
+- `generate_research_gallery.py` - Generate gallery from research videos
+- `generate_tagged_research_gallery.py` - Generate tagged gallery
 - `requirements.txt` - Python dependencies
 - `README.md` - This file
+- `LOCAL_IMAGE_USAGE.md` - Watch finder local image guide
 - `BACKUP_THUMBNAILS_USAGE.md` - Detailed backup tool guide
 - `BACKUP_QUICK_START.txt` - Quick setup instructions
-- `tag_images.py` - Legacy jewelry tagging script
-- `tag_images_old.py` - Old version of tagging script
-- `generate_tagged_master.py` - Gallery generator
+- `TAGGING_USAGE.md` - Video tagging guide
+- `FILTER_IMPROVEMENTS.md` - Filter improvements documentation
+- `product_taxonomy.json` - Product category taxonomy
 
 ## Error Handling
 

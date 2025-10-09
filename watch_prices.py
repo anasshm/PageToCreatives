@@ -492,6 +492,112 @@ def download_image_from_url(url, temp_filename):
         print(f"❌ Error downloading image from URL: {e}")
         return False
 
+def get_imgbb_api_key():
+    """Get ImgBB API key from environment or user input"""
+    api_key = os.getenv('IMGBB_API_KEY')
+    
+    if not api_key:
+        print("\n🔑 ImgBB API Key Setup (FREE - takes 30 seconds!)")
+        print("=" * 60)
+        print("1. Go to: https://api.imgbb.com/")
+        print("2. Click 'Get API Key' (no credit card needed)")
+        print("3. Sign up with email (free forever)")
+        print("4. Copy your API key")
+        print("=" * 60)
+        api_key = input("Paste your ImgBB API key here: ").strip()
+        
+        if not api_key:
+            print("❌ No API key provided!")
+            print("💡 Tip: Set IMGBB_API_KEY environment variable to skip this step")
+            return None
+        
+        # Offer to save it
+        save = input("\n💾 Save this key to .env file? (y/n): ").strip().lower()
+        if save == 'y':
+            try:
+                with open('.env', 'a') as f:
+                    f.write(f"\nIMGBB_API_KEY={api_key}\n")
+                print("✅ Key saved to .env file!")
+            except Exception as e:
+                print(f"⚠️ Could not save to .env: {e}")
+    
+    return api_key
+
+def upload_local_image_to_imgbb(image_path, api_key):
+    """Upload local image to ImgBB and return the URL with proper extension"""
+    try:
+        # ImgBB free upload - using multipart form
+        url = 'https://api.imgbb.com/1/upload'
+        
+        # Get file extension
+        file_ext = os.path.splitext(image_path)[1].lower()
+        if not file_ext or file_ext not in ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.webp']:
+            file_ext = '.jpg'  # Default to .jpg
+        
+        # Read the image file
+        with open(image_path, 'rb') as f:
+            files = {
+                'image': (os.path.basename(image_path), f, 'image/' + file_ext[1:])
+            }
+            
+            params = {
+                'key': api_key
+            }
+            
+            print(f"📤 Uploading local image to ImgBB...")
+            response = requests.post(url, params=params, files=files, timeout=30)
+        
+        if response.status_code == 200:
+            result = response.json()
+            if result.get('success'):
+                # Get the direct URL to the image - ImgBB gives us the URL with extension
+                image_url = result['data']['url']
+                
+                print(f"✅ Image uploaded successfully!")
+                print(f"   URL: {image_url[:80]}...")
+                return image_url
+            else:
+                error_msg = result.get('error', {}).get('message', 'Unknown error')
+                print(f"❌ ImgBB upload failed: {error_msg}")
+                return None
+        else:
+            print(f"❌ ImgBB API error: {response.status_code}")
+            if response.text:
+                try:
+                    error_data = response.json()
+                    print(f"   Error: {error_data.get('error', {}).get('message', response.text[:200])}")
+                except:
+                    print(f"   Response: {response.text[:200]}")
+            return None
+            
+    except Exception as e:
+        print(f"❌ Error uploading to ImgBB: {e}")
+        import traceback
+        traceback.print_exc()
+        return None
+
+def is_url(path):
+    """Check if the input is a URL or local file path"""
+    return path.startswith('http://') or path.startswith('https://')
+
+def normalize_file_path(path):
+    """Normalize file path - handle escaped spaces and expand user paths"""
+    # Remove quotes if present
+    path = path.strip('"').strip("'")
+    
+    # Handle escaped spaces (from drag-and-drop in terminal)
+    # Replace "\ " with actual space
+    path = path.replace('\\ ', ' ')
+    
+    # Expand user home directory (~)
+    path = os.path.expanduser(path)
+    
+    # Convert to absolute path if relative
+    if not os.path.isabs(path):
+        path = os.path.abspath(path)
+    
+    return path
+
 def main():
     """Main function"""
     print("🔍 Watch Prices - 1688 Product Finder")
@@ -501,13 +607,15 @@ def main():
     if not model:
         return False
     
-    print("\n🔗 Enter image URL(s):")
-    print("   - For single URL: paste one URL")
-    print("   - For multiple URLs: paste URLs separated by |||")
-    print("   Example: |||https://example.com/img1.jpg|||https://example.com/img2.jpg")
+    print("\n🔗 Enter image URL(s) or local file path(s):")
+    print("   - For single input: paste one URL or file path")
+    print("   - For multiple inputs: separate with |||")
+    print("   Example (URLs): |||https://example.com/img1.jpg|||https://example.com/img2.jpg")
+    print("   Example (Files): |||/path/to/image1.jpg|||/path/to/image2.png")
+    print("   Example (Mixed): |||https://example.com/img1.jpg|||/path/to/image2.jpg")
     print()
     sys.stdout.flush()
-    user_input = input("Image URL(s): ").strip()
+    user_input = input("Image URL(s) or path(s): ").strip()
     
     try:
         import select
@@ -521,31 +629,97 @@ def main():
         return False
     
     if '|||' in user_input:
-        image_urls = [url.strip() for url in user_input.split('|||') if url.strip()]
+        image_inputs = [inp.strip() for inp in user_input.split('|||') if inp.strip()]
     else:
-        image_urls = [user_input]
+        image_inputs = [user_input]
     
-    if not image_urls:
-        print("❌ No valid URLs found!")
+    if not image_inputs:
+        print("❌ No valid inputs found!")
         return False
     
-    print(f"\n✅ Found {len(image_urls)} URL(s) to process")
-    if len(image_urls) <= 5:
-        for i, url in enumerate(image_urls, 1):
-            print(f"   {i}. {url[:80]}{'...' if len(url) > 80 else ''}")
+    print(f"\n✅ Found {len(image_inputs)} input(s) to process")
+    if len(image_inputs) <= 5:
+        for i, inp in enumerate(image_inputs, 1):
+            input_type = "URL" if is_url(inp) else "File"
+            print(f"   {i}. [{input_type}] {inp[:70]}{'...' if len(inp) > 70 else ''}")
     else:
-        for i, url in enumerate(image_urls[:3], 1):
-            print(f"   {i}. {url[:80]}{'...' if len(url) > 80 else ''}")
-        print(f"   ... and {len(image_urls) - 3} more")
+        for i, inp in enumerate(image_inputs[:3], 1):
+            input_type = "URL" if is_url(inp) else "File"
+            print(f"   {i}. [{input_type}] {inp[:70]}{'...' if len(inp) > 70 else ''}")
+        print(f"   ... and {len(image_inputs) - 3} more")
     
     temp_dir = 'temp_images'
     if not os.path.exists(temp_dir):
         os.makedirs(temp_dir)
     
+    # Convert all inputs to URLs (upload local files if needed)
+    image_urls = []
+    imgbb_api_key = None  # Will be requested only if needed
+    
+    for idx, image_input in enumerate(image_inputs, 1):
+        print(f"\n{'=' * 50}")
+        print(f"📝 Preparing input {idx}/{len(image_inputs)}")
+        print(f"{'=' * 50}")
+        
+        if is_url(image_input):
+            # It's already a URL
+            print(f"✅ Using URL directly: {image_input[:60]}...")
+            image_urls.append(image_input)
+        else:
+            # It's a local file path - need to upload it
+            print(f"📁 Local file detected: {image_input}")
+            
+            # Get ImgBB API key if we haven't already
+            if imgbb_api_key is None:
+                imgbb_api_key = get_imgbb_api_key()
+                if not imgbb_api_key:
+                    print(f"⚠️ Cannot upload without ImgBB API key")
+                    print(f"⚠️ Skipping all remaining local files")
+                    # Skip all remaining local files
+                    for remaining_idx in range(idx, len(image_inputs) + 1):
+                        if not is_url(image_inputs[remaining_idx - 1] if remaining_idx <= len(image_inputs) else ""):
+                            image_urls.append(None)
+                    break
+            
+            # Normalize the path (handle escaped spaces, quotes, etc.)
+            normalized_path = normalize_file_path(image_input)
+            print(f"📝 Normalized path: {normalized_path}")
+            
+            # Check if file exists
+            if not os.path.exists(normalized_path):
+                print(f"❌ File not found: {normalized_path}")
+                print(f"⚠️ Skipping this input")
+                image_urls.append(None)
+                continue
+            
+            # Check if it's a valid image
+            try:
+                test_img = Image.open(normalized_path)
+                print(f"✅ Valid image: {test_img.size}, {test_img.format}")
+                test_img.close()
+            except Exception as e:
+                print(f"❌ Invalid image file: {e}")
+                print(f"⚠️ Skipping this input")
+                image_urls.append(None)
+                continue
+            
+            # Upload to ImgBB to get a URL
+            uploaded_url = upload_local_image_to_imgbb(normalized_path, imgbb_api_key)
+            if uploaded_url:
+                image_urls.append(uploaded_url)
+            else:
+                print(f"⚠️ Skipping this input - could not upload image")
+                image_urls.append(None)
+    
+    # Now process all URLs
     for idx, image_url in enumerate(image_urls, 1):
+        if image_url is None:
+            print(f"\n⏭️  Skipping input {idx} (failed to prepare)")
+            continue
+            
         is_first_url = (idx == 1)
         print(f"\n{'=' * 50}")
-        print(f"📸 Processing URL {idx}/{len(image_urls)}")
+        print(f"📸 Processing input {idx}/{len(image_urls)}")
         print(f"   URL: {image_url[:80]}{'...' if len(image_url) > 80 else ''}")
         print(f"{'=' * 50}")
         
@@ -553,7 +727,7 @@ def main():
         print(f"⬇️  Downloading reference image...")
         
         if not download_image_from_url(image_url, temp_filename):
-            print(f"⚠️ Skipping this URL - could not download reference image")
+            print(f"⚠️ Skipping this input - could not download reference image")
             continue
         
         reference_image = load_reference_image(temp_filename)
@@ -647,7 +821,7 @@ def main():
         pass
     
     print(f"\n{'=' * 50}")
-    print(f"🎉 All URLs processed!")
+    print(f"🎉 All inputs processed!")
     print(f"📊 Results saved to: Watched_prices.csv")
     print(f"{'=' * 50}")
     return True
