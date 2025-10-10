@@ -408,6 +408,15 @@ def process_products_parallel(model, reference_image, products):
             if batch_num < total_batches - 1:
                 time.sleep(0.5)
     
+    # Sort results by score (highest first) for display
+    results_sorted = sorted(results, key=lambda x: x[1], reverse=True)
+    
+    # Display all scores
+    print(f"\n📊 All Product Scores:")
+    print("=" * 50)
+    for product, score in results_sorted:
+        print(f"  Product #{product['index']}: Score {score} - Price: {product['price']}")
+    
     # NEW LOGIC: Filter products with 90%+ similarity
     high_similarity_products = [(prod, score) for prod, score in results if score >= 90]
     
@@ -427,39 +436,39 @@ def process_products_parallel(model, reference_image, products):
                 price_match = re.search(r'[\d.]+', price_text)
                 if price_match:
                     price_value = float(price_match.group())
-                    print(f"   Product (Score {score}): {price_text} = {price_value} yuan")
+                    print(f"   Product #{product['index']} (Score {score}): {price_text} = {price_value} yuan")
                     
                     if price_value < cheapest_price_value:
                         cheapest_price_value = price_value
                         cheapest_product = product
                         cheapest_score = score
                 else:
-                    print(f"   Product (Score {score}): {price_text} (could not parse price)")
+                    print(f"   Product #{product['index']} (Score {score}): {price_text} (could not parse price)")
             except:
-                print(f"   Product (Score {score}): {price_text} (could not parse price)")
+                print(f"   Product #{product['index']} (Score {score}): {price_text} (could not parse price)")
         
         if cheapest_product:
             print(f"\n🏆 Cheapest match found!")
+            print(f"   Product #: {cheapest_product['index']}")
             print(f"   Score: {cheapest_score}/100")
             print(f"   Price: {cheapest_product['price']} ({cheapest_price_value} yuan)")
             print(f"   URL: {cheapest_product['product_url'][:80]}...")
-            return (cheapest_product, cheapest_score, error_count)
+            return (cheapest_product, cheapest_score, error_count, results_sorted)
         else:
             print(f"\n⚠️ Found products with 90%+ similarity but could not parse any prices")
             # Fallback to highest similarity among the 90%+ products
             best_product, best_score = max(high_similarity_products, key=lambda x: x[1])
-            print(f"   Showing highest similarity instead: {best_score}/100")
-            return (best_product, best_score, error_count)
+            print(f"   Showing highest similarity instead: Product #{best_product['index']} with {best_score}/100")
+            return (best_product, best_score, error_count, results_sorted)
     else:
         print(f"\n❌ No products found with 90%+ similarity")
         if results:
             best_product, best_score = max(results, key=lambda x: x[1])
-            print(f"   Best match found was only {best_score}/100")
-            print(f"   Returning None since no products meet 90%+ threshold")
-            return (None, None, error_count)
+            print(f"   Best match found was only {best_score}/100 (Product #{best_product['index']})")
+            return (None, None, error_count, results_sorted)
         else:
             print(f"   No valid matches found (all products failed)")
-            return (None, None, error_count)
+            return (None, None, error_count, [])
 
 def save_to_csv(reference_image_url, product_url, product_image_url, price, similarity_score):
     """Save result to Watched_prices.csv in accumulative mode"""
@@ -479,6 +488,34 @@ def save_to_csv(reference_image_url, product_url, product_image_url, price, simi
         return True
     except Exception as e:
         print(f"❌ Error saving to CSV: {e}")
+        return False
+
+def save_all_products_to_csv(reference_image_url, all_products_with_scores):
+    """Save all products with their scores to a detailed CSV file"""
+    csv_file = 'Watched_prices_detailed.csv'
+    file_exists = os.path.isfile(csv_file)
+    
+    try:
+        with open(csv_file, mode='a', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            
+            if not file_exists:
+                writer.writerow(['reference_image_url', 'product_number', 'similarity_score', 'price', '1688_url', '1688_product_image_url'])
+            
+            for product, score in all_products_with_scores:
+                writer.writerow([
+                    reference_image_url,
+                    product['index'],
+                    score,
+                    product['price'],
+                    product['product_url'],
+                    product['image_url']
+                ])
+        
+        print(f"💾 Saved all {len(all_products_with_scores)} products to {csv_file}")
+        return True
+    except Exception as e:
+        print(f"❌ Error saving detailed CSV: {e}")
         return False
 
 def load_chrome_cookies(cookies_file='new_chrome_cookies.json'):
@@ -828,10 +865,15 @@ def main():
                 
                 browser.close()
                 
-                best_product, best_score, error_count = process_products_parallel(
+                best_product, best_score, error_count, all_results = process_products_parallel(
                     model, reference_image, products
                 )
                 
+                # Save all products with scores to detailed CSV
+                if all_results:
+                    save_all_products_to_csv(image_url, all_results)
+                
+                # Save the best/cheapest product to main CSV
                 if best_product and best_score is not None:
                     save_to_csv(
                         image_url,
@@ -868,7 +910,9 @@ def main():
     
     print(f"\n{'=' * 50}")
     print(f"🎉 All inputs processed!")
-    print(f"📊 Results saved to: Watched_prices.csv")
+    print(f"📊 Results saved to:")
+    print(f"   - Watched_prices.csv (best/cheapest matches)")
+    print(f"   - Watched_prices_detailed.csv (all products with scores and thumbnails)")
     print(f"{'=' * 50}")
     return True
 
