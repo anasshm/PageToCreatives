@@ -46,7 +46,7 @@ def download_thumbnail(url):
         headers = {
             'User-Agent': 'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15'
         }
-        response = requests.get(url, headers=headers, timeout=10)
+        response = requests.get(url, headers=headers, timeout=25)
         response.raise_for_status()
         
         image = Image.open(io.BytesIO(response.content))
@@ -236,10 +236,10 @@ def save_database(db):
 
 def is_duplicate_phash(phash, db):
     """Check if perceptual hash exists in database
-    Returns: (is_duplicate: bool, duplicate_url: str or None)
+    Returns: (is_duplicate: bool, list of duplicate URLs or None)
     """
     if phash in db.get('phashes', {}):
-        return (True, db['phashes'][phash])
+        return (True, db['phashes'][phash])  # Returns list of URLs
     return (False, None)
 
 def is_duplicate_fingerprint(fingerprint, db):
@@ -252,9 +252,14 @@ def is_duplicate_fingerprint(fingerprint, db):
 
 def add_to_database(db, phash, fingerprint, thumbnail_url):
     """Add new watch to database"""
-    # Add phash with URL
-    if phash and phash not in db['phashes']:
-        db['phashes'][phash] = thumbnail_url
+    # Add phash with URL (store as list to track all duplicates)
+    if phash:
+        if phash not in db['phashes']:
+            db['phashes'][phash] = [thumbnail_url]
+        else:
+            # Add to existing list if not already there
+            if thumbnail_url not in db['phashes'][phash]:
+                db['phashes'][phash].append(thumbnail_url)
     
     # Add fingerprint
     if fingerprint and fingerprint not in db['fingerprints']:
@@ -286,10 +291,10 @@ def process_watch_thumbnail(model, video, db, video_num, total):
             print(f"  [{video_num}/{total}] ⚠️ Failed to calculate phash")
             return (None, 'phash_failed')
         
-        is_dup_phash, dup_url = is_duplicate_phash(phash, db)
+        is_dup_phash, dup_urls = is_duplicate_phash(phash, db)
         if is_dup_phash:
             print(f"  [{video_num}/{total}] ⏭️  SKIP - Duplicate image (phash)")
-            print(f"      Dup: {dup_url[:80]}...")
+            print(f"      Dups: {', '.join(dup_urls)}")
             return (None, 'duplicate_phash')
         
         # Step 3: AI Filter 1 - Multiple products check

@@ -277,51 +277,101 @@ def extract_products_from_results(page):
         return []
 
 def compare_image_with_gemini_score(model, reference_image, product_image, product_num=None):
-    """Compare product image with reference image using Gemini"""
+    """Compare product image with reference image using structured attribute scoring"""
     max_retries = 2
     retry_delay = 2
     
     for attempt in range(max_retries):
         try:
-            prompt = """Compare these two images and rate their similarity from 0 to 100 with PRECISE scoring.
+            prompt = """Compare these two watches using SEPARATE scores for each attribute.
 
-The FIRST image is the reference product.
-The SECOND image is a product from search results.
+FIRST image = Reference watch
+SECOND image = Product from search results
 
-IMPORTANT: Be very precise and granular with your score. Use specific numbers like 87, 92, 73, NOT round numbers like 80, 90, 70.
+IGNORE brand names completely - they don't matter at all.
 
-Scoring Guidelines:
-- 96-100 = Nearly identical (tiny differences in lighting/angle only)
-- 91-95 = Extremely similar (same design, very minor style variations)
-- 86-90 = Very similar (same type, small differences in details)
-- 76-85 = Similar (recognizable similarity, some notable differences)
-- 61-75 = Moderately similar (same category, several differences)
-- 46-60 = Somewhat similar (same general category, many differences)
-- 26-45 = Different but related (same product type but different design)
-- 11-25 = Quite different (distant relation)
-- 0-10 = Completely different products
+Score each attribute from 0-100:
 
-Analyze carefully:
-- Overall shape and proportions
-- Design elements and details
-- Material appearance
-- Style and aesthetic
-- Key visual features
+1. SHAPE (overall watch shape, case shape, proportions, size appearance):
+   - 90-100: Nearly identical shape
+   - 70-89: Very similar shape with minor differences
+   - 50-69: Same general category but noticeable shape differences
+   - 30-49: Different shapes but still recognizable as similar type
+   - 0-29: Very different shapes
 
-Give a PRECISE score (e.g., 87, 73, 92) based on the exact degree of similarity.
-Answer with ONLY a specific number from 0 to 100. No other text."""
+2. STRAP (strap/band type, style, texture, width):
+   - 90-100: Nearly identical strap type and style
+   - 70-89: Same strap type with minor style differences
+   - 50-69: Similar strap type but different styling
+   - 30-49: Different strap types (e.g., metal vs leather)
+   - 0-29: Completely different strap types
+
+3. DIAL (dial design, markers/numbers type, hands style, layout):
+   - 90-100: Nearly identical dial design and markers
+   - 70-89: Very similar dial with minor differences in markers
+   - 50-69: Similar dial style but different marker types (e.g., arabic vs roman)
+   - 30-49: Different dial designs but recognizable similarity
+   - 0-29: Completely different dial designs
+
+4. COLOR (overall color scheme - this is LEAST important, shade differences are OK):
+   - 90-100: Nearly identical colors
+   - 70-89: Same color family (e.g., both gold, both silver)
+   - 50-69: Different shades but harmonious (e.g., tan vs brown)
+   - 30-49: Different color categories but not clashing
+   - 0-29: Completely different color schemes
+
+Answer in this EXACT format (four lines, numbers only):
+SHAPE: [0-100]
+STRAP: [0-100]
+DIAL: [0-100]
+COLOR: [0-100]"""
 
             response = model.generate_content([prompt, reference_image, product_image])
             
             if response and response.text:
                 answer = response.text.strip()
-                match = re.search(r'\d+', answer)
-                if match:
-                    score = int(match.group())
-                    score = max(0, min(100, score))
-                    return (score, None)
+                
+                # Parse the structured response
+                scores = {}
+                for line in answer.split('\n'):
+                    line = line.strip()
+                    if ':' in line:
+                        key, value = line.split(':', 1)
+                        key = key.strip().upper()
+                        value = value.strip()
+                        
+                        # Extract number from value
+                        match = re.search(r'\d+', value)
+                        if match and key in ['SHAPE', 'STRAP', 'DIAL', 'COLOR']:
+                            score = int(match.group())
+                            score = max(0, min(100, score))
+                            scores[key] = score
+                
+                # Check if we got all required scores
+                required = ['SHAPE', 'STRAP', 'DIAL', 'COLOR']
+                if all(key in scores for key in required):
+                    # Calculate weighted final score
+                    # Shape: 35%, Strap: 25%, Dial: 25%, Color: 15%
+                    final_score = (
+                        scores['SHAPE'] * 0.35 +
+                        scores['STRAP'] * 0.25 +
+                        scores['DIAL'] * 0.25 +
+                        scores['COLOR'] * 0.15
+                    )
+                    final_score = round(final_score, 1)
+                    
+                    # Return structured data
+                    result = {
+                        'final_score': final_score,
+                        'shape': scores['SHAPE'],
+                        'strap': scores['STRAP'],
+                        'dial': scores['DIAL'],
+                        'color': scores['COLOR']
+                    }
+                    return (result, None)
                 else:
-                    return (None, 'invalid_response')
+                    missing = [k for k in required if k not in scores]
+                    return (None, f'incomplete_scores: missing {missing}')
             else:
                 return (None, 'empty_response')
                 
@@ -349,7 +399,7 @@ def process_single_product(model, reference_image, product, product_num, total_p
             print(f"  [{product_num}/{total_products}] ⚠️ Failed to download image")
             return (None, 'download_failed')
         
-        score, error = compare_image_with_gemini_score(model, reference_image, product_image, product_num)
+        score_data, error = compare_image_with_gemini_score(model, reference_image, product_image, product_num)
         
         if error:
             if 'rate_limit' in str(error):
@@ -360,8 +410,11 @@ def process_single_product(model, reference_image, product, product_num, total_p
                 print(f"  [{product_num}/{total_products}] ⚠️ ERROR: {error}")
             return (None, error)
         else:
-            print(f"  [{product_num}/{total_products}] 📊 Score: {score}")
-            return (score, None)
+            # Print detailed breakdown
+            print(f"  [{product_num}/{total_products}] 📊 Final: {score_data['final_score']:.1f} | "
+                  f"Shape: {score_data['shape']} | Strap: {score_data['strap']} | "
+                  f"Dial: {score_data['dial']} | Color: {score_data['color']}")
+            return (score_data, None)
         
     except Exception as e:
         print(f"  [{product_num}/{total_products}] ⚠️ Processing error: {e}")
@@ -378,7 +431,7 @@ def process_products_parallel(model, reference_image, products):
     batch_size = 50
     total_batches = (len(products) + batch_size - 1) // batch_size
     
-    with ThreadPoolExecutor(max_workers=10) as executor:
+    with ThreadPoolExecutor(max_workers=25) as executor:
         for batch_num in range(total_batches):
             start_idx = batch_num * batch_size
             end_idx = min(start_idx + batch_size, len(products))
@@ -399,12 +452,12 @@ def process_products_parallel(model, reference_image, products):
             batch_processed = 0
             for future, product in futures:
                 try:
-                    score, error = future.result(timeout=30)
+                    score_data, error = future.result(timeout=30)
                     
                     if error:
                         error_count += 1
-                    elif score is not None:
-                        results.append((product, score))
+                    elif score_data is not None:
+                        results.append((product, score_data))
                         batch_processed += 1
                 except Exception as e:
                     print(f"  ⚠️ Thread error: {e}")
@@ -415,28 +468,35 @@ def process_products_parallel(model, reference_image, products):
             if batch_num < total_batches - 1:
                 time.sleep(0.5)
     
-    # Sort results by score (highest first) for display
-    results_sorted = sorted(results, key=lambda x: x[1], reverse=True)
+    # Sort results by final_score (highest first) for display
+    results_sorted = sorted(results, key=lambda x: x[1]['final_score'], reverse=True)
     
     # Display all scores
-    print(f"\n📊 All Product Scores:")
+    print(f"\n📊 All Product Scores (sorted by Final Score):")
     print("=" * 50)
-    for product, score in results_sorted:
-        print(f"  Product #{product['index']}: Score {score} - Price: {product['price']}")
+    for product, score_data in results_sorted:
+        print(f"  #{product['index']}: Final={score_data['final_score']:.1f} | "
+              f"Shape={score_data['shape']} Strap={score_data['strap']} "
+              f"Dial={score_data['dial']} Color={score_data['color']} | "
+              f"Price: {product['price']}")
     
     if results:
-        best_product, best_score = max(results, key=lambda x: x[1])
+        best_product, best_score_data = max(results, key=lambda x: x[1]['final_score'])
         print(f"\n🏆 Best match found!")
         print(f"   Product #: {best_product['index']}")
-        print(f"   Score: {best_score}/100")
+        print(f"   Final Score: {best_score_data['final_score']:.1f}/100")
+        print(f"   └─ Shape: {best_score_data['shape']}/100 (35% weight)")
+        print(f"   └─ Strap: {best_score_data['strap']}/100 (25% weight)")
+        print(f"   └─ Dial: {best_score_data['dial']}/100 (25% weight)")
+        print(f"   └─ Color: {best_score_data['color']}/100 (15% weight)")
         print(f"   URL: {best_product['product_url'][:80]}...")
         print(f"   Price: {best_product['price']}")
-        return (best_product, best_score, error_count, results_sorted)
+        return (best_product, best_score_data, error_count, results_sorted)
     else:
         print(f"\n❌ No valid matches found (all products failed)")
         return (None, None, error_count, [])
 
-def save_to_csv(reference_image_url, product_url, product_image_url, price, similarity_score):
+def save_to_csv(reference_image_url, product_url, product_image_url, price, score_data):
     """Save result to Watched_prices.csv in accumulative mode"""
     csv_file = 'Watched_prices.csv'
     file_exists = os.path.isfile(csv_file)
@@ -446,9 +506,20 @@ def save_to_csv(reference_image_url, product_url, product_image_url, price, simi
             writer = csv.writer(f)
             
             if not file_exists:
-                writer.writerow(['reference_image_url', '1688_url', '1688_product_image_url', 'price', 'similarity_score'])
+                writer.writerow(['reference_image_url', '1688_url', '1688_product_image_url', 'price', 
+                               'final_score', 'shape_score', 'strap_score', 'dial_score', 'color_score'])
             
-            writer.writerow([reference_image_url, product_url, product_image_url, price, similarity_score])
+            writer.writerow([
+                reference_image_url, 
+                product_url, 
+                product_image_url, 
+                price, 
+                score_data['final_score'],
+                score_data['shape'],
+                score_data['strap'],
+                score_data['dial'],
+                score_data['color']
+            ])
         
         print(f"💾 Saved to {csv_file}")
         return True
@@ -458,31 +529,43 @@ def save_to_csv(reference_image_url, product_url, product_image_url, price, simi
 
 def save_all_products_to_csv(reference_image_url, all_products_with_scores):
     """Save all products with their scores to a detailed CSV file"""
-    csv_file = 'Watched_prices_detailed.csv'
-    file_exists = os.path.isfile(csv_file)
+    # Auto-increment filename if exists
+    base_filename = 'Watched_prices_detailed'
+    csv_file = f'{base_filename}.csv'
+    counter = 1
+    
+    while os.path.exists(csv_file):
+        csv_file = f'{base_filename}{counter}.csv'
+        counter += 1
     
     try:
-        with open(csv_file, mode='a', newline='', encoding='utf-8') as f:
+        with open(csv_file, mode='w', newline='', encoding='utf-8') as f:
             writer = csv.writer(f)
             
-            if not file_exists:
-                writer.writerow(['reference_image_url', 'product_number', 'similarity_score', 'price', '1688_url', '1688_product_image_url'])
+            # Always write header for new file
+            writer.writerow(['reference_image_url', 'product_number', 'final_score', 
+                           'shape_score', 'strap_score', 'dial_score', 'color_score',
+                           'price', '1688_url', '1688_product_image_url'])
             
-            for product, score in all_products_with_scores:
+            for product, score_data in all_products_with_scores:
                 writer.writerow([
                     reference_image_url,
                     product['index'],
-                    score,
+                    score_data['final_score'],
+                    score_data['shape'],
+                    score_data['strap'],
+                    score_data['dial'],
+                    score_data['color'],
                     product['price'],
                     product['product_url'],
                     product['image_url']
                 ])
         
         print(f"💾 Saved all {len(all_products_with_scores)} products to {csv_file}")
-        return True
+        return csv_file
     except Exception as e:
         print(f"❌ Error saving detailed CSV: {e}")
-        return False
+        return None
 
 def load_chrome_cookies(cookies_file='new_chrome_cookies.json'):
     """Load Chrome cookies and convert to Playwright format"""
@@ -840,8 +923,9 @@ def main():
                 page.close()
                 
                 # Save all products with scores to detailed CSV
+                detailed_csv = None
                 if all_results:
-                    save_all_products_to_csv(image_url, all_results)
+                    detailed_csv = save_all_products_to_csv(image_url, all_results)
                 
                 # Save the best product to main CSV
                 if best_product and best_score is not None:
@@ -853,6 +937,8 @@ def main():
                         best_score
                     )
                     print(f"✅ Successfully processed URL")
+                    if detailed_csv:
+                        print(f"   Detailed results: {detailed_csv}")
                 else:
                     print(f"❌ Could not find a match for this URL")
                 
@@ -887,8 +973,9 @@ def main():
     print(f"\n{'=' * 50}")
     print(f"🎉 All inputs processed!")
     print(f"📊 Results saved to:")
-    print(f"   - Watched_prices.csv (best matches)")
-    print(f"   - Watched_prices_detailed.csv (all products with scores and thumbnails)")
+    print(f"   - Watched_prices.csv (best matches only)")
+    print(f"   - Watched_prices_detailed*.csv (all products with detailed scores)")
+    print(f"     Note: A new detailed file is created for each run")
     print(f"{'=' * 50}")
     return True
 
