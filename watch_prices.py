@@ -408,16 +408,26 @@ def process_products_parallel(model, reference_image, products):
             if batch_num < total_batches - 1:
                 time.sleep(0.5)
     
+    # Sort results by score (highest first) for display
+    results_sorted = sorted(results, key=lambda x: x[1], reverse=True)
+    
+    # Display all scores
+    print(f"\n📊 All Product Scores:")
+    print("=" * 50)
+    for product, score in results_sorted:
+        print(f"  Product #{product['index']}: Score {score} - Price: {product['price']}")
+    
     if results:
         best_product, best_score = max(results, key=lambda x: x[1])
         print(f"\n🏆 Best match found!")
+        print(f"   Product #: {best_product['index']}")
         print(f"   Score: {best_score}/100")
         print(f"   URL: {best_product['product_url'][:80]}...")
         print(f"   Price: {best_product['price']}")
-        return (best_product, best_score, error_count)
+        return (best_product, best_score, error_count, results_sorted)
     else:
         print(f"\n❌ No valid matches found (all products failed)")
-        return (None, None, error_count)
+        return (None, None, error_count, [])
 
 def save_to_csv(reference_image_url, product_url, product_image_url, price, similarity_score):
     """Save result to Watched_prices.csv in accumulative mode"""
@@ -437,6 +447,34 @@ def save_to_csv(reference_image_url, product_url, product_image_url, price, simi
         return True
     except Exception as e:
         print(f"❌ Error saving to CSV: {e}")
+        return False
+
+def save_all_products_to_csv(reference_image_url, all_products_with_scores):
+    """Save all products with their scores to a detailed CSV file"""
+    csv_file = 'Watched_prices_detailed.csv'
+    file_exists = os.path.isfile(csv_file)
+    
+    try:
+        with open(csv_file, mode='a', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            
+            if not file_exists:
+                writer.writerow(['reference_image_url', 'product_number', 'similarity_score', 'price', '1688_url', '1688_product_image_url'])
+            
+            for product, score in all_products_with_scores:
+                writer.writerow([
+                    reference_image_url,
+                    product['index'],
+                    score,
+                    product['price'],
+                    product['product_url'],
+                    product['image_url']
+                ])
+        
+        print(f"💾 Saved all {len(all_products_with_scores)} products to {csv_file}")
+        return True
+    except Exception as e:
+        print(f"❌ Error saving detailed CSV: {e}")
         return False
 
 def load_chrome_cookies(cookies_file='new_chrome_cookies.json'):
@@ -786,10 +824,15 @@ def main():
                 
                 browser.close()
                 
-                best_product, best_score, error_count = process_products_parallel(
+                best_product, best_score, error_count, all_results = process_products_parallel(
                     model, reference_image, products
                 )
                 
+                # Save all products with scores to detailed CSV
+                if all_results:
+                    save_all_products_to_csv(image_url, all_results)
+                
+                # Save the best product to main CSV
                 if best_product and best_score is not None:
                     save_to_csv(
                         image_url,
@@ -826,7 +869,9 @@ def main():
     
     print(f"\n{'=' * 50}")
     print(f"🎉 All inputs processed!")
-    print(f"📊 Results saved to: Watched_prices.csv")
+    print(f"📊 Results saved to:")
+    print(f"   - Watched_prices.csv (best matches)")
+    print(f"   - Watched_prices_detailed.csv (all products with scores and thumbnails)")
     print(f"{'=' * 50}")
     return True
 
