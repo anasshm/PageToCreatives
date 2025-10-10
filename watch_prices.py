@@ -17,6 +17,10 @@ import io
 import requests
 from concurrent.futures import ThreadPoolExecutor
 import re
+from dotenv import load_dotenv
+
+# Load environment variables from .env file
+load_dotenv()
 
 def setup_gemini_api():
     """Setup Gemini API with user's API key"""
