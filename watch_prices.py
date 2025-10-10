@@ -37,8 +37,8 @@ def setup_gemini_api():
     
     try:
         genai.configure(api_key=api_key)
-        model = genai.GenerativeModel('gemini-2.0-flash-exp')
-        print("✅ Gemini API configured successfully (using gemini-2.0-flash-exp)")
+        model = genai.GenerativeModel('gemini-2.5-flash-preview-09-2025')
+        print("✅ Gemini API configured successfully (using gemini-2.5-flash-preview-09-2025)")
         return model
     except Exception as e:
         print(f"❌ Error configuring Gemini API: {e}")
