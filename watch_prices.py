@@ -371,7 +371,7 @@ def process_products_parallel(model, reference_image, products):
     batch_size = 50
     total_batches = (len(products) + batch_size - 1) // batch_size
     
-    with ThreadPoolExecutor(max_workers=50) as executor:
+    with ThreadPoolExecutor(max_workers=10) as executor:
         for batch_num in range(total_batches):
             start_idx = batch_num * batch_size
             end_idx = min(start_idx + batch_size, len(products))
@@ -754,23 +754,14 @@ def main():
                 image_urls.append(None)
     
     # Launch browser once and reuse it for all URLs
-    # Try to connect to existing browser first, otherwise launch new one
     with sync_playwright() as p:
-        try:
-            # Try to connect to existing browser on port 9222
-            browser = p.chromium.connect_over_cdp('http://localhost:9222')
-            print("🔗 Connected to existing Chrome browser")
-        except Exception as e:
-            # Launch new browser with remote debugging enabled
-            print("🚀 Launching new Chrome browser (will persist across runs)")
-            browser = p.chromium.launch(
-                headless=False,
-                args=[
-                    '--disable-blink-features=AutomationControlled',
-                    '--disable-dev-shm-usage',
-                    '--remote-debugging-port=9222',
-                ]
-            )
+        browser = p.chromium.launch(
+            headless=False,
+            args=[
+                '--disable-blink-features=AutomationControlled',
+                '--disable-dev-shm-usage',
+            ]
+        )
         
         cookies = load_chrome_cookies('new_chrome_cookies.json')
         
