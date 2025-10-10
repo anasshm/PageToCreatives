@@ -17,10 +17,6 @@ import io
 import requests
 from concurrent.futures import ThreadPoolExecutor
 import re
-from dotenv import load_dotenv
-
-# Load environment variables from .env file
-load_dotenv()
 
 def setup_gemini_api():
     """Setup Gemini API with user's API key"""
@@ -277,7 +273,7 @@ def extract_products_from_results(page):
         return []
 
 def compare_image_with_gemini_score(model, reference_image, product_image, product_num=None):
-    """Compare product image with reference image using Gemini - focuses on shape and material"""
+    """Compare product image with reference image using Gemini"""
     max_retries = 2
     retry_delay = 2
     
@@ -288,19 +284,19 @@ def compare_image_with_gemini_score(model, reference_image, product_image, produ
 The FIRST image is the reference product.
 The SECOND image is a product from search results.
 
-Rate how similar they are focusing on SHAPE and MATERIAL:
-- 100 = Identical shape, design, and material
-- 90-99 = Same shape and material (ignore color shades, brand differences, or missing brand)
-- 80-89 = Very similar shape with same material type
-- 60-79 = Similar shape, material may differ
-- 40-59 = Somewhat similar shape
-- 20-39 = Different shape but same product category
+Rate how similar they are:
+- 100 = Identical product (same design, shape, style)
+- 80-99 = Very similar (same type, minor differences)
+- 60-79 = Similar (same category, notable differences)
+- 40-59 = Somewhat similar (same general category)
+- 20-39 = Different but related
 - 0-19 = Completely different
 
-IMPORTANT RULES:
-- Slightly different color shades = DO NOT lower score
-- Different brand or no brand visible = DO NOT lower score
-- Focus ONLY on: overall shape, watch face shape, band style, material appearance
+Focus on:
+- Product type and category
+- Overall shape and design
+- Key visual features
+- Style and appearance
 
 Answer with ONLY a number from 0 to 100. No other text."""
 
@@ -361,7 +357,7 @@ def process_single_product(model, reference_image, product, product_num, total_p
         return (None, f'processing_error: {str(e)}')
 
 def process_products_parallel(model, reference_image, products):
-    """Process all products in parallel and return both highest score and cheapest 90%+ match"""
+    """Process all products in parallel and return the one with highest score"""
     print(f"\n🔎 Analyzing {len(products)} products with parallel processing...")
     print("=" * 50)
     
@@ -408,65 +404,19 @@ def process_products_parallel(model, reference_image, products):
             if batch_num < total_batches - 1:
                 time.sleep(0.5)
     
-    # Find best match (highest score)
-    best_product = None
-    best_score = None
     if results:
         best_product, best_score = max(results, key=lambda x: x[1])
         print(f"\n🏆 Best match found!")
         print(f"   Score: {best_score}/100")
         print(f"   URL: {best_product['product_url'][:80]}...")
         print(f"   Price: {best_product['price']}")
+        return (best_product, best_score, error_count)
     else:
         print(f"\n❌ No valid matches found (all products failed)")
-    
-    # Find cheapest product with 90%+ similarity
-    high_similarity_products = [(prod, score) for prod, score in results if score >= 90]
-    cheapest_product = None
-    cheapest_score = None
-    
-    if high_similarity_products:
-        print(f"\n💰 Found {len(high_similarity_products)} products with 90%+ similarity")
-        
-        # Parse prices and find cheapest
-        cheapest_price_value = float('inf')
-        
-        for product, score in high_similarity_products:
-            price_text = product['price']
-            try:
-                # Remove currency symbols and extract number
-                price_match = re.search(r'[\d.]+', price_text)
-                if price_match:
-                    price_value = float(price_match.group())
-                    print(f"   Product (Score {score}): {price_text} = {price_value} yuan")
-                    
-                    if price_value < cheapest_price_value:
-                        cheapest_price_value = price_value
-                        cheapest_product = product
-                        cheapest_score = score
-                else:
-                    print(f"   Product (Score {score}): {price_text} (could not parse price)")
-            except:
-                print(f"   Product (Score {score}): {price_text} (could not parse price)")
-        
-        if cheapest_product:
-            print(f"\n🏆 Cheapest 90%+ match found!")
-            print(f"   Score: {cheapest_score}/100")
-            print(f"   Price: {cheapest_product['price']} ({cheapest_price_value} yuan)")
-            print(f"   URL: {cheapest_product['product_url'][:80]}...")
-        else:
-            print(f"\n⚠️ Found products with 90%+ similarity but could not parse any prices")
-            # Fallback to highest similarity among the 90%+ products
-            cheapest_product, cheapest_score = max(high_similarity_products, key=lambda x: x[1])
-            print(f"   Using highest similarity instead: {cheapest_score}/100")
-    else:
-        print(f"\n💰 No products found with 90%+ similarity for cheapest option")
-    
-    return (best_product, best_score, cheapest_product, cheapest_score, error_count)
+        return (None, None, error_count)
 
-def save_to_csv(reference_image_url, best_product_url, best_product_image_url, best_price, best_similarity_score, 
-                cheapest_product_url, cheapest_product_image_url, cheapest_price, cheapest_similarity_score):
-    """Save both results to Watched_prices.csv in accumulative mode"""
+def save_to_csv(reference_image_url, product_url, product_image_url, price, similarity_score):
+    """Save result to Watched_prices.csv in accumulative mode"""
     csv_file = 'Watched_prices.csv'
     file_exists = os.path.isfile(csv_file)
     
@@ -475,17 +425,9 @@ def save_to_csv(reference_image_url, best_product_url, best_product_image_url, b
             writer = csv.writer(f)
             
             if not file_exists:
-                writer.writerow([
-                    'reference_image_url', 
-                    'best_match_url', 'best_match_image_url', 'best_match_price', 'best_match_similarity',
-                    'cheapest_90plus_url', 'cheapest_90plus_image_url', 'cheapest_90plus_price', 'cheapest_90plus_similarity'
-                ])
+                writer.writerow(['reference_image_url', '1688_url', '1688_product_image_url', 'price', 'similarity_score'])
             
-            writer.writerow([
-                reference_image_url,
-                best_product_url or '', best_product_image_url or '', best_price or '', best_similarity_score or '',
-                cheapest_product_url or '', cheapest_product_image_url or '', cheapest_price or '', cheapest_similarity_score or ''
-            ])
+            writer.writerow([reference_image_url, product_url, product_image_url, price, similarity_score])
         
         print(f"💾 Saved to {csv_file}")
         return True
@@ -658,7 +600,7 @@ def normalize_file_path(path):
 
 def main():
     """Main function"""
-    print("🔍 Watch Prices - 1688 Product Finder (Best Match + Cheapest 90%+)")
+    print("🔍 Watch Prices - 1688 Product Finder")
     print("=" * 50)
     
     model = setup_gemini_api()
@@ -840,32 +782,21 @@ def main():
                 
                 browser.close()
                 
-                best_product, best_score, cheapest_product, cheapest_score, error_count = process_products_parallel(
+                best_product, best_score, error_count = process_products_parallel(
                     model, reference_image, products
                 )
                 
-                # Save both results to CSV
-                save_to_csv(
-                    image_url,
-                    best_product['product_url'] if best_product else None,
-                    best_product['image_url'] if best_product else None,
-                    best_product['price'] if best_product else None,
-                    best_score,
-                    cheapest_product['product_url'] if cheapest_product else None,
-                    cheapest_product['image_url'] if cheapest_product else None,
-                    cheapest_product['price'] if cheapest_product else None,
-                    cheapest_score
-                )
-                
-                if best_product:
-                    print(f"✅ Successfully processed URL - found best match")
+                if best_product and best_score is not None:
+                    save_to_csv(
+                        image_url,
+                        best_product['product_url'],
+                        best_product['image_url'],
+                        best_product['price'],
+                        best_score
+                    )
+                    print(f"✅ Successfully processed URL")
                 else:
-                    print(f"⚠️ No best match found for this URL")
-                
-                if cheapest_product:
-                    print(f"✅ Found cheapest 90%+ match")
-                else:
-                    print(f"⚠️ No cheapest 90%+ match found")
+                    print(f"❌ Could not find a match for this URL")
                 
                 if error_count > 0:
                     print(f"⚠️ {error_count} products had errors during processing")

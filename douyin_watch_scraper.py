@@ -198,7 +198,17 @@ def load_database():
         try:
             with open(db_file, 'r', encoding='utf-8') as f:
                 db = json.load(f)
-                print(f"✅ Loaded database: {len(db.get('phashes', []))} phashes, {len(db.get('fingerprints', {}))} fingerprints")
+                
+                # Migrate old format: list to dict
+                if isinstance(db.get('phashes'), list):
+                    print(f"⚠️ Migrating old database format (list → dict)...")
+                    old_phashes = db['phashes']
+                    db['phashes'] = {}
+                    # Old phashes won't have URLs, so they'll just be lost in migration
+                    # This is okay since it's just a one-time migration
+                    print(f"   Cleared {len(old_phashes)} old phashes (no URL data available)")
+                
+                print(f"✅ Loaded database: {len(db.get('phashes', {}))} phashes, {len(db.get('fingerprints', {}))} fingerprints")
                 return db
         except Exception as e:
             print(f"⚠️ Error loading database: {e}")
@@ -206,7 +216,7 @@ def load_database():
     
     # Create new database
     db = {
-        'phashes': [],
+        'phashes': {},  # Dict to store phash -> URL mapping
         'fingerprints': {}
     }
     return db
@@ -225,18 +235,26 @@ def save_database(db):
         return False
 
 def is_duplicate_phash(phash, db):
-    """Check if perceptual hash exists in database"""
-    return phash in db.get('phashes', [])
+    """Check if perceptual hash exists in database
+    Returns: (is_duplicate: bool, duplicate_url: str or None)
+    """
+    if phash in db.get('phashes', {}):
+        return (True, db['phashes'][phash])
+    return (False, None)
 
 def is_duplicate_fingerprint(fingerprint, db):
-    """Check if fingerprint exists in database"""
-    return fingerprint in db.get('fingerprints', {})
+    """Check if fingerprint exists in database
+    Returns: (is_duplicate: bool, duplicate_url: str or None)
+    """
+    if fingerprint in db.get('fingerprints', {}):
+        return (True, db['fingerprints'][fingerprint]['thumbnail_url'])
+    return (False, None)
 
 def add_to_database(db, phash, fingerprint, thumbnail_url):
     """Add new watch to database"""
-    # Add phash
+    # Add phash with URL
     if phash and phash not in db['phashes']:
-        db['phashes'].append(phash)
+        db['phashes'][phash] = thumbnail_url
     
     # Add fingerprint
     if fingerprint and fingerprint not in db['fingerprints']:
@@ -268,8 +286,10 @@ def process_watch_thumbnail(model, video, db, video_num, total):
             print(f"  [{video_num}/{total}] ⚠️ Failed to calculate phash")
             return (None, 'phash_failed')
         
-        if is_duplicate_phash(phash, db):
+        is_dup_phash, dup_url = is_duplicate_phash(phash, db)
+        if is_dup_phash:
             print(f"  [{video_num}/{total}] ⏭️  SKIP - Duplicate image (phash)")
+            print(f"      Dup: {dup_url[:80]}...")
             return (None, 'duplicate_phash')
         
         # Step 3: AI Filter 1 - Multiple products check
@@ -296,8 +316,11 @@ def process_watch_thumbnail(model, video, db, video_num, total):
         
         # Step 5: Fingerprint check
         fingerprint = generate_watch_fingerprint(attributes)
-        if is_duplicate_fingerprint(fingerprint, db):
+        is_dup_fingerprint, dup_url = is_duplicate_fingerprint(fingerprint, db)
+        if is_dup_fingerprint:
             print(f"  [{video_num}/{total}] ⏭️  SKIP - Duplicate watch (attributes)")
+            print(f"      Fingerprint: {fingerprint}")
+            print(f"      Dup: {dup_url[:80]}...")
             return (None, 'duplicate_fingerprint')
         
         # Step 6: Unique watch found!
