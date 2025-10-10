@@ -753,52 +753,54 @@ def main():
                 print(f"⚠️ Skipping this input - could not upload image")
                 image_urls.append(None)
     
-    # Now process all URLs
-    for idx, image_url in enumerate(image_urls, 1):
-        if image_url is None:
-            print(f"\n⏭️  Skipping input {idx} (failed to prepare)")
-            continue
-            
-        is_first_url = (idx == 1)
-        print(f"\n{'=' * 50}")
-        print(f"📸 Processing input {idx}/{len(image_urls)}")
-        print(f"   URL: {image_url[:80]}{'...' if len(image_url) > 80 else ''}")
-        print(f"{'=' * 50}")
+    # Launch browser once and reuse it for all URLs
+    with sync_playwright() as p:
+        browser = p.chromium.launch(
+            headless=False,
+            args=[
+                '--disable-blink-features=AutomationControlled',
+                '--disable-dev-shm-usage',
+            ]
+        )
         
-        temp_filename = os.path.join(temp_dir, f'temp_image_{idx}.jpg')
-        print(f"⬇️  Downloading reference image...")
+        cookies = load_chrome_cookies('new_chrome_cookies.json')
         
-        if not download_image_from_url(image_url, temp_filename):
-            print(f"⚠️ Skipping this input - could not download reference image")
-            continue
+        context = browser.new_context(
+            viewport={'width': 1920, 'height': 1080},
+            user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
+        )
         
-        reference_image = load_reference_image(temp_filename)
-        if not reference_image:
-            print(f"⚠️ Skipping this URL - could not load reference image")
-            if os.path.exists(temp_filename):
-                os.remove(temp_filename)
-            continue
+        if cookies:
+            context.add_cookies(cookies)
+            print(f"🍪 Cookies loaded into browser context")
         
-        with sync_playwright() as p:
-            browser = p.chromium.launch(
-                headless=False,
-                args=[
-                    '--disable-blink-features=AutomationControlled',
-                    '--disable-dev-shm-usage',
-                ]
-            )
+        # Now process all URLs using the same browser
+        for idx, image_url in enumerate(image_urls, 1):
+            if image_url is None:
+                print(f"\n⏭️  Skipping input {idx} (failed to prepare)")
+                continue
+                
+            is_first_url = (idx == 1)
+            print(f"\n{'=' * 50}")
+            print(f"📸 Processing input {idx}/{len(image_urls)}")
+            print(f"   URL: {image_url[:80]}{'...' if len(image_url) > 80 else ''}")
+            print(f"{'=' * 50}")
             
-            cookies = load_chrome_cookies('new_chrome_cookies.json')
+            temp_filename = os.path.join(temp_dir, f'temp_image_{idx}.jpg')
+            print(f"⬇️  Downloading reference image...")
             
-            context = browser.new_context(
-                viewport={'width': 1920, 'height': 1080},
-                user_agent='Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/131.0.0.0 Safari/537.36',
-            )
+            if not download_image_from_url(image_url, temp_filename):
+                print(f"⚠️ Skipping this input - could not download reference image")
+                continue
             
-            if cookies:
-                context.add_cookies(cookies)
-                print(f"🍪 Cookies loaded into browser context")
+            reference_image = load_reference_image(temp_filename)
+            if not reference_image:
+                print(f"⚠️ Skipping this URL - could not load reference image")
+                if os.path.exists(temp_filename):
+                    os.remove(temp_filename)
+                continue
             
+            # Create a new page (tab) for this search
             page = context.new_page()
             
             try:
@@ -806,7 +808,7 @@ def main():
                 
                 if not result_page:
                     print(f"⚠️ Failed to submit image URL - skipping")
-                    browser.close()
+                    page.close()  # Close only the current tab
                     if os.path.exists(temp_filename):
                         os.remove(temp_filename)
                     continue
@@ -817,16 +819,18 @@ def main():
                 
                 if not products:
                     print(f"⚠️ No products found in results - skipping")
-                    browser.close()
+                    page.close()  # Close only the current tab
                     if os.path.exists(temp_filename):
                         os.remove(temp_filename)
                     continue
                 
-                browser.close()
-                
+                # Keep browser open, just close the search results tab after processing
                 best_product, best_score, error_count, all_results = process_products_parallel(
                     model, reference_image, products
                 )
+                
+                # Close the search results tab now that we've extracted the data
+                page.close()
                 
                 # Save all products with scores to detailed CSV
                 if all_results:
@@ -855,10 +859,16 @@ def main():
                 print(f"❌ Error processing URL: {e}")
                 import traceback
                 traceback.print_exc()
-                browser.close()
+                try:
+                    page.close()  # Close only the current tab
+                except:
+                    pass
                 if os.path.exists(temp_filename):
                     os.remove(temp_filename)
                 continue
+        
+        # Browser will close automatically when exiting the 'with' block
+        print(f"\n🌐 Browser will remain open. Close it manually when done.")
     
     try:
         if os.path.exists(temp_dir):
