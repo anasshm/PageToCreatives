@@ -283,26 +283,33 @@ def compare_image_with_gemini_score(model, reference_image, product_image, produ
     
     for attempt in range(max_retries):
         try:
-            prompt = """Compare these two images and rate their similarity from 0 to 100.
+            prompt = """Compare these two images and rate their similarity from 0 to 100 with PRECISE scoring.
 
 The FIRST image is the reference product.
 The SECOND image is a product from search results.
 
-Rate how similar they are:
-- 100 = Identical product (same design, shape, style)
-- 80-99 = Very similar (same type, minor differences)
-- 60-79 = Similar (same category, notable differences)
-- 40-59 = Somewhat similar (same general category)
-- 20-39 = Different but related
-- 0-19 = Completely different
+IMPORTANT: Be very precise and granular with your score. Use specific numbers like 87, 92, 73, NOT round numbers like 80, 90, 70.
 
-Focus on:
-- Product type and category
-- Overall shape and design
+Scoring Guidelines:
+- 96-100 = Nearly identical (tiny differences in lighting/angle only)
+- 91-95 = Extremely similar (same design, very minor style variations)
+- 86-90 = Very similar (same type, small differences in details)
+- 76-85 = Similar (recognizable similarity, some notable differences)
+- 61-75 = Moderately similar (same category, several differences)
+- 46-60 = Somewhat similar (same general category, many differences)
+- 26-45 = Different but related (same product type but different design)
+- 11-25 = Quite different (distant relation)
+- 0-10 = Completely different products
+
+Analyze carefully:
+- Overall shape and proportions
+- Design elements and details
+- Material appearance
+- Style and aesthetic
 - Key visual features
-- Style and appearance
 
-Answer with ONLY a number from 0 to 100. No other text."""
+Give a PRECISE score (e.g., 87, 73, 92) based on the exact degree of similarity.
+Answer with ONLY a specific number from 0 to 100. No other text."""
 
             response = model.generate_content([prompt, reference_image, product_image])
             
