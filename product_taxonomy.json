@@ -1,0 +1,240 @@
+{
+  "shapes": {
+    "clover": {
+      "primary": "clover",
+      "synonyms": ["fourleaf", "four-leaf", "four leaf", "4-leaf", "4leaf", "quatrefoil", "shamrock", "trefoil"],
+      "description": "Four-leaf clover or quatrefoil design"
+    },
+    "butterfly": {
+      "primary": "butterfly",
+      "synonyms": ["butterflies", "wing", "wings", "winged", "moth", "insect"],
+      "description": "Butterfly shape or wing elements"
+    },
+    "leaf": {
+      "primary": "leaf",
+      "synonyms": ["leaves", "foliage", "botanical", "plant", "nature"],
+      "description": "Leaf designs (not clover)"
+    },
+    "star": {
+      "primary": "star",
+      "synonyms": ["stars", "starry", "celestial", "starburst", "5-point", "6-point"],
+      "description": "Star shapes"
+    },
+    "heart": {
+      "primary": "heart",
+      "synonyms": ["hearts", "love", "heart-shaped", "valentine"],
+      "description": "Heart designs"
+    },
+    "circle": {
+      "primary": "circle",
+      "synonyms": ["round", "circular", "ring", "hoop", "o-ring"],
+      "description": "Circular or ring shapes"
+    },
+    "flower": {
+      "primary": "flower",
+      "synonyms": ["flowers", "floral", "bloom", "blossom", "petal", "rose", "daisy"],
+      "description": "Flower designs"
+    },
+    "shell": {
+      "primary": "shell",
+      "synonyms": ["shells", "oyster", "seashell", "conch", "scallop"],
+      "description": "Shell or oyster designs"
+    },
+    "geometric": {
+      "primary": "geometric",
+      "synonyms": ["abstract", "modern", "angular", "triangular", "square"],
+      "description": "Geometric or abstract shapes"
+    },
+    "crown": {
+      "primary": "crown",
+      "synonyms": ["tiara", "coronet", "royal"],
+      "description": "Crown designs"
+    },
+    "bow": {
+      "primary": "bow",
+      "synonyms": ["ribbon", "knot", "bow-tie"],
+      "description": "Bow or ribbon designs"
+    },
+    "cross": {
+      "primary": "cross",
+      "synonyms": ["crucifix", "religious", "faith"],
+      "description": "Cross designs"
+    }
+  },
+  
+  "product_types": {
+    "necklace": {
+      "primary": "necklace",
+      "synonyms": ["pendant", "chain", "choker"],
+      "description": "Necklaces and pendants"
+    },
+    "earring": {
+      "primary": "earring",
+      "synonyms": ["stud", "drop", "drop-earring", "hoop", "hoop-earring", "dangle", "ear-cuff"],
+      "description": "All types of earrings"
+    },
+    "ring": {
+      "primary": "ring",
+      "synonyms": ["band", "engagement", "wedding-band"],
+      "description": "Rings"
+    },
+    "bracelet": {
+      "primary": "bracelet",
+      "synonyms": ["bangle", "cuff", "chain-bracelet", "charm-bracelet"],
+      "description": "Bracelets and bangles"
+    },
+    "watch": {
+      "primary": "watch",
+      "synonyms": ["timepiece", "wristwatch"],
+      "description": "Watches"
+    },
+    "brooch": {
+      "primary": "brooch",
+      "synonyms": ["pin", "broach"],
+      "description": "Brooches and pins"
+    }
+  },
+  
+  "materials": {
+    "pearl": {
+      "primary": "pearl",
+      "synonyms": ["pearls", "pearl-like", "beaded", "bead"],
+      "description": "Pearl materials"
+    },
+    "mother-of-pearl": {
+      "primary": "mother-of-pearl",
+      "synonyms": ["nacre", "mop", "shell", "iridescent"],
+      "description": "Mother of pearl or nacre"
+    },
+    "crystal": {
+      "primary": "crystal",
+      "synonyms": ["crystals", "rhinestone", "sparkle", "gem", "stone"],
+      "description": "Crystal or rhinestone elements"
+    },
+    "diamond": {
+      "primary": "diamond",
+      "synonyms": ["diamonds", "cz", "cubic-zirconia"],
+      "description": "Diamond or diamond-like stones"
+    },
+    "enamel": {
+      "primary": "enamel",
+      "synonyms": ["enameled", "painted", "lacquer", "colored"],
+      "description": "Enamel coating"
+    },
+    "resin": {
+      "primary": "resin",
+      "synonyms": ["plastic", "acrylic"],
+      "description": "Resin or acrylic materials"
+    }
+  },
+  
+  "metal_colors": {
+    "gold": {
+      "primary": "gold",
+      "synonyms": ["golden", "yellow-gold"],
+      "description": "Gold colored metal"
+    },
+    "silver": {
+      "primary": "silver",
+      "synonyms": ["platinum"],
+      "description": "Silver colored metal"
+    },
+    "white-gold": {
+      "primary": "white-gold",
+      "synonyms": [],
+      "description": "White gold colored metal"
+    },
+    "rose-gold": {
+      "primary": "rose-gold",
+      "synonyms": ["rose", "pink-gold"],
+      "description": "Rose gold colored metal"
+    },
+    "two-tone": {
+      "primary": "two-tone",
+      "synonyms": ["mixed", "multi-metal"],
+      "description": "Multiple metal colors"
+    }
+  },
+  
+  "colors": {
+    "black": {
+      "primary": "black",
+      "synonyms": ["dark", "noir", "onyx", "jet-black"],
+      "description": "Black color"
+    },
+    "white": {
+      "primary": "white",
+      "synonyms": ["cream", "ivory", "pearl-white", "off-white"],
+      "description": "White or cream color"
+    },
+    "red": {
+      "primary": "red",
+      "synonyms": ["ruby", "crimson", "scarlet"],
+      "description": "Red color"
+    },
+    "blue": {
+      "primary": "blue",
+      "synonyms": ["sapphire", "navy", "turquoise"],
+      "description": "Blue color"
+    },
+    "green": {
+      "primary": "green",
+      "synonyms": ["emerald", "jade", "olive"],
+      "description": "Green color"
+    },
+    "pink": {
+      "primary": "pink",
+      "synonyms": ["rose", "blush", "magenta"],
+      "description": "Pink color"
+    },
+    "purple": {
+      "primary": "purple",
+      "synonyms": ["violet", "amethyst", "lavender"],
+      "description": "Purple color"
+    },
+    "yellow": {
+      "primary": "yellow",
+      "synonyms": ["citrine", "amber"],
+      "description": "Yellow color"
+    },
+    "brown": {
+      "primary": "brown",
+      "synonyms": ["tan", "beige", "chocolate"],
+      "description": "Brown or beige color"
+    },
+    "multicolor": {
+      "primary": "multicolor",
+      "synonyms": ["rainbow", "mixed-color", "colorful"],
+      "description": "Multiple colors"
+    }
+  },
+  
+  "styles": {
+    "luxury": {
+      "primary": "luxury",
+      "synonyms": ["designer", "high-end", "premium"],
+      "description": "Luxury or designer style"
+    },
+    "vintage": {
+      "primary": "vintage",
+      "synonyms": ["retro", "antique", "classic"],
+      "description": "Vintage or classic style"
+    },
+    "modern": {
+      "primary": "modern",
+      "synonyms": ["contemporary", "minimalist", "sleek"],
+      "description": "Modern or contemporary style"
+    },
+    "statement": {
+      "primary": "statement",
+      "synonyms": ["bold", "large", "dramatic"],
+      "description": "Bold statement pieces"
+    },
+    "delicate": {
+      "primary": "delicate",
+      "synonyms": ["dainty", "subtle", "fine", "small"],
+      "description": "Delicate or dainty pieces"
+    }
+  }
+}
+

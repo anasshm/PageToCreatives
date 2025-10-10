@@ -1,0 +1,1878 @@
+{
+  "phashes": [
+    "f1a692ada6b49992",
+    "8019c8e6d9f874bb",
+    "f8ad6652594936b4",
+    "fca4264b4e4b6aaa",
+    "ad7eb2a1919990b3",
+    "fd2066b2996666c9",
+    "a67bf2e88a88a9a3",
+    "fe2859d866669989",
+    "a1c8d8da6d63b2e4",
+    "fcafa55352424a5c",
+    "bccbe6f0c4c4e311",
+    "9619f9c18cfce027",
+    "af7e0072b99898bc",
+    "b339f3c20cf881c7",
+    "acc2e8f0fc6532b1",
+    "861cd8c7ef64c383",
+    "84c8e0f9e827f3c9",
+    "981cdfc18c7ef0c1",
+    "8cc3f0f0ec7331cc",
+    "901cdec28cfc62cf",
+    "8019dbe2c1de7639",
+    "f8ac665359a8b694",
+    "861bc0e7f0787c99",
+    "addab4a39598d492",
+    "fc24666699326766",
+    "f8ae595b46269295",
+    "b218d8c74cdc83cf",
+    "a119c6e2d96e7638",
+    "f8ac665a49a8b695",
+    "fcac333389996664",
+    "b31c9cf306073ef0",
+    "a619d9c6c5ced0c3",
+    "fcaca639664a4a6a",
+    "a519c2e4d9bc263b",
+    "fca07352d9ac3694",
+    "8019c3e6ddb8761b",
+    "fca86652d9cd26a4",
+    "adfd926684cd8dc0",
+    "b3199be38c0d76e0",
+    "aefcf123cb8180ea",
+    "a43bd167f9800f99",
+    "adfef062cd88c462",
+    "a43be266f9992632",
+    "b319d9e28cfce089",
+    "f8a152525bdaa4b5",
+    "af7ee26581c9a462",
+    "f8ad6652592da495",
+    "9a31c73c668cd939",
+    "fc2433769399c64c",
+    "a5f8c2e4c9ce74b0",
+    "fc2a9cb553526c4c",
+    "f8a0665ad995b6a4",
+    "8619c9c6cc7073f9",
+    "f8ac4553daa53594",
+    "adfe80b6919c9e82",
+    "f0ac59525bacb495",
+    "b21bdb610d37d0c9",
+    "fc2698595959469b",
+    "bc7df0a2998c9691",
+    "b11cd9c18ccee2c7",
+    "861cc9471e6633f9",
+    "f8ac665b5a98b494",
+    "871ec067ccc76719",
+    "b21999f3890cbeb1",
+    "f1ab6456524a6d95",
+    "f8a9a46e9b5a464a",
+    "861cd9e28fce6319",
+    "f8a96352d98c3635",
+    "a63179e28b9e9833",
+    "b19be364d6297198",
+    "9218d9c68ecc63f3",
+    "b219d9c326fcc08f",
+    "a319d247fd649338",
+    "f8ad5b52525294b5",
+    "8c18c3e7f88d6633",
+    "f0ad66525999b6a4",
+    "c719a66699996666",
+    "f858667399996664",
+    "f8ac665b5a5a90b4",
+    "b438f2660dfe810f",
+    "f8bd26626a66654c",
+    "ad3c9a0c968da763",
+    "a679c9ced2a1d1c1",
+    "ac32dbccc6a5c343",
+    "fca951525b953455",
+    "ae30dd4e12c9b0f3",
+    "f83e24649b9b6c64",
+    "b699cbe6089a3639",
+    "f8ac44525b8d36b6",
+    "a6b3994cdccc8a8d",
+    "aa95855a3fe3941a",
+    "ad34db0c5ec9c427",
+    "b459c366cc3e3319",
+    "ad32d90cd6c5a7a1",
+    "fca85b5a5a949495",
+    "be19c9e6c93e3019",
+    "f0a944525badb595",
+    "fc2d6636d9492625",
+    "adf892a797899462",
+    "af7b607691d98826",
+    "8c19d2e6c9d8ec66",
+    "fcab646693d96424",
+    "b138f2061de087df",
+    "f8ad66d266465265",
+    "9119f2c39d76218f",
+    "adf6e2019dfa2a81",
+    "ae7c90279e8d8c33",
+    "8c19c3e6d9ce2633",
+    "a2d0f8dccfc7c0e0",
+    "b238f2831d98939f",
+    "af7080eab9b9ac26",
+    "fc48ab95d88b3554",
+    "83adddd2b2796106",
+    "fec2a4b58ba66849",
+    "f851a4a4999b666e",
+    "f853a4a49b9a6669",
+    "af789466a9c8a4b6",
+    "fe26636699c83364",
+    "f85966264666aa6d",
+    "b48ed3c1d9e896c4",
+    "f851a7a491556b8b",
+    "8ece9398c96d6866",
+    "f85b647492ba2565",
+    "8cb3c6cd93646393",
+    "9219f3c49c7231de",
+    "fcd226a5994664ad",
+    "9ce6e371c866b10e",
+    "f8d366a699c9622a",
+    "b319d9670cf8814f",
+    "fc59a6b692642d94",
+    "a61adb630d36c1e3",
+    "f0539cb49969a9aa",
+    "adf287b198f2984a",
+    "fed297a48929268b",
+    "af959ac5cb8cd083",
+    "f4529ab5993666c8",
+    "a419cbe6c18f7631",
+    "fc54d2b2998d6722",
+    "acc7f3909cf8984c",
+    "b23ce6063c6283fe",
+    "ad1ed8c94e668336",
+    "fc409bb633738c89",
+    "8499e0e6d9c67719",
+    "f85db6b699642688",
+    "f849a75299592676",
+    "861df103fd6073b8",
+    "f85126b49672a9ad",
+    "ac1c9ef1490736f8",
+    "fc49739a64956626",
+    "af5894fe9c9c9091",
+    "f05698b569ae26a9",
+    "a61ddee00dcec8c3",
+    "f143a4b395aa2ba9",
+    "aff194ee83db8090",
+    "f4d198a59baa9b48",
+    "a349d6ad09c2f52d",
+    "a219d8e26f7e3099",
+    "a43de7269886b273",
+    "fc4536b69db124a4",
+    "b219d9461df4d11d",
+    "b433cb64e6cc3299",
+    "fc4499b3b16564c9",
+    "a63cf0273fe28332",
+    "f85925b556da2534",
+    "a53bdac6d9c86498",
+    "fc55999699692685",
+    "823bd8c13fc4c799",
+    "fc53a5a594932999",
+    "891c9ef2899f3626",
+    "af7b20f3d980fa20",
+    "f84ce692b63293a5",
+    "afe093b6998c84b5",
+    "8f5fa432b99291a9",
+    "f89764a58b5a4aca",
+    "b439ce2683d293e6",
+    "b31db9e08437cc63",
+    "f8c666999a9b1266",
+    "810cf0f0cdef741e",
+    "f88365b4cec99929",
+    "fc4c63ab9593522a",
+    "f8806666d999d966",
+    "861fc0e7c8e76319",
+    "f8d1a4a5999a664d",
+    "fd82c69999666499",
+    "a019cde0d17e7699",
+    "f085c3a69a9b66c9",
+    "fc95735263635462",
+    "a619da631978839f",
+    "a61bd9e4837c7093",
+    "fcc1e1b6949133cc",
+    "8c32c3e9c3dc989e",
+    "f85aa3b4d62a9915",
+    "f8d966b695912625",
+    "aa4da7b3b9b49290",
+    "f8d1a6b6a4249ba9",
+    "abfea76090c8e722",
+    "821cc867f8e63799",
+    "f8d392a491d366a9",
+    "a82ac53569c637e5",
+    "fc80e666d9992666",
+    "a5d99379fc643092",
+    "f8b1e66491999b64",
+    "adf09b969c9c9894",
+    "fcd296a59991662a",
+    "f8d326a5998b66a4",
+    "aa90b5e0cdce6c66",
+    "fcc0b226d9d96626",
+    "afdc80a39881f7d1",
+    "fee4666299936164",
+    "83c4f0f8eee13c0e",
+    "f8c324b5c64a89af",
+    "afdf80cad2676130",
+    "fec0b5b3c94922b4",
+    "fc917326c9c932b2",
+    "89d6f0f1ede23034",
+    "fc80276bd9da3624",
+    "84c7c161ece4f2f8",
+    "f8d0a3a94d4a5ad6",
+    "af7ff432998c4824",
+    "f8c177238ccc8b33",
+    "af7cb0a1b0a9b8b8",
+    "fcb846c966c96466",
+    "8738d2c7c9e6643a",
+    "f0c5d9a3d94a22d5",
+    "8a0fcfe3c00739f8",
+    "9833d97066263bd9",
+    "fec4b3b389c82266",
+    "acf891b7888cc5b5",
+    "f081936dcb5272dc",
+    "8a95f0e1dbce6170",
+    "b9f3a28d0e6e7091",
+    "f880e666d9996666",
+    "aefe90839d9c9095",
+    "af7fa2a28c84a3b2",
+    "f8c9a6a4996a66c9",
+    "9cc0d9e4c2e6659b",
+    "f88da5a6d95a328c",
+    "f45b88a4b332d2cd",
+    "ae7081af88dca3a7",
+    "ae7249e48be8e0e9",
+    "fcac9893ce3990c6",
+    "f899662699da728c",
+    "9e86f3d1989c386c",
+    "ecf9a023bf8889b1",
+    "fd5096a599a56529",
+    "ad7882a3bc88b9b5",
+    "f8d966249c9b5a4a",
+    "a61bcce29366d391",
+    "f889a5b6cc2399cc",
+    "aebd8a85888ec7b1",
+    "f0629c9553926d6d",
+    "fcc1b6a6cac93126",
+    "aabfafb098889698",
+    "a41af2619e7c7133",
+    "f8a5664a999566cc",
+    "b31c13e1cc878ece",
+    "8cd6fb71c7072318",
+    "f8ac6673c98922ae",
+    "e1adb1525b496ca6",
+    "b9b6025d7f2289c5",
+    "acdeb1819abcb0b1",
+    "acd8f2e1d1e66113",
+    "ea7fec621199d860",
+    "f8aa9c8cd29a6d2a",
+    "f8a4a69166565373",
+    "ae740323dcc83377",
+    "f8a96666da9a2949",
+    "f88de226ec999926",
+    "f88ec4936c6c936c",
+    "a11a9674db898c6f",
+    "e8a1a52792d9b3b2",
+    "fc8d666699892666",
+    "fcc96660d9c9346c",
+    "eb15ae76b9588582",
+    "a219f7e689cce4c1",
+    "fe8d666499983331",
+    "fca86666c9896656",
+    "b7cbc01c37f6c0c8",
+    "b6cbdae092ed0f04",
+    "be9ea840c46ae7a3",
+    "ff976626c9496122",
+    "fca4634b5962b694",
+    "fca92766da4a6928",
+    "f89025259dc9696f",
+    "bce69169cc360c3b",
+    "fd80861969e6869f",
+    "f8c1d9a2aa2d26cd",
+    "a61bc9c68d997263",
+    "acecb7a98c859994",
+    "b618c9e60ce763d1",
+    "b133cccece313338",
+    "a868b6ebc9e4e982",
+    "a379b6e3d0c48a47",
+    "860dc343cde3fc70",
+    "ed53e4268f999930",
+    "adf29089ab89a5a7",
+    "f8aedcb0c9899136",
+    "bcd193b7909cd832",
+    "f61e666699992626",
+    "fe276666999b0826",
+    "f138f626c3999926",
+    "fc8fb326c9898326",
+    "adf280af8c9e9694",
+    "fe8b655666849991",
+    "fca0565159cba6b4",
+    "f6a4dba36460ca9c",
+    "963dc867321de4c3",
+    "fea5634ada9a2454",
+    "a3d1f3d64e0c2393",
+    "a934cee5116d269b",
+    "f8a166495922b7d5",
+    "bec8e3261c3e70c3",
+    "fca06a49cdb25655",
+    "a62c998c73667399",
+    "fea94156d94c268d",
+    "be4953464cb596aa",
+    "ac9fd0d84be1e0f0",
+    "e80eadb5aa91cab4",
+    "ffa6596699990099",
+    "bfff4024999b2464",
+    "f0a3534bc8b57654",
+    "f97ca680c9d53625",
+    "9f6cb29ac469269a",
+    "fca4b651436b21b5",
+    "bfa69c516329a931",
+    "ffb1a4a4d948664a",
+    "adf103e6d88ed126",
+    "aed0839c9cb1939d",
+    "ffa085655b8b2626",
+    "ffb44249cc2233d6",
+    "be9209e6cbc0f1b1",
+    "a305cce6e0dc3b33",
+    "fea57352c8883656",
+    "fcad65524989b654",
+    "e93c369ec798c82c",
+    "f8b626aea9ad2590",
+    "feac735948325455",
+    "fea644594bae9494",
+    "aff8b0b39d9091b0",
+    "b3f98cc644879b38",
+    "c25b88fb91cf8989",
+    "fcc973325353d824",
+    "fcd425259b9b624a",
+    "acc6e2d298c8f5cc",
+    "fc5324b4a76788a9",
+    "fc8433a3c9497276",
+    "f0d965269a9672c9",
+    "f8896666649b9999",
+    "ac4df3f39a90b130",
+    "a95abda49a8ca6a5",
+    "8895e5e2d8ec7433",
+    "e3ae26d8d966268c",
+    "ea7ce0439dcc1173",
+    "eb5caceef4b89040",
+    "fb8694584f25d895",
+    "f89f666688991366",
+    "ea75f4c281038f4f",
+    "f8996665d2991965",
+    "a9feb4e68285262e",
+    "ad6cf6e1e122892e",
+    "bcf891e318d9d09c",
+    "a8b5b31e42cd8e63",
+    "fc4b725c55962545",
+    "f0a3a68c99737351",
+    "fe6493649b936423",
+    "ff6c9993674c4809",
+    "f8b595a26a65ad48"
+  ],
+  "fingerprints": {
+    "other|gold|other|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/o879FBJuAvaQoCfPekELIxIRICce2NVG8AGTBZ~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=iZXHD6nI%2FmlBe1p8PIoEQrWJgB8%3D",
+      "count": 1
+    },
+    "oval|silver|white|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oEQAIEE8lKeEhuB7RLDRrAWlfADMfCABAMhhHE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=fpntD3ccn2gqK6ZsPNxvyoZPMnQ%3D",
+      "count": 2
+    },
+    "oval|silver|other|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ogAAHiqNVQ9pBKJAef8C5uA4gCi8ACAIw0bGEn~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=TGaonddsJvLEWm97RYKqNKnQJzU%3D",
+      "count": 1
+    },
+    "other|silver|white|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oEEHIAAAeKQQAlB0diCIf42diU2AEiAgCq5gCW~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=rJCej2d8l38mT0whOl57ycPi6%2B8%3D",
+      "count": 1
+    },
+    "other|silver|white|arabic|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ocARF1EgCvAini5KCsem6QfuASBZACAIFAW0AH~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=LNQ78qECQuwgTMT7Zp3pIJrMGKQ%3D",
+      "count": 1
+    },
+    "square|black|other|arabic|metal-bracelet|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ooOuAHGAAQiALEHMoIeI2BffZfm6UKDhAICwjI~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=rwyZEqqFVCUz6g1SVBQyX5ff124%3D",
+      "count": 2
+    },
+    "other|silver|other|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o40QC3kXIACmCkDAEdAAWAA9AeijvCfuPgUB8i~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=qsKkip4daAGYPqQbx5HcXnsQ8x8%3D",
+      "count": 1
+    },
+    "square|silver|other|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oQ5r3mAiIEuHsWAAFuoAADeCgQG7CDAfgAXFE9~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=9aOQDUnGbvBjCm9WzCO%2F1Q0RPxM%3D",
+      "count": 3
+    },
+    "rectangular|silver|gold|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o4AAAQhAWtoIfCaAfCDFyEFzCgX9E0FgAPpAvR~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=vl25ZP5aBVGowUXGwsLkCcO4rxA%3D",
+      "count": 2
+    },
+    "oval|silver|white|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/okA3PAaBi2sXZRAtAAuAB8gEYBcvCIiRgIIEK~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=%2FU5LEZHCd8NMWY2YGFiPlRETjaA%3D",
+      "count": 1
+    },
+    "round|silver|white|roman|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ocfzAH7CFoKkEgENWxcFeABDChABgI9Au9CAAA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=J4riwbn1ZcAyRWDkW23YISgyVqg%3D",
+      "count": 1
+    },
+    "oval|gold|gold|roman|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/okIfQACA2EJfA8DhoFDbfs09MD9DfEAAIgiHIY~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=T0YMhkV5%2FqCRJMHV31ertuJgqdQ%3D",
+      "count": 2
+    },
+    "round|silver|white|crystals|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oMDETE1E7QEfjFDBtEgfTqKA1inYC7AXfQIwAB~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=w81Y%2BsJNJcm3moq67ccrAEOzqyw%3D",
+      "count": 1
+    },
+    "oval|silver|white|crystals|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oAhAIWf6hIWIhAL28CDQerCAAfDzAkeDL1DGIo~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=V9wQPIUMm%2B%2Fcz2T9Zr10EGUTov8%3D",
+      "count": 1
+    },
+    "oval|gold|white|roman|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o49HLiA5M9vavgABBIcyAy0Xu6iAAtvIg92PE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=qbFEuTLDt%2FQd2UwyyOFOqj61xY4%3D",
+      "count": 2
+    },
+    "oval|gold|other|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ogAA9FDNofCgDuAA7fLEb1BfAEEYBBAI5QlsEA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=eXE%2FvXEqfNNJ5PFmx%2BIAxFUpANk%3D",
+      "count": 1
+    },
+    "round|silver|white|other|other|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oA77H5AffAIfulDkAD7QwoEccEBEFBAsjbAQN2~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=ZTlp6mkzsTVRrnmFvoDH%2FovBPeA%3D",
+      "count": 1
+    },
+    "round|silver|white|other|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/osehfa2HDvGeb2eIH4LGRQAyC8AngAIu30AIBA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=MOhCiJ4r4FDIReFEQHcK%2BzjAx8A%3D",
+      "count": 1
+    },
+    "square|gold|black|arabic|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o4EA70hAyCYAZgeixkIABiiAUCBRqPAHjfDQiC~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=TYoCBCXe0mvwy7jF%2Bcy5%2F%2FcYQLk%3D",
+      "count": 2
+    },
+    "rectangular|gold|gold|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oAA6ChzzGIBX27fLAILAEA751Ee3QABEIhAeB9~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=GGJ0oqV2p3046NiTMpYBUJPx8Lg%3D",
+      "count": 2
+    },
+    "rectangular|silver|other|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/osKjEEAKkDAOCbATAwF8B7QABBeAkEYeIEf87E~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=dcw5W8lVoV%2FpTmVEqiTxav3PItw%3D",
+      "count": 2
+    },
+    "round|gold|other|crystals|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o4BECIwsgAFFAU5geifaO0BCtAPLLiA3qAZVA5~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=DnZq3T5u%2FxU%2BSiZ1ivrKDO4uqjc%3D",
+      "count": 2
+    },
+    "rectangular|gold|gold|roman|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oAABwPQeAg7RILYBL4ADeIQGzAyE8AxEAoe98t~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=6H0UUk%2FGXAe019vjb%2FbCeclBiZg%3D",
+      "count": 2
+    },
+    "round|rose-gold|white|crystals|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o8EeAgd8MLDAaB4AIQIGfFekQAGJABPiBEzRF7~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=k2ct8E94T8IiPZFuq7J69aqyl48%3D",
+      "count": 2
+    },
+    "square|black|pink|minimalist|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o0EJ8eX7BEBfBZPBIQMAI0GrLLeAAEoABIU4Ah~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=CaViqW07NRmSJZRa4NjQbWUNaNM%3D",
+      "count": 1
+    },
+    "rectangular|black|pink|minimalist|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oQaZAIchPhynIH0EhXvg4ZpkrilAliBBh8QIX~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=ssB4y72IotjoS%2Bg5We2%2FRumuj3w%3D",
+      "count": 1
+    },
+    "rectangular|silver|black|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oUfQv2llCMl4AICheIXHAbgQ2AWfAWf8DAIhAZ~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=Iz7ErEmDNzHSYTngjdogvTIik5w%3D",
+      "count": 2
+    },
+    "square|gold|gold|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o4erZMbE8EBLlFIEAIOALAA0feqAUQMaGB74IB~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=xWM9vsvfEH8W76w%2FB%2B5DhIQh5Hk%3D",
+      "count": 1
+    },
+    "rectangular|gold|gold|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYZz1iEAiIBEg8PyD4fJAA4AeALE0BCjAAyPCg~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=6BpgmHM%2FXQ1ApPI6AhCFdzR%2Bsb4%3D",
+      "count": 1
+    },
+    "other|gold|blue|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oc4D9mt7HfYueutgKKtgfhenEIeHAAILKRNQqA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=acYvtZgoWiXL7TSoraXzqWu1y9I%3D",
+      "count": 2
+    },
+    "rectangular|silver|other|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o8FdIZE7ABXirBGeBAALu7KXEeFeQLIEwAlr3A~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=JDAhgsXsGg0lMG06Nb9sUVhkfOc%3D",
+      "count": 2
+    },
+    "rectangular|silver|pink|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o4f0UaeBApBOi1EimxiMcEAjAnAPIgC2uoACXA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=cETRbynPE2ITZoGnuxScEfyXmZo%3D",
+      "count": 2
+    },
+    "round|black|red|other|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oA11rFC9CDoBdCAWxgA4AxYQEfLKfrAELIIAcA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=cBZTIdksPKR0qVfvcihfwZAe47s%3D",
+      "count": 1
+    },
+    "round|silver|other|minimalist|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/og9TECWyqDATxfX7JcFtA9oBlASg3B2dIOfa1E~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=UPJo43yo4Ap83wHoJsBBwG564ck%3D",
+      "count": 1
+    },
+    "oval|gold|gold|minimalist|leather|tan": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o0B69jIAEhALiIPfDG7IP6eeAjGXBEAQ2AHQpo~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=VtFeKwT7sEs8d2%2FxeOcn6uqq%2BB0%3D",
+      "count": 1
+    },
+    "rectangular|gold|black|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oEuh4AEGQEfxZbELIAAPWAI9BBgoe6OAe7QCDH~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=%2B4VWEzSqb%2FhFWyPZ0es9A3eEZ5I%3D",
+      "count": 2
+    },
+    "rectangular|gold|black|roman|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o8AiAgIA4AAac3IgAEHZAtBAv4LRH3QBpxaPi~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=EYcc7sn2F8ypxPsjWoKBWMxE8BU%3D",
+      "count": 2
+    },
+    "round|black|red|minimalist|metal-bracelet|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oAE93cEDBAZ4qjCeAYnqsxgIDfASFAAgNCAodQ~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=OBX1A6e%2FyH74ymzVCOKwMgebLjE%3D",
+      "count": 1
+    },
+    "round|black|other|minimalist|metal-bracelet|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oEDexWflAOEdoFAACCgCAjC8EcIA2E5g9oBAOt~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=iungVCcaNfA%2FyNxIJSHmYIJ8Fk4%3D",
+      "count": 1
+    },
+    "rectangular|silver|other|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oQEwIAAA9jicAiDofFBjfBaiH0xA4EAgCOITC6~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=gTb7b9zDp9S2TX2BA%2FH9wknTQcc%3D",
+      "count": 3
+    },
+    "rectangular|silver|blue|roman|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/owyjJAAD0BAJ72OwC2iigZBIAOAeBGAIEdfqCE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=XUdScnM48pUA0mbVED1Gcu8epd0%3D",
+      "count": 1
+    },
+    "rectangular|silver|other|roman|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o07MIBgiavJPABhBAIMCpAIIwyHAEgCpAji10~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=%2B4vI0hvE2kjPyFjxiLvesgF5kL4%3D",
+      "count": 1
+    },
+    "square|other|other|minimalist|metal-bracelet|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oI0LGgVAPEZwiBLAABgTAImvgIPAap8CSxiP8~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=Yd0KvepNk0mYpNGsXxtSCr1aJ28%3D",
+      "count": 1
+    },
+    "rectangular|other|pink|minimalist|metal-bracelet|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ogANFAPGIGgx7hA8ABvgEIgmAZvOnpi6r9Bia~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=858SbPjsxPblci9CUDRzRwx4Dn4%3D",
+      "count": 1
+    },
+    "other|black|pink|minimalist|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ocMvgVACIQfefyABRGQBZMCE2Qt2a8A8AAPXD7~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=n5dLcBlyz87NXEW%2FPjo6Vx0c9bM%3D",
+      "count": 1
+    },
+    "other|gold|gold|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oIyQ1LI20GhGsDDfLAAoAv4BQe9H9fCIgegAiA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=udBEb4NIAAQu7cPkoSskBe9HRRs%3D",
+      "count": 1
+    },
+    "oval|gold|gold|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o8uy5AfMNbQA8F9DAHg9I5FEleATAoZwDCAIC2~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=JD7c9t6FLPNf3Zh7e%2BPmkeksANs%3D",
+      "count": 1
+    },
+    "oval|silver|white|roman|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oIA2AAtCIBPBIAAgZvgaAEB6YGrQQii3AgU4G~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=6%2BIqMVhz%2BCboCY351Dpq7%2F7gm6Y%3D",
+      "count": 1
+    },
+    "square|silver|white|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/owif7AzoaAQYAdbAixszB9PCCdrfI6KAA1ygEB~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=6%2FheV6QQsLRgFBMlVCiiKx48xgA%3D",
+      "count": 1
+    },
+    "rectangular|silver|white|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/owjDQ8PspAf2MIAgA5SQAfIIfCrXQWJehOxsAG~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=xLbAOU4t2saAJFzI5bOqSuH52N0%3D",
+      "count": 1
+    },
+    "rectangular|silver|black|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oAgvpWABgoBIPIgdUAB2BiS5vAtGliEaAipAs~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=oEtFpZIvvbFGYz3b7wCVU5zXrs8%3D",
+      "count": 1
+    },
+    "square|gold|other|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ooSbIBgiaPjPAB5hASWkHAIYo2GAEgisAliav~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=jLODqZJQjYNKX259Z0gBq4k47xA%3D",
+      "count": 2
+    },
+    "oval|gold|white|roman|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/og6JT3gkaEArsAHoABAFIlEofUABgCACfDw9aF~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=VOGCpB4ZBVLSJi%2BC9o3Gam78hEs%3D",
+      "count": 2
+    },
+    "round|silver|white|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oUBmECiBA4fAG0nAk0EoADAIzAi0ueANWcCQ0g~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=FPFEXownTyj8Ob7rVhPexIBhoE0%3D",
+      "count": 1
+    },
+    "triangular|silver|other|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o4yAAMQCsIA65AqLuhQGnfAENgiwmCBB0EueAi~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=EZL7s3Gozr57TFQVzN5jEs8hs8U%3D",
+      "count": 1
+    },
+    "round|silver|other|roman|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oAjOrDgZfAIbLGDeAD9oA1CYgEACFAAl30AQQ3~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=qDczVTQDulV2onBQf2l6u5eve8s%3D",
+      "count": 1
+    },
+    "other|silver|pink|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oAQGhlAh8KBfDIkCmCjCifAAIDIGLvAIFAeL2f~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=AFe4RLlfXkDQ8r3Ia30JchIc0S4%3D",
+      "count": 2
+    },
+    "round|rose-gold|white|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o8RBlDLxxIGqvkAAA0AAeeIcQGQe7MxBGACrsE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=zIzpqk6NadAnOW9rzDD5mBhp2vo%3D",
+      "count": 1
+    },
+    "rectangular|silver|silver|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oAhaAACA2uujAfYhXsMe48ff400DngAAM8VkIp~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=HcEkca4yFdzR905LrpOatcMCDa4%3D",
+      "count": 1
+    },
+    "rectangular|gold|other|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/okCIEMC0AgAIMBexAixrfAIAjZjBMi9taDpVUA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=5NDng5GrX4LBoOJnYOrfGxZpauQ%3D",
+      "count": 2
+    },
+    "square|silver|white|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o8AcDgYwDQDW4E1aAQFADz9z1CfeoAAIEDgyAY~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=D0SDwkKTqxcxdHZe4YQXFn40KJM%3D",
+      "count": 2
+    },
+    "rectangular|silver|other|roman|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/okv8I5vxAvZ7AQceQAgG5fLUBiBIGAeFEiA4GA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=ATUDWSNN%2FYSVXfrqFiWcAibzOmA%3D",
+      "count": 1
+    },
+    "rectangular|silver|white|roman|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oIeJAUaBAQe0EAISB0ALtBJGEoAdxI7iteGAAB~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=PPbzpDpQ%2Few82vfYNHYnVzhDZgI%3D",
+      "count": 3
+    },
+    "rectangular|silver|silver|roman|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o8C8eABBMBQfKArAiMNjD1miAAyiEA0mAIgAUv~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=emAjKaHbhhjll7wfcOsANmypRsM%3D",
+      "count": 1
+    },
+    "rectangular|silver|white|roman|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ogg7nGQAAb6oevMIGBQdrxLGLAAElAeFIEBAoe~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=atCVHSD2GfErW9s9FYYjFSEKcUA%3D",
+      "count": 3
+    },
+    "oval|gold|blue|crystals|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ooHGAjfDDItk9yoA0aywCXQ2fCyABEsAFAAhQg~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=4jGN3U8bjN0TTrnbsrtFBwkqq4Y%3D",
+      "count": 1
+    },
+    "other|gold|blue|crystals|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o03fBgeGGIw47UQBvahwCvdtfEgAwIQALAAbQA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=UeVOtNGVvkQ8yh19Ryn1ZKTYt3c%3D",
+      "count": 1
+    },
+    "round|silver|white|roman|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o8a2oAQ1lADQggAAIDCAC1RfEDFU9XaEZA5VfA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=n0oOUK6aa72jv22b%2Fropp5eL%2BmI%3D",
+      "count": 1
+    },
+    "round|silver|white|roman|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o4XoXADUIACEACy7fAAgQmAFy2fZ6aKjNBN9Da~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=y4OuyCDzhVYLxyYGGAPfWaTObqs%3D",
+      "count": 1
+    },
+    "round|gold|white|crystals|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/okuaZAeZEvQA6F7CB5AEIfLIVzAMAQedGPBCEZ~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=NUd3lSVbQ3W85VxUy4zLBRFxi6U%3D",
+      "count": 2
+    },
+    "triangular|silver|white|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ocCNICEDA3fAL04AEoheAAqQ0AFab9AX0OC8dg~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=EOhsL7vZZTn7uuiMEZG5C8FiVe0%3D",
+      "count": 1
+    },
+    "other|silver|white|roman|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oQbJLyA4IEGEklAAhEoAeDsCXQXGCAAfgAbFC9~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=o11etGtUmk2CuNLgXPlSTKrSzfM%3D",
+      "count": 1
+    },
+    "other|silver|white|mixed|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oEC7GIASIeQA1ZBkQEeASELAgvKTEBeCmHAGSD~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=yArmkzNB1bn%2FiNA%2F4%2B6P3nX94mg%3D",
+      "count": 1
+    },
+    "round|silver|other|crystals|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oE9C1FAEA0QfCrXGqoEfAEC5tAIAQAlhDMm0Eg~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=HvQ5cK%2BaKSCaqm6LXaGIgN4jp%2BA%3D",
+      "count": 2
+    },
+    "round|silver|white|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/owm2u0AOIENC3eAAMloA5D2CXQ9lCtAfgAhFC9~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=HshVRXocJGE7yf0GWVTGhpkofjQ%3D",
+      "count": 2
+    },
+    "oval|silver|other|roman|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o0PCcyfAAACiAugg5QBkC0IPLEARcyeBmivABI~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=QA55%2FFCyidJtnNH3qm49YV36u7k%3D",
+      "count": 2
+    },
+    "oval|gold|gold|minimalist|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/owKvUGtygAEvhnABXBeIJTiAeQF7AALlQtEYce~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=v9E2QHtsWNgtx8bZaheR2fnP9Ec%3D",
+      "count": 2
+    },
+    "oval|gold|other|crystals|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/okhDhqAuIEWFMaAA3eoA2DECWQdSCGAfgA2FC9~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=I4o1%2FLqmEu4zTA9sxJ7tWfx6gXg%3D",
+      "count": 2
+    },
+    "other|gold|other|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oAAACIEfQBAyRudpAGEGCvftLASIEQe7JBBg0E~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=aKNCDUJrXNDt%2Bog%2Fib0keCTgAcU%3D",
+      "count": 1
+    },
+    "rectangular|gold|white|roman|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oIYoXMAteAQefGF8AG7QMyEggIBELBA4OEAgUF~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=c2hT7UOOahdUhS8FNj%2BBYxGQYpQ%3D",
+      "count": 1
+    },
+    "other|gold|other|minimalist|other|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYBxtZEAEYAFWEb3Bl7xesfWAfDUBEAI5A9QOY~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=Dd%2FhKZSy29%2BUp8%2B8tF43Vusfg1I%3D",
+      "count": 2
+    },
+    "other|silver|other|roman|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ooetAttBbQeNEAIY3emLsBZGE1ApsI7Y24EAAB~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=X7%2FKhlbTQOLuMpmavD09E3kY7%2F0%3D",
+      "count": 2
+    },
+    "rectangular|gold|other|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/og3Y0ow3EWkNAFyBfACEAgA321AWC3DiAITf9x~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=Qpp4cXLzo89jTmrr0NVW1WGuB38%3D",
+      "count": 1
+    },
+    "round|silver|other|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ooBin3qNEI7ACaLCIYdBfApe5rAiAAGgAFQ0In~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=aCuV1qWznqIOgHpqOz65fCklzio%3D",
+      "count": 3
+    },
+    "round|silver|other|other|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oAoBEYTAADEUjgAAJ3KCfFIsyAC4FITe9NWTzA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=uMfLINOtjGkotBw4zJk2pPXyrtg%3D",
+      "count": 1
+    },
+    "square|gold|gold|arabic|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o8aEqAYPCgIwAIAgc3i3Bwic1jAAYABvIPSBF~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=slr%2Fb0bTXzLsx7oKZqHMuFbqbwI%3D",
+      "count": 1
+    },
+    "oval|gold|white|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/okIIECsm5DAjMfAlAjFwA9oABAygwCnVIQfhWE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=4gDjCypWpI%2FBQGUFLL93trOXW7w%3D",
+      "count": 1
+    },
+    "other|gold|white|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/okvHIC2CSDA6YpAWAjF5A9oACAXgECUVQUfesE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=96Yxy87b7J%2Bf9VKyjhDPl9XwpYY%3D",
+      "count": 1
+    },
+    "rectangular|rose-gold|gold|roman|metal-bracelet|rose-gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oc1ANCCWIAHgg2UPWFiIAGEBQPYxiAagMb6AB~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=VwG6wVCbR2E%2Bg%2Bz5oegu8CQbbNI%3D",
+      "count": 1
+    },
+    "rectangular|rose-gold|other|roman|metal-bracelet|rose-gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o0CSAMeV2FBAHAjAEoEDhNfQIAsBgD9oACWbC9~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=01z5BK5Zb3tLd3IhDb1vY6CO7RE%3D",
+      "count": 1
+    },
+    "other|other|other|minimalist|metal-bracelet|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/okLPILGG2DCpeQALSsIIXeIAXA7A4fAmWhe4oC~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=YUMxaaicb0EI9CAktkGbmmShH7A%3D",
+      "count": 1
+    },
+    "round|other|other|minimalist|metal-bracelet|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oYUKYq2IyzgIAiPv5FPSP7vigLaBBGaAAWAEA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=QptNarb9EVMmfjgCYWhbp3RpqjU%3D",
+      "count": 1
+    },
+    "other|black|other|minimalist|metal-bracelet|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oY6Ts9UgEgP4BizBAImPiAaiARaF3RIi7jvAA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=TUg6e0XSs7KpRlgvitL2gFvYy7k%3D",
+      "count": 1
+    },
+    "rectangular|black|other|minimalist|metal-bracelet|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ooeBOA9VA1AI7AX09nCiiCPKECofpAtUSgB4A1~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=puVXN3spW3M5swHB4OhgTaOnl8M%3D",
+      "count": 1
+    },
+    "rectangular|black|other|arabic|other|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/owBUbTciABOgAAaEAAzY2IQgv4iAP0x4gzFLI~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=AMmkXNxRPMuHhb1Z1ChY4jIXXdY%3D",
+      "count": 1
+    },
+    "rectangular|black|other|arabic|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oABUWEFfICsqlEiKIf74BM1B8fZ0bAgNBAA7iQ~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=6cX1KxKQlFOUZULFoqDWDDSVXWE%3D",
+      "count": 1
+    },
+    "square|gold|white|roman|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o8snC9eGIIs92uhDavGoCUf3pIeA1IfALAAXQA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=wpj0zvjhnAmXYIN6jzXVwPQSp%2Fg%3D",
+      "count": 1
+    },
+    "other|gold|white|roman|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oMYphq8ETO9GDQsIsBFoAv6DgaCeoAz0fNVAun~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=LGMRORi7VlTZASdz89x0Dm1ZlPk%3D",
+      "count": 1
+    },
+    "oval|silver|silver|roman|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oQeQNSxcAAAcA7ftAILMpDGGTeBxJFwIBBECnQ~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=UAKyVYM98hwi31KsWCA0Id%2B3W0c%3D",
+      "count": 2
+    },
+    "round|other|other|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oUQDoUAlTOd4AC03epTABbAAECDbnIAIDgfF9C~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=GnxIn5f3sZ%2Fy%2F7jkUdUTpHsJSbA%3D",
+      "count": 2
+    },
+    "round|gold|gold|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYeBeAEGQEcPCXkLIAAHUAIuBBBkepHA87QHCx~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=kJMyqtWN2XX3PBhI6WtXnI9dFXg%3D",
+      "count": 2
+    },
+    "oval|gold|white|minimalist|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o4GNkAewAUWGQLABeJNEAJEiIpQBbIfA7YCAii~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=3pQzj42kh12UTBAhcAUpmZudjlg%3D",
+      "count": 1
+    },
+    "square|other|other|minimalist|leather|tan": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oUil82x0KAwpAAgBi6FRleMBCYSfIZn4AcUgEB~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=bEtf0wVlGQf0KI%2BKaSkGiJO%2FSWU%3D",
+      "count": 2
+    },
+    "square|black|pink|minimalist|other|pink": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o0GwATfDCEfK9FoA6MoqBUnjSCiALEIAFAAhIg~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=mCXo8JykxdfgSIwzu6MibMJDoec%3D",
+      "count": 1
+    },
+    "other|black|pink|minimalist|other|pink": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oMDTAEyAFIMU4FQAZCjfBWPXieAlC9gbSoEjAA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=fZwaGhFGudzWG8P0LaK3gr2VBa0%3D",
+      "count": 1
+    },
+    "round|black|other|other|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oM7A5BaFgIA1NicAwisDBVoE0PQAvADkYgoqI~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=fzwdj3tK9a45Kc20uKVtbvm1lmU%3D",
+      "count": 1
+    },
+    "round|black|red|minimalist|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oEfeEAYKwxHVBATQkcC8I0b7gAiAA0AHK5BCAi~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=Vxm1Gco9sd1cxb0ggKlUTtayZ%2Fs%3D",
+      "count": 1
+    },
+    "rectangular|gold|black|arabic|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oAPgMJ6hAuWAH3C0edCCAJ8B0iIUEAiQABAKfB~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=jVU%2BKGebm8eyIOtKUfgKr0NF82k%3D",
+      "count": 2
+    },
+    "round|gold|other|minimalist|metal-bracelet|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/okc260ABfAC5AIBSASdQSmIgaieUHKoA4CiEAx~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=DKZFEb%2F2C8Lw1wylEetO4qGIGFM%3D",
+      "count": 1
+    },
+    "round|other|black|minimalist|other|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o06f6AIGhIzWWxSLIAA5FAIwDCkheQrAf2QfC1~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=qcXGvO5M98KcXN%2BXZibrZmYolOc%3D",
+      "count": 1
+    },
+    "square|gold|other|arabic|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/owQPiKgJfAEX2qBXABe06UCGliACiAAgu8AIX4~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=AnOVRSyeFdACeHvuwyMlD%2FsPlYg%3D",
+      "count": 2
+    },
+    "round|silver|pink|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oYgASieg0AA5l0T4ABCZBwMJiAUECIveEAJuPF~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=nrd3oF3sfTajvbpVmhBX4O3V%2FG4%3D",
+      "count": 2
+    },
+    "other|gold|blue|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/owvJISFeAJIflKtZCADAQbMl2NhA9ICDAfE7fJ~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=XxYEKor0lT2yePwLyhkHMzMAZZA%3D",
+      "count": 1
+    },
+    "round|black|other|arabic|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYEAM0oAaCnAugeDyKIABiiAu9BdCJAoKvde3C~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=pRXxSRadH89f7WhTJHJPSrgGOVY%3D",
+      "count": 2
+    },
+    "square|other|pink|minimalist|metal-bracelet|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oo4fAhfC1EfhIAg96wevePcYgvAKzQaZf9gAAI~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=3fc6gT9dGLs5swF2QnY2C4px1XE%3D",
+      "count": 1
+    },
+    "square|other|pink|minimalist|metal-bracelet|pink": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/okBgzBgPRU1zKQAERAiiJAMaWmIzv1EARAIX9~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=NLYBcxRjF0ymesOrkE2sGkgcSZ8%3D",
+      "count": 1
+    },
+    "square|gold|other|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/owBxEEIGAfeBWBhApQ0LBfTIjALhE7AlcxE4MA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=EB7ugXyWc1F6ll%2F%2BCDsFI%2BwJpP0%3D",
+      "count": 1
+    },
+    "square|gold|black|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oAoACRXrvC8I6AF9sAsQztfAASA5gZfCtVSDE4~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=rxYqeGr%2FyEKjksF%2FKnSXU4yNo%2BQ%3D",
+      "count": 1
+    },
+    "other|silver|other|crystals|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oU6AWSABKFllACCAeolb9zgASEE1fAZDILpJuD~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=D%2B07yntDtVnJ1MTu7puMksPgC50%3D",
+      "count": 2
+    },
+    "rectangular|black|pink|minimalist|other|pink": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oQAbXAYf0EAACIQQClLeBEAn5RkAWmIB7AGfBx~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=QlnO0ALD2pZhnbw3upzILqtUX10%3D",
+      "count": 1
+    },
+    "rectangular|gold|other|minimalist|metal-bracelet|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oQoACfXIMCcI6AF93AJQiphAASAMg5fCjFQDE0~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=CrbE1wbM9YUXNDdvPDglnj9YMtE%3D",
+      "count": 1
+    },
+    "rectangular|gold|other|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oAJBBlfEOIAzFil1vHofLfBJtAiyjCBFQET7Mi~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=kqUcyGZEwhFzdBddBzL2Z5nULP4%3D",
+      "count": 1
+    },
+    "round|silver|white|minimalist|leather|tan": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oE8uUA6plCADiEQoCSFfACgUBseAlaIX9ADuAw~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=abekfDCH9bHcJ9L3FquCldpTcCY%3D",
+      "count": 1
+    },
+    "square|silver|pink|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o0IxEhC0AgAIjBeYAis3PA5AKeIBJi1uSCQV1A~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=f2g6ArPH%2FPh1IJB%2F3kOCWwqAgdw%3D",
+      "count": 2
+    },
+    "oval|silver|other|crystals|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oULIpEBAvAVgpw3LAarAkPVgOAKViiEJI7BZm~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=SMwzNpmckUA76sHeBtlgvM%2BFPeY%3D",
+      "count": 1
+    },
+    "square|silver|other|minimalist|leather|pink, tan": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ogpDwQUMAfAIXfAX8Ah2CAAfI7UteKQ1Ub1CQI~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=Djp3RRtqqd1%2FzqfXLC6aw5Z7aIU%3D",
+      "count": 1
+    },
+    "rectangular|silver|white|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/okilsPgvygTiKBIAtU3BAAIIAaSIApEhEp0vR~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=3EeqXCTtbryiYDLX3liMLqwrumQ%3D",
+      "count": 1
+    },
+    "square|silver|pink|minimalist|other|pink": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oA8fApfJUhqHhAQekyTX8DEMIfAIKA2SncIAAC~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=XOD49Ama85qKYVByJ2TxFMnfZXw%3D",
+      "count": 1
+    },
+    "other|silver|other|minimalist|leather|pink": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oEfUQAAdQBBjd7NKELLIAIGZBlA7yyAIE6eeEK~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=WowXDRTRJMS01Kc8KVE0fMQL6RA%3D",
+      "count": 1
+    },
+    "rectangular|silver|other|arabic|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/o0oVEJzAADEtegZtBDJBfFsq5ACtkIUT9QSTlB~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=u%2BYf4soxeahBkEy7ghdw954UEZY%3D",
+      "count": 1
+    },
+    "square|silver|white|arabic|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oMYSALgSfAIEo0CVAD9oYgCSGEACFAAihQAQen~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=ncLPKbk0LBCLb%2F0%2FODMxJFxhW3k%3D",
+      "count": 1
+    },
+    "other|gold|gold|roman|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYQALSABYF30ACCARo8D9DgAyEECfAfDIJDIO1~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=Fy8%2FAw2dBXG59NNCgGW%2Bk2BLrQ0%3D",
+      "count": 2
+    },
+    "triangular|silver|white|arabic|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ogBwECiBAIvASzqAs0eHAQZIOAigneAI66CVhg~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=9xYkNml1Bz5D8IIe2yATTdETvv4%3D",
+      "count": 1
+    },
+    "oval|silver|black|roman|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o88EAAHE9Cff91BSrgA6aIAREAPoGnDl7GUAFC~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=gjF7YGXhIo%2F8tAPvehe1kezNx2Q%3D",
+      "count": 1
+    },
+    "other|silver|black|roman|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oABRCEFIDn9z6CrHgEfMAXAAvFjeAoAAVtF9nH~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=L2%2BcJ6GzHg2vjSstT5jx%2BxKB1Ps%3D",
+      "count": 1
+    },
+    "other|silver|silver|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oorIBPztAibCI7qrEA0giC9HEseeAAnaBASAqx~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=iUU60BRRgPLHnf89vlQ9sDjZpr0%3D",
+      "count": 1
+    },
+    "square|black|other|minimalist|metal-bracelet|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oMQufADRasCA4F9lohaHnACAgIvMC9eQAA8lEG~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=GfRQpp%2BDmQw%2BhDNzzDXRDeksQTw%3D",
+      "count": 1
+    },
+    "oval|gold|other|roman|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oYDFtACZEK9CBjA5mfveGIlMoPAW8Dm4RAEgAA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=qI%2BpT1voG55dY5fnHsdcsOX9Saw%3D",
+      "count": 2
+    },
+    "other|gold|other|roman|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oEaDvAAkJEIEiBgnp6iSMiBAIPzkAm8gPqzuA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=YWgEwDgs9RlVLXBpLHGfoTRo1n8%3D",
+      "count": 1
+    },
+    "rectangular|gold|other|roman|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o8oQB95yIAeVC5DAELAD3AAcA9i5cCf40guBXi~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=s4lYVDv%2B3G9Ljnsoui8cBe8EIJ8%3D",
+      "count": 1
+    },
+    "round|silver|other|mixed|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ogASAfN8BAB0iAWAXCiaTEEqICCIA93g49ezVA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=DWISI%2FqrbaaiAmSqHDOYWdji61w%3D",
+      "count": 1
+    },
+    "square|silver|black|arabic|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oUIeSC0ATyUyt1XCBAEDUIiBTAACogf6iaAA2W~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=O8UFMwnCgEXGiPLJfvYyLQSuZnc%3D",
+      "count": 2
+    },
+    "square|silver|other|arabic|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/owXbIC2bnDAczlAfAmF7A9oACAygLC7QQrfcEE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=TMHQb04Uos0Eum0MdIP31IKpgOQ%3D",
+      "count": 1
+    },
+    "oval|gold|blue|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ooHAkiMBgIACi44ifA0eAAAzElBtFIIHItvBzC~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=zESDJRtqprlQHYX3xYgL%2FHXcYUA%3D",
+      "count": 1
+    },
+    "other|gold|blue|crystals|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oMEgagBGBIgA3xwiAPBBoEAPiaAtAE2sIDEaQ~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=qM0ZynvEnGGonEllUueuXxH0xug%3D",
+      "count": 1
+    },
+    "square|gold|white|arabic|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oARn8ACDoCG1kgNFEAARAAEfAA6BfQrgW9IcBK~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=lXmeIsqPTWDP1QEzWFXDgjtFfZM%3D",
+      "count": 2
+    },
+    "other|other|pink|minimalist|metal-bracelet|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ocM4ITC9AAQRxBDDAAgFVQM9EfGfoEEC2AjnBA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=MECTEa0iW03KoheO25miZh2JasE%3D",
+      "count": 1
+    },
+    "round|gold|gold|minimalist|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/okfQsLI2IGgBfsDhzAAeArDZIeLrrXCIyCQA5A~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=xDgN%2Fh81xinRXjyQTuLnSvFOw3M%3D",
+      "count": 1
+    },
+    "square|black|other|arabic|other|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYfMkAcD2gRAJIcelDQAy2GgAEQLICX5IAeCkf~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=qB%2FU2cxyUmpHmjKW25I5cyfBCtU%3D",
+      "count": 1
+    },
+    "square|black|other|arabic|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oAAOx4CCDQB9GfpfA2FAIC2QAIfKgACIE1ASDf~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=mPmbh%2BjmmHU6G9OMSoqLUjRoQWc%3D",
+      "count": 1
+    },
+    "oval|gold|gold|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oYAmdnDNDQBs4eqbAQFACq9AnCfwoAAIEJgCAP~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=roUsAWBbdPQSDKPMYgxSL2JWO4Y%3D",
+      "count": 1
+    },
+    "round|gold|gold|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o8AfpiA2ABOe0BwoINIAO9AmA6iAH0OCgAC9El~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=p8lwjWLMKsn4g4vEjgTZ4NsyfBg%3D",
+      "count": 1
+    },
+    "round|gold|gold|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oUH4xiCAiIAEgNHbo9vfTAlAeARZ0BC8AAO5CY~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=LO0bCVjZ2eLImtWGzUEFdx0U2Z0%3D",
+      "count": 1
+    },
+    "round|silver|white|other|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYAAneIQICAgvlee4PLI6PBLoW1f7DA7GIj2Ax~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=uCfESsH8vk9WHSr18esKxqMttbE%3D",
+      "count": 1
+    },
+    "round|silver|white|crystals|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o09IxLI2IGgAeCDwHAAfAXgkEefT3kCIZdIAjA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=D5igj%2FgYHPRalPpwdLxAdaM8s2w%3D",
+      "count": 1
+    },
+    "square|other|other|roman|other|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oMXIkEAAvANgKu03AaoAgPRg2A52iiDIIyBoC~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=wvbgr1qo2fYh7v%2FTye5bTPZtqmU%3D",
+      "count": 1
+    },
+    "square|other|other|minimalist|other|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oIY5SKgOfAEJKXA6AD9ocdCdNEACFAAFCTAI5f~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=SnrAxEqvc0pZsLoZpcWtcso%2F4Js%3D",
+      "count": 1
+    },
+    "square|rose-gold|other|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o8RsEWMe7BBtfgAVAaQQoNEAJAeAqIA7bQ8ATD~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=Py%2BtvqXpHkWeadvxdI7DGAfozFs%3D",
+      "count": 1
+    },
+    "other|rose-gold|other|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oks0I8CeAAG0XABEAAgilGNBEfih0oiCrAR62A~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=xlBU8grk4h94OlvDQt1PKNKuVjk%3D",
+      "count": 1
+    },
+    "other|silver|white|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oUt9oNEATAtab2CjAeY2hZgEDfAuFAAI4CAooI~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=ukY5zYZa6mnGWLGXtczHuJ6K7tc%3D",
+      "count": 1
+    },
+    "round|gold|other|roman|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/okEArfp1HgleBXAIAW0iAkCCNAGiEHoj0sogAA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=urmtuMRdpbHMO4vMqaOZXMWQRG4%3D",
+      "count": 2
+    },
+    "oval|silver|blue|crystals|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oAavAXcUPdJOIDAEsAPg1MzSJixAQiABAwgIm~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=TDhYu69MFNlAoPbFk6VcIQxgO%2BU%3D",
+      "count": 2
+    },
+    "other|gold|white|roman|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o0rP3izPiPxI1ADIyAgKGguAAXaBAuwSKE6XA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=Axw5Ei0Ldku616qIFtlYDjNPA%2Fg%3D",
+      "count": 2
+    },
+    "round|gold|blue|minimalist|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYFe4AzQZA65BGLAEoe8A75EEvzfIzMABtIAED~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=2yEpx87Jxm7z9Wt8g830fW0lZrI%3D",
+      "count": 2
+    },
+    "rectangular|rose-gold|other|roman|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/osIgvALIgQ8iAlP0P5FCDAaxiAn1zYAoBE6AA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=XeSWytY4m6WiwoIDgNJ3as9xj18%3D",
+      "count": 2
+    },
+    "square|gold|other|roman|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oooMAejmIAprCwdAEVAyZAA8A9FNWCfOog0DjE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=aiyZV8tAQjLv3pI2OhSn%2BSKQr8Y%3D",
+      "count": 1
+    },
+    "round|gold|green|roman|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oUCi9ADMMBpfgAftl3oCCqtEAm3FIAo4AQgAFz~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=NCm1qsD8HrVNBIGyHwz%2BXymRcgw%3D",
+      "count": 1
+    },
+    "round|gold|gold|other|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oACvI10iAveoAIJElCi0A9ABgzCPAA8CvfFAC4~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=RkxT%2BL6uUjOAYsoXSDgcoD71Q70%3D",
+      "count": 1
+    },
+    "rectangular|silver|gold|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oEiBFffvsAs7DtAIAVoEArEE8BXFEvaSQeIkAA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=SUXExhjHLg0huASBrpDV6hwRjbs%3D",
+      "count": 1
+    },
+    "square|gold|blue|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/osUoEACoAgAICA9eAEKjfAMAuwsDLFyYqC9pwA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=j0IYPHlFJJhxpDCqrCfYqRisBSo%3D",
+      "count": 1
+    },
+    "round|rose-gold|white|other|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o4deXLE7EGQBXGBcRAAiAfwmIeaFWRBIxWQAUA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=IkWeOAxD4fWDkjtN46cQqotCV9Q%3D",
+      "count": 1
+    },
+    "square|gold|other|arabic|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oAEaymgLfAIKHPBiAD9oJfCypEACFAAB0VAQr5~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=eT8DqTLQnWhqgWPYqEdW3gXPu6I%3D",
+      "count": 1
+    },
+    "rectangular|gold|other|arabic|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o4AtpVgpDQBuua5NA3FACe90NCfDoAAIEsgxAL~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=Eem%2FydCM8vMLezGGCLR0w664Q5s%3D",
+      "count": 1
+    },
+    "rectangular|gold|gold|minimalist|leather|tan": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oIAAm1Z9IEPBpvY3FIaiAtBgr5i0gACgvAUAS~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=NJaojx%2BVJ0vrPXZjck6SrEzNknc%3D",
+      "count": 1
+    },
+    "other|gold|gold|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ooZsYXGiAreDAIFEOCi0AAABgBCyAASzfgFAW6~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=hRWJjhm5uQjX3hm7ayGqtgggUTE%3D",
+      "count": 1
+    },
+    "other|gold|gold|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/osA8ZNPYiIvCAFtgPRkAiB4IQsXwAImEgaBM8~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=aPLInjgQ%2Bqsv7%2BNegnseFgo3uNM%3D",
+      "count": 1
+    },
+    "oval|gold|black|roman|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oI2OAjfBCE0seZ0Agt4OAFTVqCwAbiuAiAAGIg~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=luvnExuyEVldaiaYZ4xw4EfTNtw%3D",
+      "count": 1
+    },
+    "other|gold|black|roman|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oAEAqQFBFEWAGA7fFiIAALIB0tG9NVAblefNoE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=0EFAdDcn%2BnIMSoCnOl1%2FWBXygzY%3D",
+      "count": 1
+    },
+    "round|silver|blue|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/osQ7SEQAWA4FiZYVGBIeOVLBeAAECAepIZBAHJ~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=hjxtEnv7u7TUZyi2T4%2FZWx11pMg%3D",
+      "count": 1
+    },
+    "rectangular|rose-gold|brown|roman|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o8AiQvkaEq6ACvECpmvBfAEe7VAiAA1gAVI0IL~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=ESZA%2BHDmNSLIzRjr%2B6S4RyGe%2BlI%3D",
+      "count": 1
+    },
+    "oval|silver|black|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o0CsAa7JIFAAZAWAEoED3xffIAVOgsHNAClVL9~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=F2nEYS6ULKBkiMA%2B2v1ilCqOLH4%3D",
+      "count": 2
+    },
+    "rectangular|gold|other|crystals|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ocLBuE4DAaAEEfCFfAQ7BAA2IsIzeSQtCrsBnE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=wnGpkFSNJGQwHz0BKj2Qkocb0fQ%3D",
+      "count": 1
+    },
+    "round|silver|silver|roman|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oYIAIguDEIEA4A2HKtQABLICfJG9fkA1iecbeI~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=FL9%2Feq%2BbkYP089BeR1Myi3L1nkM%3D",
+      "count": 1
+    },
+    "rectangular|gold|gold|arabic|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oIAAAAfoCE0AA9XQ3QDfCFmIBDwQwcIoGIvang~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=h5aQixxFld9ZiJIfPG6NgTjCdyA%3D",
+      "count": 1
+    },
+    "square|black|black|arabic|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oMEoIADgIACEABtEfAAgQJAFbcDi0MW3e539Cm~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=CeZ8%2FkQjquVFy0z27qqnpi5rsss%3D",
+      "count": 1
+    },
+    "square|black|other|arabic|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oI6hmoABfAC7A2DYA7fD3sQgKF9HcIvA8CEIAi~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=iC%2FKWWxY3CsLCyswKYvyiyOcRk8%3D",
+      "count": 1
+    },
+    "oval|gold|other|crystals|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/owFSgAKQDCANdiI0AEifACgZ2ddAqVEWeAB1AR~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=S%2By1We1kCXYo%2B4%2FOlKbi2XAVa5A%3D",
+      "count": 1
+    },
+    "oval|gold|black|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/osMAAEBRQEHQCIQxF87SBHfBfhWmEAfqAUAAWQ~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=a7m9Ix93vJOwJxi9ng2JHUTY0yU%3D",
+      "count": 1
+    },
+    "other|gold|black|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ow5mfABEEIAA1ieU0S7sGACAgE8gCHmIAA1Bia~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=iyAy2VfSd9%2B3CbQb287Q9ZxPiFA%3D",
+      "count": 1
+    },
+    "round|silver|red|minimalist|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/osCs9AD1HAtfaAjZetPgC19EA23FIAoJAQgArQ~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=bJJkSSuJXjdzaWbEpj5LZ522Gtw%3D",
+      "count": 1
+    },
+    "round|silver|other|other|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oI6jiYOQYet1EYz4HAe9eQAeqAtLeAKRgguIEy~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=3Ci1x4CdDIYA1n0LRJw66YxwIcE%3D",
+      "count": 1
+    },
+    "rectangular|gold|gold|crystals|leather|tan": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/owsIhuGhAD0HSCoenqFAgIQE9AzzAPcfAACoAt~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=bO9w9xd3Y4GSRK4RxmzJzVxuV0Q%3D",
+      "count": 1
+    },
+    "oval|silver|pink|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ocAiCglxEo7ACwDCwdcBfA5eGLAiAAsgApQ0Ih~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=%2BH5jSDlg2k7SQtBu6Es4iSc6ayA%3D",
+      "count": 1
+    },
+    "round|gold|gold|other|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYA3AoDC3MnEADF9A4QA4fACkcgfyH24AAHI4D~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=uJV9vOU77nNEf%2Bt3ubMxfKl%2FigY%3D",
+      "count": 1
+    },
+    "rectangular|silver|white|crystals|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oc7g4bIMEiAgyhItB5AMMsIBE2iAC4iAAaAvP~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=liLAySZT6YXQFiwABsUMjMXvJnE%3D",
+      "count": 1
+    },
+    "round|silver|white|other|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ooHAADeCBIAERAtxmHjYYvArcgi3qCBA0EMeAi~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=1pUpLNf7tebOdgZzHhWZtOdxnZ8%3D",
+      "count": 1
+    },
+    "oval|gold|other|crystals|leather|tan": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oYzgCIBxvA4AAAiiiNzEQYciIPAaBgK9uIJoA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=rS3dFdvsAf4htgdnE2Zc3WpbtUM%3D",
+      "count": 1
+    },
+    "oval|gold|white|crystals|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/ogIAeGAE5FwbABCKFor691gsoEEPfASDIYik0d~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=L9lQ8wou7yMb5BtCS3g%2BmNNOOz0%3D",
+      "count": 1
+    },
+    "other|silver|black|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oEmhIEcJlGAG63AUAOLUB7QAABdAeEeKQSe4oI~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=JH3Wl3tkOhBPmxIIPbD6DzBF%2Fco%3D",
+      "count": 1
+    },
+    "oval|gold|gold|arabic|other|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/ogUXdBCdIACYZOBA7A8i5ihWlE8egxiL0SByDf~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=yQ5cjWlRSN1%2FAUC922Yp3vQv4uM%3D",
+      "count": 2
+    },
+    "rectangular|gold|gold|mixed|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o4AAIIIQIBAQjVIeMoLEg7ARomJCeBAeGEK7At~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=AqWx7iUtHAMg5zBt%2FBlDpDtMKB8%3D",
+      "count": 1
+    },
+    "other|gold|gold|arabic|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o46HEdvQwgAfuAGJThfe7eAeIAIFFQGAAQ1tAL~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=Hnk16Z%2FGF2F8puqiAgjJWg49QAA%3D",
+      "count": 1
+    },
+    "round|black|other|minimalist|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oUZuICktnDA29VZzovF1A9oBAAggQBcDQsfedE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=27%2FI7CbytQq6ZAGGowMGHEkvqSw%3D",
+      "count": 1
+    },
+    "round|gold|pink|crystals|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oc3yBeo0GBoQLCiBzbIX1vIvGCEQfWtARI7e3A~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=HOYNg3QweHYpDLeBcKGROMLHmrw%3D",
+      "count": 1
+    },
+    "oval|gold|gold|arabic|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oUPuLwfAAACiAxgEyGBVC0I3BEAWzCe2YisAAz~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=XeJbmCQAhzF8RpcdFlEGP5%2Bv%2BXY%3D",
+      "count": 2
+    },
+    "oval|gold|white|crystals|leather|tan": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/okGMABpE3AijANkfAg8EmC0MdAeRAAdEiI0CAm~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=5kDcZjBV3XO89OgIBhjeGs2UzOs%3D",
+      "count": 1
+    },
+    "round|gold|blue|minimalist|other|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o0fBXsgAfAEckGA5AD9odZCL0EACFAAIhdAIDu~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=rhQ%2F%2Bo8%2FZgcOoXms3JKv6p9vaXE%3D",
+      "count": 1
+    },
+    "square|black|pink|other|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o4amAacCPCw4IAAE7AvgAgAcWiBAKiABAzgIK~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=qc8uK7ugKZ20gDfUtjUkWG460AU%3D",
+      "count": 1
+    },
+    "other|black|other|minimalist|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oQAIGfcydffA4QF2yfYFrhvHg5LZgevAneJPId~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=dmqO4nGawE4pzEQ3BTG9dev36SA%3D",
+      "count": 1
+    },
+    "square|silver|white|arabic|other|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ocAxAfU3BADniAFAo5i6PdEFfCCIRBGg9H9xQA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=VRMWMqWpNzGxLBlAMkz04Hpvo9Y%3D",
+      "count": 1
+    },
+    "round|gold|other|crystals|other|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ocfBWHF8sIDoqgAAaaAAfEE5PzQU7o4BEAVezE~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=VdHGN%2BJ%2FMiZRf2X4WSNoc4gTr3c%3D",
+      "count": 1
+    },
+    "round|gold|other|minimalist|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o8JLEC4SlBAc5FAuAPiwA9nADAVgFCafIsfh5i~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=hz4zE4i8jsYKkTDqsyt0Ld9XHGE%3D",
+      "count": 1
+    },
+    "round|silver|white|crystals|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oQZ9DfwAAEsCIkRghAngFCo3EN90AAgVDABAfV~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=divAKTOxxdbcx%2FAnIB7AnKEr550%3D",
+      "count": 2
+    },
+    "rectangular|gold|white|roman|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oQbr7faPPIEjBzB3eC6FmHjEQzDBgzAJPAf0NC~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=DcEqm4o6SZvAuHWBQqN%2Fi%2B6ifVg%3D",
+      "count": 1
+    },
+    "other|silver|black|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oMHqQIfQGfv8EQJPAIe5A5AAuLPIAfEHeaWsmU~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=jJwC9KxeeQQK5VCIRy0Q71UNWFo%3D",
+      "count": 1
+    },
+    "oval|silver|black|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/ogOBSY1PDj0ziAA0E1ijetFBgiEACUBasNeDIV~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=0v6AjMyyE9beBICG6nb1wgrNnAg%3D",
+      "count": 1
+    },
+    "rectangular|gold|other|arabic|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oI5NQfEPBAAgOO7AAQI18AfANTOMxXdtvE5e1B~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=Ey0eoahx2Pfqq4HvjFu2a1798pA%3D",
+      "count": 1
+    },
+    "rectangular|silver|other|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oEvIBR4KILAEuxCAQ7uGEL5PvveqYfPGjBAeCw~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=WGB%2Bw9M6lxjrZQbs9z9jT3PVp5k%3D",
+      "count": 1
+    },
+    "oval|silver|other|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/osQAJfePfg1AuAZMekgAOsgIfrYTVEARv4kLeg~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=KV0L4TPmoshYhjCAl3%2BFJkSHTqo%3D",
+      "count": 1
+    },
+    "oval|silver|other|roman|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o4iAICCvJ49EhoAegaezHAirGAzBLDgAAJ3IiC~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=VN1eyuWQaMxVPjaW%2Fu2f4dY9AXo%3D",
+      "count": 1
+    },
+    "square|silver|other|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o87ArDieWEBCAxAAdaAgvticzgIIeQlACAQD3C~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=UqtAvEGrV%2BTxUi0mHo9s%2FM3WtYI%3D",
+      "count": 1
+    },
+    "other|silver|black|minimalist|other|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/okhceAGc18DEALsuff3XAAQHAE4cQhvIAAeeIl~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=esBFnJknYj9noyCEzxnBMTV6kyI%3D",
+      "count": 1
+    },
+    "rectangular|black|other|arabic|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/ogHiDmiIEAgzRm7fh5iCcF36d6PLoAAEBBneB2~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=nQxMmho05lcjchaqPP01PuENOJE%3D",
+      "count": 1
+    },
+    "other|gold|other|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oUM5AEGxQEYufIQYD87zBELBfw9YcAPUAeAAWP~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=GnswMB9UXas17ciCukTjMsQ7rBo%3D",
+      "count": 2
+    },
+    "oval|gold|gold|minimalist|other|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oMKBiCkDeA4AlDiXEAAmivSYCo6UzIAWrAkegM~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=RPG5OcDUN%2FCntovaJq52Yg0Yyxs%3D",
+      "count": 1
+    },
+    "square|black|pink|minimalist|metal-bracelet|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oQ1XQ3g1fAEBvHDzAD9nLdCqoEACFAAxf6AIVw~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=6XnH9ESj6xnI2v7RxpgALyA7ibU%3D",
+      "count": 1
+    },
+    "rectangular|black|other|arabic|metal-bracelet|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/o4IeoCzATczG0OASBAEol6iDCmABjgf4idAQBK~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=RxipYvwOGDNFqvBS0EIiGRL15Co%3D",
+      "count": 1
+    },
+    "rectangular|silver|gold|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oomnCSEAEBQFwDaANgcE0enA9k9ADAA4AfFIyC~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=SHWtvl1bL6cbsAcMIq2bhUfevAo%3D",
+      "count": 1
+    },
+    "oval|gold|other|arabic|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/osvA8iEIAgARipTxpMPEDZIBl4A9E4AgUBkEn~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=d5ybjI58ofVYbnwtAlTKDZCpEk4%3D",
+      "count": 1
+    },
+    "other|other|pink|minimalist|metal-bracelet|pink": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oECV5oHe2EX1A0VAizfg5RB2iQPAABjmTI0PbY~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=x19GqR%2FsiEWj6P76AX0mnhEE2II%3D",
+      "count": 1
+    },
+    "rectangular|silver|silver|minimalist|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oIG2rZiPKlu6EPAVygsIA4QslB8qIaASiBCwP~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=2Ce3qhMYUirzBrFcqZ%2FeDTjosjI%3D",
+      "count": 1
+    },
+    "rectangular|gold|white|minimalist|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oAfnzO9DAwDwSApEXUFL1EAvAbA5IgCkFeACWA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=zvrZ3silMWvh8XxQugknEcOtpl8%3D",
+      "count": 1
+    },
+    "round|gold|gold|roman|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oQF7GIApIpPBreBYQCzJUEL3fcqOEBextCA0F7~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=39Fqd8LROfD%2FqqlCzURYT19L%2FlA%3D",
+      "count": 1
+    },
+    "rectangular|silver|white|minimalist|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o4HncFT7AAA8A9BpgEiCt6CBrfah8dfiAACC3I~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=Zuo0lTT%2F9CkpLyHaGPxWF3ckzpw%3D",
+      "count": 1
+    },
+    "rectangular|silver|other|minimalist|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ocABwVP0AR7tIdlBL0AFFIQGrAeEaAbEyyegVf~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=UN4pb5ITT14QTHmdOacssYuOFmo%3D",
+      "count": 1
+    },
+    "round|silver|other|crystals|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oIA3AeWXGEFeLA7HfrIPnSI71QQQeuHA09sf9A~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=tqMi15kf7r6PGNwyxhSWfhYxjRM%3D",
+      "count": 1
+    },
+    "round|gold|white|minimalist|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oUAs0LkfeziZiCAMBCB1L1isaul2gAxEu9m1IA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=Jl8iqFZDyz8F%2FuA66C91%2Bh8x5F0%3D",
+      "count": 1
+    },
+    "round|gold|gold|minimalist|other|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oQE1IAAy9mVtA5DneFWnfDEVCdyAIE8gCSZdBQ~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=N%2F1Pc%2FsuiDckcXNsJ%2F1Up7GYTZM%3D",
+      "count": 1
+    },
+    "rectangular|gold|gold|arabic|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oQuHPJH82BNgJAA8ZiAwvqEAiA7iZIN4gIACm~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=AaUbFoW21Zzhj6hcPCxCuuYiDaQ%3D",
+      "count": 1
+    },
+    "other|other|other|minimalist|other|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/osLnL39HLAIzB99CgIFUqsCDkfinHDaEAABepQ~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=4nB1VIJd%2BS1H5M9TgaDlIpXx2x4%3D",
+      "count": 1
+    },
+    "rectangular|gold|white|roman|metal-bracelet|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oQZpPAGQvEI61BQpluipui2BIPrQAUogmqyXb~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=%2Bc6nAcHGfXZDjpt4uaRz76LSA6M%3D",
+      "count": 1
+    },
+    "round|gold|brown|minimalist|metal-bracelet|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ocHz1JKlAAAxAep7gEi40JCB2fnBtWZiAACCjI~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=pX8d9G4%2FbPYRzOcINdCP0%2FGsrZY%3D",
+      "count": 1
+    },
+    "oval|gold|blue|crystals|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oIeEmYxzIMtAC9kB9QCDfA89LcAFBuGgqMPnQc~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=9qldPwVrDVjVO4Z8dpYUEh90nnE%3D",
+      "count": 1
+    },
+    "other|gold|other|roman|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ownCELVAADEZrgAA1FOCfFDeQACN2IGM9xiQMA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=T%2Byhi7RP1QcSMgs14Vwhal2a2RE%3D",
+      "count": 1
+    },
+    "rectangular|silver|white|arabic|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oUPkkJGTELAzIoEFjAIEAFBABJCve7fKPSmCAe~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=jNMX1bV0Kfbi4yObodaxCg0Fqeo%3D",
+      "count": 1
+    },
+    "oval|gold|white|crystals|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ogBxe8IAEHAFgEe3En7I2EfyA4DCBEAQzAHPYT~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=ce7xE8Aa%2B2QsGzCPE20W3fzdhhg%3D",
+      "count": 2
+    },
+    "other|silver|white|crystals|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/okEADizTcCAzAUB1If6KACAgiBgb4wwWKCEAei~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=nTk2rQbLToDdFGjbGET9qNrqaL0%3D",
+      "count": 1
+    },
+    "oval|gold|black|roman|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/ogQoRGZAIIPATBgzGkvXqIizQZiCCP4iIMHBP~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=0yhuKaQHVKty2lIXdoIMksyrHg0%3D",
+      "count": 1
+    },
+    "oval|silver|blue|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015c000-ce/oQdf7xfbQ0twFDXDQFkfNTApD2La64eu6A7GpI~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=bUNLagl0wGpYVB7aJf6r5jDiSbc%3D",
+      "count": 1
+    },
+    "rectangular|gold|other|roman|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o0ZAAC3BUUBuiknEAK120g7NP8CIAPiItg9QA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=VPX%2F7LcSR6uDq2R6tPuE1qvukzc%3D",
+      "count": 1
+    },
+    "other|silver|black|crystals|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/okB7GIAaECOAbcBmIEdAfELAMue5JBekjKADzB~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=jqBcMZKaezhnrzt1aEHcNHg%2BJ6E%3D",
+      "count": 1
+    },
+    "oval|gold|gold|other|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/o82HUIC0awzAN0LnlXixBirAeA6BygeCdIPNIO~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=%2BrGhYV0QKysXpV07QWzf4tPvI0k%3D",
+      "count": 1
+    },
+    "round|other|brown|minimalist|metal-bracelet|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/occNiFurgeyeAEwnzAIBtIiHAHAaCUvnC7AcBA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=%2B5ShIdU42xfLaYFmeufglRlxm0k%3D",
+      "count": 1
+    },
+    "other|gold|other|minimalist|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oAzKCvZLIBAIKAie1A5IoMZB2rA1g8fpFXTBic~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=3SjcYH%2FO2nNkQUBaam%2FrKn70qBo%3D",
+      "count": 1
+    },
+    "round|gold|gold|arabic|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oArPRSPWiIv1AxAJv8JsiBDlQWDaAIKIgZBuw~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=CHmK0YVD1%2F4QBNcvdm83uac7Ucg%3D",
+      "count": 1
+    },
+    "round|gold|other|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oYEsneCz3qRchiy9z5BBKgAACCAfAUZAYIAciL~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=lbPekPgBpFS5kBiBwB6Lv5xGaos%3D",
+      "count": 1
+    },
+    "round|silver|white|mixed|leather|tan": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oEcg1cdDACuAr9CzeLQCAQxWwiI0EAiNABApfB~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=ihTtU2ER3sH1g9zJaLAHG94t6Oc%3D",
+      "count": 1
+    },
+    "rectangular|gold|other|roman|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o0xzFnABfACWALDAAUUMVqIgeF9CBT1ALCEEAa~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=GOlU1xLJ5COjBklBv0qFnHthuDw%3D",
+      "count": 1
+    },
+    "other|silver|blue|roman|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oAqlPABpuvBAuieIz8w5eACAgEDKC2SIAA0ViA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=bIbtcHolwxyN6o5Rhe7ZIU%2FGjlQ%3D",
+      "count": 2
+    },
+    "square|gold|gold|roman|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ownACeDR0CEIZAF9xAQQI2gAAQAdg0fCTuNDEA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=hWAKb5s0Sf%2F2FoGDdFukjKfCVq4%3D",
+      "count": 1
+    },
+    "square|gold|other|arabic|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oIig3vfoA02AvsCn9p8CA1UGaEQbIAF9ABAPfD~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=RhO5uFS9l0hitU3lrN%2BDjAS2MQU%3D",
+      "count": 1
+    },
+    "other|silver|other|roman|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ocZ9vAAnEEIzUBgbpLiQ0iAAIPtDAS2g2Y6aA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=r7jibfftRUOVyKpaBI9H7A6IP4I%3D",
+      "count": 1
+    },
+    "other|gold|white|roman|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oMVzBfs4DApnF6bAj7EZbqIvPBCQOAJgiK9eLA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=B5EU7Vx1MUqcAIsKwr%2F%2FIRNaC%2BM%3D",
+      "count": 1
+    },
+    "rectangular|gold|black|crystals|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c000-ce/oIB3BiqAiIAEwLnXQ6fJYAsAeAsmzBeAEA6NER~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=5OEcg74QW7Ht%2FqpvoJcmWbFk4q0%3D",
+      "count": 1
+    },
+    "rectangular|black|white|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oMIAZnZAKCIAfg9z9qQABFEAcDDOtLA6hfyHgC~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=o3R6Wm05Zj37tmGOrqghyn1QF%2BM%3D",
+      "count": 1
+    },
+    "square|silver|black|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c000-ce/oA4qPtAoIETzTCAEiRnAsD9EFQeVesAfwAxFA9~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=MGzoFeN%2FooPWu1BtECpGCqty1so%3D",
+      "count": 1
+    },
+    "rectangular|gold|other|minimalist|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o8PKG1ZRaqg3PIgA2oAt9LNAiiAAwBaiIEuAT~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=XLxwYQ3AjnomX%2BC0bI7UOFCE4ac%3D",
+      "count": 1
+    },
+    "round|other|pink|minimalist|leather|pink": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oMRPEfAKIIwLeWACe4cDRGQIIQSrILAeAAXLA2~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=PiNzxP%2BesU7fuVLjgg32ZG7NxyM%3D",
+      "count": 1
+    },
+    "square|black|other|roman|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oouunOAAfAE6ACD6B3eMeAQA2F7VJD2A8EEIBk~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=ZmQ92Q%2FkONr3phc9xsbPvvUdrZY%3D",
+      "count": 1
+    },
+    "round|silver|other|arabic|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o8hJIAgiZPwPAB5LArD6HAIkF0wAEgUNAAiJr~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=aOu9z1itt0S9q3zKYQuUzi1XT3Q%3D",
+      "count": 1
+    },
+    "rectangular|silver|black|crystals|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oIAKUSmiBIATxC6iAliACteczCfEzAAEiagiAg~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075486400&x-signature=4mFO4UUra9RhKRQtgFzSzNlcnHc%3D",
+      "count": 1
+    },
+    "oval|gold|other|crystals|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/owfNubjEfEBFa4AEAIeArAAPP7mAaQ6wDB79EB~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=v4FR3LNhuvrENnMWpU2QD9powFQ%3D",
+      "count": 1
+    },
+    "rectangular|silver|gold|minimalist|leather|tan": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYGIpePcQ6VBEf3Ea8tGeB07nLALAAnAAXhQgM~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=Gzh85AgVARBd3Hx6UXCoeKqV9%2FA%3D",
+      "count": 1
+    },
+    "rectangular|silver|white|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oID7GIA2IDQAN2BgQEGAfGLAExaCrBeqAeAz4N~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=EJKSnld0DXf92EWd60U%2F9WPXJN0%3D",
+      "count": 1
+    },
+    "oval|silver|silver|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oUAA8KIQIBAQl9veSZLGfxCWejx6OBATGEs7A9~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=zAr3PpMVDpg94vZ6R8q11FF9UEg%3D",
+      "count": 1
+    },
+    "square|silver|silver|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oEQcW7EQUck23LleYsDGeAABEdBeAlOA8gA8Im~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=gjWfcqBEFzlWSYu%2BpHv4Bs4kWc0%3D",
+      "count": 1
+    },
+    "square|silver|gold|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYQXvAHOfCAmoiIoALifACgb08DAiAEK9AB0A8~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=%2BXKFAeO90NhT1ZvdRjgycwKGWco%3D",
+      "count": 1
+    },
+    "round|silver|pink|crystals|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o4p30bPoiIZCAImAvZAliAK4guS6AIKEgaBA5~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=VFdYAAaJHitvznran6aeCkSk3f8%3D",
+      "count": 1
+    },
+    "rectangular|other|other|minimalist|other|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ok5T1AAsoAALlcatC6iigeBqALA9XUAIEvfxCU~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=h0LzanWy1OY8jlusoZ1Nmb%2BuIRw%3D",
+      "count": 1
+    },
+    "round|silver|white|mixed|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oIAArIAdq4oAZw1uktEsCFKA9AFDeghCVEfAXp~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=YATZCtO%2F9t%2B2eheOGU6odACvCOs%3D",
+      "count": 1
+    },
+    "square|gold|gold|roman|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o8mIZbarAkhhAiiPgmMAC1RBJgTaPVEQAIAAR~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=%2FoAttrbD0E%2FxXI3deEcj7dE9hFg%3D",
+      "count": 1
+    },
+    "rectangular|gold|white|arabic|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o8aoAGvIAAL5BhVeBAoDNEQemB7HQAb3IQeEAp~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=wxE%2BFyMhDX8kJZiR3f4UW8ap1JM%3D",
+      "count": 1
+    },
+    "oval|gold|white|roman|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ock9IFE7ABUEeADUBAAFkQ8KEfJgQFEEEAf6gA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=g0CLTwt2GfF4sEGB70c4yssB3ww%3D",
+      "count": 1
+    },
+    "rectangular|silver|other|crystals|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oM7wyFE7EDQAO5BsqAAJAizCIfOfHeBEdKQA6A~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=tkahjk9cmjgVJ%2Bo09tVg58gZ1CY%3D",
+      "count": 1
+    },
+    "round|silver|white|mixed|leather|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/okm2SDGE73FIAxIfAg8cRCoZgA9XHAB5EIfBBV~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=haOJLZCRI4754mUQdu%2FD7WrXT9g%3D",
+      "count": 1
+    },
+    "square|silver|other|minimalist|leather|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/ocy8AAUE9Czf79AebgAGHIAFEAloNtDbWh2AFC~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=tIJcMR8q0pbBVlIEHlraGij57KY%3D",
+      "count": 1
+    },
+    "oval|gold|other|arabic|other|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oo1X7kP4iIpAAzKAvKAUiAX3gBKHAIrEgaBAx~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=nO54BCT%2B4EVkmGCqWNVwCQlcT7M%3D",
+      "count": 1
+    },
+    "round|gold|black|minimalist|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o8IkABpABAy97S6aEAIgEAi0HPgPEAT52iAxA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=ZTQv4FkOWvwQ40VmN5ZlXBr%2FyjM%3D",
+      "count": 1
+    },
+    "square|black|other|minimalist|other|black": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYD5AEHpQE7fXIEkdf7FBNiBfrW0IAlrALAAFP~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=g%2Bh0jX20u18LtJYHJQT1L%2BNkKBU%3D",
+      "count": 1
+    },
+    "oval|gold|other|roman|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oUDP7A560EAaxEIPDeFfBEAtPQzADOE17ADeB2~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=2lhDs9mQazfCEndN4Pt8EOkzNg0%3D",
+      "count": 1
+    },
+    "round|gold|blue|crystals|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/osntEoI4Arx7AIFcPAQHCfFNBFBjEff9EYAyDA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=KEk9H1BDYd%2FurmxPl7VLrNCWX%2Fc%3D",
+      "count": 1
+    },
+    "round|gold|other|minimalist|other|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oEeDRADWA5AIkAAzjDCiigteECUvDA4gTgB4AK~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=huC7McQ%2FKOOALwOBciAmZQeE7vI%3D",
+      "count": 1
+    },
+    "other|gold|pink|minimalist|other|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oYiNQAeAEAAfrIDTAzAg6Hm0CCidEr6Bds5Zkx~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=VY5vFIlLwZRrcxElp90J4Qhdrxs%3D",
+      "count": 1
+    },
+    "rectangular|silver|white|minimalist|leather|tan": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-p-0015/oIAKBBFPEEIFl7iQeyOfCFmnfD9qDSIir1hyaA~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=xSZCNiZNLrUgIL2Zufzl9CZq2Y8%3D",
+      "count": 1
+    },
+    "square|gold|gold|arabic|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/oIANdHyxDQFvIgobAqFAET7eiEffPABIETAnBY~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=Qns1sswHR0CNWrQg2SrV0f7q4%2BU%3D",
+      "count": 1
+    },
+    "rectangular|gold|black|minimalist|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o4GuAEDbQEr7aII2te7vBtrBe7aerA8bAIAALO~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=YK%2FEyd9o9Re%2FqVzXmWF%2BPFWo0mc%3D",
+      "count": 1
+    },
+    "square|silver|black|minimalist|metal-bracelet|silver": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oMqffADXMSCAuF9nngDxVACAgIa6CnKQAAsSEs~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=ogFb42d%2FTvCznobXvniSLDniESg%3D",
+      "count": 1
+    },
+    "other|rose-gold|gold|arabic|metal-bracelet|rose-gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/oYDlACCyQC0UuIESWf9gAUlAeCDqsgNQAwAAFn~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=L3fF20sliiDBC6flD2eywoW327Q%3D",
+      "count": 1
+    },
+    "other|gold|other|minimalist|metal-bracelet|gold": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813/o8ZAiAAisEA1BeAg3XApGdIgNiDqBf8CCtOzvM~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=YzcZLT6OHLLVAsopJD7kCug%2B5xw%3D",
+      "count": 1
+    },
+    "oval|silver|black|roman|leather|other": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/o0AAAAWnCExAA9UQig9fCF8PBDVNtvI0Bftpqg~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=uj0nqIRDuBCDE%2BSCE1D4umZ0Sts%3D",
+      "count": 1
+    },
+    "square|brown (interpreted as 'other' based on provided options, but closer to a muted brown/rose-gold hue)|brown (interpreted as 'other')|minimalist|metal-bracelet|brown": {
+      "first_seen": "2025-10-10",
+      "thumbnail_url": "https://p3-pc-sign.douyinpic.com/tos-cn-i-0813c001/ocAJglApA4ibEKzAuPyglbiPI7LPwZAmASBIX~tplv-dy-cropcenter:323:430.jpeg?biz_tag=pcweb_cover&from=327834062&lk3s=138a59ce&s=PackSourceEnum_PUBLISH&sc=cover&se=true&sh=323_430&x-expires=2075490000&x-signature=59tI7xVV895zzRtjtrw3KHeORPE%3D",
+      "count": 1
+    }
+  }
+}

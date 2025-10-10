@@ -196,9 +196,86 @@ Image URL(s) or path(s): /path/to/watch.jpg
 
 **See detailed guide:** `LOCAL_IMAGE_USAGE.md`
 
+## Watch Deduplication Tool (Douyin Watch Scraper)
+
+Scrape Douyin pages and extract only **unique watches** using AI-powered deduplication!
+
+### Features
+
+- ✅ **Hybrid deduplication** - Perceptual hash + AI attribute extraction
+- ✅ **Multi-product filtering** - Auto-eliminates images with multiple products
+- ✅ **AI attribute extraction** - Identifies case shape, colors, dial markers, strap type
+- ✅ **Persistent database** - Tracks all processed watches across runs
+- ✅ **Parallel processing** - 50 watches analyzed simultaneously
+- ✅ **Auto-scrolling** - Loads all videos from Douyin page
+
+### How It Works
+
+1. **Perceptual Hash Filter** - Fast elimination of exact/near-duplicate images
+2. **AI Filter 1** - Eliminates images with multiple products
+3. **AI Filter 2** - Extracts watch attributes (case, dial, strap details)
+4. **Fingerprint Check** - Compares attributes against historical database
+5. **Result** - Only truly unique watches saved to CSV
+
+### Quick Start
+
+```bash
+python3 douyin_watch_scraper.py
+
+# Enter Douyin page URL when prompted
+# Complete CAPTCHA if shown
+# Press ENTER to start scraping
+```
+
+### Output Files
+
+1. **`watch_sources.csv`** - Unique watches with attributes
+   - Columns: video_url, thumbnail_url, likes, case_shape, case_color, dial_color, dial_markers, strap_type, strap_color, fingerprint, phash
+   - Auto-increments filename (watch_sources1.csv, watch_sources2.csv, etc.)
+
+2. **`processed_watches_db.json`** - Persistent deduplication database
+   - Tracks perceptual hashes and watch fingerprints
+   - Updated after each run
+   - Prevents re-processing same watches across multiple runs
+
+### Example
+
+```bash
+python3 douyin_watch_scraper.py
+
+🌐 Enter Douyin page URL: https://www.douyin.com/user/MS4wLjABAAAA...
+
+# After scraping...
+🎉 Processing Complete!
+📊 STATISTICS:
+   Total videos processed: 150
+   ✅ Unique watches found: 45
+   ⏭️  Duplicate images (phash): 30
+   ⏭️  Multiple products filtered: 25
+   ⏭️  Duplicate watches (attributes): 40
+   ⚠️  Errors: 10
+```
+
+### Deduplication Logic
+
+**Same Watch = Same Fingerprint**
+
+A watch fingerprint is generated from:
+- Case shape (round, square, rectangular, oval, triangular)
+- Case color/material (gold, silver, rose-gold, black)
+- Dial color (white, black, gold, blue, pink)
+- Dial markers (roman, arabic, minimalist, crystals, mixed)
+- Strap type (metal-bracelet, leather, fabric)
+- Strap color (gold, silver, black, brown, tan, pink)
+
+**Example:** Two images of the same gold rectangular watch with Roman numerals will generate the same fingerprint and be treated as duplicates, even from different angles.
+
+**See detailed guide:** `WATCH_SCRAPER_USAGE.md`
+
 ## File Directory
 
 - `find_product_videos.py` - Main product finder script
+- `douyin_watch_scraper.py` - Watch deduplication scraper (outputs watch_sources.csv)
 - `watch_prices.py` - 1688 product finder with drag-and-drop support
 - `backup_thumbnails.py` - Thumbnail backup to Cloudinary
 - `tag_research_videos.py` - Tag research videos with product taxonomy
@@ -206,12 +283,14 @@ Image URL(s) or path(s): /path/to/watch.jpg
 - `generate_tagged_research_gallery.py` - Generate tagged gallery
 - `requirements.txt` - Python dependencies
 - `README.md` - This file
+- `WATCH_SCRAPER_USAGE.md` - Watch scraper detailed guide
 - `LOCAL_IMAGE_USAGE.md` - Watch finder local image guide
 - `BACKUP_THUMBNAILS_USAGE.md` - Detailed backup tool guide
 - `BACKUP_QUICK_START.txt` - Quick setup instructions
 - `TAGGING_USAGE.md` - Video tagging guide
 - `FILTER_IMPROVEMENTS.md` - Filter improvements documentation
 - `product_taxonomy.json` - Product category taxonomy
+- `processed_watches_db.json` - Watch deduplication database (auto-created)
 
 ## Error Handling
 
