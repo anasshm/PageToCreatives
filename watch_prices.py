@@ -527,6 +527,61 @@ def save_to_csv(reference_image_url, product_url, product_image_url, price, scor
         print(f"❌ Error saving to CSV: {e}")
         return False
 
+def save_cheapest_high_quality_match(reference_image_url, all_products_with_scores):
+    """Save the cheapest product with ≥95% score to Watches.csv"""
+    csv_file = 'Watches.csv'
+    file_exists = os.path.isfile(csv_file)
+    
+    # Filter products with final_score >= 95
+    high_quality_products = [
+        (product, score_data) for product, score_data in all_products_with_scores
+        if score_data['final_score'] >= 95.0
+    ]
+    
+    if not high_quality_products:
+        print(f"⚠️ No products with ≥95% score found for Watches.csv")
+        return False
+    
+    # Parse prices and find the cheapest
+    def parse_price(price_str):
+        """Extract numeric value from price string (e.g., '¥27.03' -> 27.03)"""
+        try:
+            # Remove currency symbols and other non-numeric chars except . and digits
+            import re
+            numbers = re.findall(r'\d+\.?\d*', price_str)
+            if numbers:
+                return float(numbers[0])
+            return float('inf')  # If can't parse, treat as expensive
+        except:
+            return float('inf')
+    
+    # Find cheapest among high quality products
+    cheapest_product, cheapest_score_data = min(
+        high_quality_products,
+        key=lambda x: parse_price(x[0]['price'])
+    )
+    
+    try:
+        with open(csv_file, mode='a', newline='', encoding='utf-8') as f:
+            writer = csv.writer(f)
+            
+            if not file_exists:
+                writer.writerow(['reference_image_url', 'final_score', 'price', '1688_url', '1688_thumbnail'])
+            
+            writer.writerow([
+                reference_image_url,
+                cheapest_score_data['final_score'],
+                cheapest_product['price'],
+                cheapest_product['product_url'],
+                cheapest_product['image_url']
+            ])
+        
+        print(f"💎 Saved to {csv_file} (cheapest ≥95% match: {cheapest_product['price']})")
+        return True
+    except Exception as e:
+        print(f"❌ Error saving to Watches.csv: {e}")
+        return False
+
 def save_all_products_to_csv(reference_image_url, all_products_with_scores):
     """Save all products with their scores to a detailed CSV file"""
     # Auto-increment filename if exists
@@ -926,6 +981,8 @@ def main():
                 detailed_csv = None
                 if all_results:
                     detailed_csv = save_all_products_to_csv(image_url, all_results)
+                    # Also save the cheapest high-quality match to Watches.csv
+                    save_cheapest_high_quality_match(image_url, all_results)
                 
                 # Save the best product to main CSV
                 if best_product and best_score is not None:
@@ -973,7 +1030,8 @@ def main():
     print(f"\n{'=' * 50}")
     print(f"🎉 All inputs processed!")
     print(f"📊 Results saved to:")
-    print(f"   - Watched_prices.csv (best matches only)")
+    print(f"   - Watches.csv (cheapest products with ≥95% score)")
+    print(f"   - Watched_prices.csv (best overall matches)")
     print(f"   - Watched_prices_detailed*.csv (all products with detailed scores)")
     print(f"     Note: A new detailed file is created for each run")
     print(f"{'=' * 50}")
