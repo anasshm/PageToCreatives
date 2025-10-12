@@ -794,35 +794,78 @@ def main():
     if not model:
         return False
     
-    print("\n🔗 Enter image URL(s) or local file path(s):")
-    print("   - For single input: paste one URL or file path")
-    print("   - For multiple inputs: separate with |||")
-    print("   Example (URLs): |||https://example.com/img1.jpg|||https://example.com/img2.jpg")
-    print("   Example (Files): |||/path/to/image1.jpg|||/path/to/image2.png")
-    print("   Example (Mixed): |||https://example.com/img1.jpg|||/path/to/image2.jpg")
+    print("\n🔗 Choose input method:")
+    print("   1. Enter URLs manually (paste or type)")
+    print("   2. Load URLs from CSV file")
     print()
-    sys.stdout.flush()
-    user_input = input("Image URL(s) or path(s): ").strip()
+    choice = input("Enter choice (1 or 2): ").strip()
     
-    try:
-        import select
-        while select.select([sys.stdin], [], [], 0)[0]:
-            sys.stdin.readline()
-    except:
-        pass
-    
-    if not user_input:
-        print("❌ No URLs provided!")
-        return False
-    
-    if '|||' in user_input:
-        image_inputs = [inp.strip() for inp in user_input.split('|||') if inp.strip()]
+    if choice == '2':
+        # CSV file mode
+        csv_path = input("Enter CSV file path: ").strip()
+        csv_path = normalize_file_path(csv_path)
+        
+        if not os.path.exists(csv_path):
+            print(f"❌ CSV file not found: {csv_path}")
+            return False
+        
+        # Read URLs from CSV
+        image_inputs = []
+        try:
+            with open(csv_path, 'r', encoding='utf-8') as f:
+                csv_reader = csv.reader(f)
+                for row in csv_reader:
+                    if row and row[0].strip():  # Get first column, skip empty rows
+                        url = row[0].strip()
+                        if url.startswith('http'):  # Basic validation
+                            image_inputs.append(url)
+            
+            print(f"✅ Loaded {len(image_inputs)} URLs from CSV")
+        except Exception as e:
+            print(f"❌ Error reading CSV: {e}")
+            return False
+        
+        if not image_inputs:
+            print("❌ No valid URLs found in CSV!")
+            return False
     else:
-        image_inputs = [user_input]
-    
-    if not image_inputs:
-        print("❌ No valid inputs found!")
-        return False
+        # Manual input mode (existing logic)
+        print("   - For single input: paste one URL or file path")
+        print("   - For multiple inputs: paste multiple lines (one URL per line)")
+        print()
+        sys.stdout.flush()
+        user_input = input("Image URL(s) or path(s): ").strip()
+        
+        # Capture any additional lines pasted after the first line
+        additional_lines = []
+        try:
+            import select
+            while select.select([sys.stdin], [], [], 0.5)[0]:
+                line = sys.stdin.readline().strip()
+                if line:
+                    additional_lines.append(line)
+        except:
+            pass
+        
+        # Combine first line with additional lines if any were pasted
+        if additional_lines:
+            user_input = user_input + '\n' + '\n'.join(additional_lines)
+        
+        if not user_input:
+            print("❌ No URLs provided!")
+            return False
+        
+        # Support both ||| separator and newline-separated URLs
+        if '|||' in user_input:
+            image_inputs = [inp.strip() for inp in user_input.split('|||') if inp.strip()]
+        elif '\n' in user_input:
+            image_inputs = [inp.strip() for inp in user_input.split('\n') if inp.strip()]
+        else:
+            image_inputs = [user_input]
+        
+        if not image_inputs:
+            print("❌ No valid inputs found!")
+            return False
     
     print(f"\n✅ Found {len(image_inputs)} input(s) to process")
     if len(image_inputs) <= 5:
