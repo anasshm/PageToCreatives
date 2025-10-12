@@ -129,17 +129,25 @@ def extract_watch_attributes(model, image):
             prompt = '''Analyze this watch and extract these attributes:
 
 1. CASE_SHAPE: round, square, rectangular, oval, triangular, other
-2. CASE_COLOR: gold, silver, rose-gold, black, other
-3. DIAL_COLOR: white, black, gold, blue, pink, other
+
+2. CASE_COLOR: Choose from: white, black, silver, gold, rose-gold, burgundy, navy, emerald, turquoise, beige, brown, pink, purple, orange, other
+
+3. DIAL_COLOR: Choose from: white, black, silver, gold, rose-gold, burgundy, navy, emerald, turquoise, beige, brown, pink, purple, orange, other
+
 4. DIAL_MARKERS: roman, arabic, minimalist, crystals, mixed, other
-5. STRAP_TYPE: metal-bracelet, leather, fabric, other
-6. STRAP_COLOR: gold, silver, black, brown, tan, pink, other
+
+5. DIAL_MARKERS_COLOR: The color of the hour markers/indices themselves. Choose from: white, black, silver, gold, rose-gold, burgundy, navy, emerald, turquoise, beige, brown, pink, purple, orange, other
+
+6. STRAP_TYPE: metal-bracelet, leather, fabric, other
+
+7. STRAP_COLOR: Choose from: white, black, silver, gold, rose-gold, burgundy, navy, emerald, turquoise, beige, brown, pink, purple, orange, other
 
 Answer in this EXACT format (one per line):
 CASE_SHAPE: [value]
 CASE_COLOR: [value]
 DIAL_COLOR: [value]
 DIAL_MARKERS: [value]
+DIAL_MARKERS_COLOR: [value]
 STRAP_TYPE: [value]
 STRAP_COLOR: [value]'''
 
@@ -157,11 +165,13 @@ STRAP_COLOR: [value]'''
                         key = key.strip()
                         value = value.strip().lower()
                         
-                        if key in ['CASE_SHAPE', 'CASE_COLOR', 'DIAL_COLOR', 'DIAL_MARKERS', 'STRAP_TYPE', 'STRAP_COLOR']:
+                        if key in ['CASE_SHAPE', 'CASE_COLOR', 'DIAL_COLOR', 
+                                   'DIAL_MARKERS', 'DIAL_MARKERS_COLOR', 'STRAP_TYPE', 'STRAP_COLOR']:
                             attributes[key] = value
                 
                 # Verify all required attributes are present
-                required = ['CASE_SHAPE', 'CASE_COLOR', 'DIAL_COLOR', 'DIAL_MARKERS', 'STRAP_TYPE', 'STRAP_COLOR']
+                required = ['CASE_SHAPE', 'CASE_COLOR', 'DIAL_COLOR', 
+                           'DIAL_MARKERS', 'DIAL_MARKERS_COLOR', 'STRAP_TYPE', 'STRAP_COLOR']
                 if all(key in attributes for key in required):
                     return (attributes, None)
                 else:
@@ -185,9 +195,65 @@ STRAP_COLOR: [value]'''
     
     return (None, 'max_retries_exceeded')
 
+def compare_watches_visual(model, original_image, current_image):
+    """Visual comparison of two watches using AI
+    Returns: (is_same: bool or None, error: str or None)
+    """
+    max_retries = 2
+    retry_delay = 2
+    
+    for attempt in range(max_retries):
+        try:
+            prompt = """Compare these two watch images.
+
+Are these the SAME watch (more than 95% confidence)?
+
+Look for:
+- Same design and shape
+- Same dial layout
+- Same case style
+- Same strap/bracelet
+- Same overall appearance
+
+Answer with ONLY ONE WORD:
+- "MATCH" if you're >95% confident these are the same watch
+- "NO" if they are different watches or you're not confident enough
+
+Be strict - only say MATCH if you're very confident."""
+
+            response = model.generate_content([prompt, original_image, current_image])
+            
+            if response and response.text:
+                answer = response.text.strip().upper()
+                
+                if "MATCH" in answer:
+                    return (True, None)
+                elif "NO" in answer:
+                    return (False, None)
+                else:
+                    return (None, 'invalid_response')
+            else:
+                return (None, 'empty_response')
+                
+        except Exception as e:
+            error_msg = str(e).lower()
+            
+            if "quota" in error_msg or "rate limit" in error_msg or "429" in error_msg:
+                if attempt < max_retries - 1:
+                    print(f"  ⚠️ Rate limit hit, retrying in {retry_delay}s...")
+                    time.sleep(retry_delay)
+                    retry_delay *= 2
+                    continue
+                else:
+                    return (None, 'rate_limit')
+            else:
+                return (None, f'api_error: {str(e)[:100]}')
+    
+    return (None, 'max_retries_exceeded')
+
 def generate_watch_fingerprint(attributes):
     """Generate unique fingerprint from attributes"""
-    fingerprint_str = f"{attributes['CASE_SHAPE']}|{attributes['CASE_COLOR']}|{attributes['DIAL_COLOR']}|{attributes['DIAL_MARKERS']}|{attributes['STRAP_TYPE']}|{attributes['STRAP_COLOR']}"
+    fingerprint_str = f"{attributes['CASE_SHAPE']}|{attributes['CASE_COLOR']}|{attributes['DIAL_COLOR']}|{attributes['DIAL_MARKERS']}|{attributes['DIAL_MARKERS_COLOR']}|{attributes['STRAP_TYPE']}|{attributes['STRAP_COLOR']}"
     return fingerprint_str
 
 def load_database():
@@ -208,6 +274,10 @@ def load_database():
                     # This is okay since it's just a one-time migration
                     print(f"   Cleared {len(old_phashes)} old phashes (no URL data available)")
                 
+                # Add ai_verifications field if not present
+                if 'ai_verifications' not in db:
+                    db['ai_verifications'] = {}
+                
                 print(f"✅ Loaded database: {len(db.get('phashes', {}))} phashes, {len(db.get('fingerprints', {}))} fingerprints")
                 return db
         except Exception as e:
@@ -217,7 +287,8 @@ def load_database():
     # Create new database
     db = {
         'phashes': {},  # Dict to store phash -> URL mapping
-        'fingerprints': {}
+        'fingerprints': {},
+        'ai_verifications': {}  # Track AI verification decisions
     }
     return db
 
@@ -271,6 +342,18 @@ def add_to_database(db, phash, fingerprint, thumbnail_url):
     elif fingerprint:
         db['fingerprints'][fingerprint]['count'] += 1
 
+def add_ai_verification(db, video_url, fingerprint, original_url, ai_decision):
+    """Record AI verification decision in database"""
+    if 'ai_verifications' not in db:
+        db['ai_verifications'] = {}
+    
+    db['ai_verifications'][video_url] = {
+        'fingerprint': fingerprint,
+        'original_url': original_url,
+        'ai_decision': ai_decision,
+        'timestamp': time.strftime('%Y-%m-%d %H:%M:%S')
+    }
+
 def process_watch_thumbnail(model, video, db, video_num, total):
     """
     Process single watch through deduplication pipeline
@@ -322,11 +405,46 @@ def process_watch_thumbnail(model, video, db, video_num, total):
         # Step 5: Fingerprint check
         fingerprint = generate_watch_fingerprint(attributes)
         is_dup_fingerprint, dup_url = is_duplicate_fingerprint(fingerprint, db)
+        
+        fingerprint_match_but_different = False
+        
         if is_dup_fingerprint:
-            print(f"  [{video_num}/{total}] ⏭️  SKIP - Duplicate watch (attributes)")
-            print(f"      Fingerprint: {fingerprint}")
-            print(f"      Dup: {dup_url[:80]}...")
-            return (None, 'duplicate_fingerprint')
+            # Fingerprint match found - verify with AI visual comparison
+            print(f"  [{video_num}/{total}] 🔍 Fingerprint match - verifying visually...")
+            
+            # Download original image
+            original_image = download_thumbnail(dup_url)
+            if not original_image:
+                print(f"  [{video_num}/{total}] ⚠️ Could not download original - treating as duplicate")
+                # Record verification attempt
+                add_ai_verification(db, video['video_url'], fingerprint, dup_url, 'ERROR_DOWNLOAD')
+                return (None, 'duplicate_fingerprint')
+            
+            # Compare visually with AI
+            is_same, error = compare_watches_visual(model, original_image, image)
+            if error:
+                if 'rate_limit' in str(error):
+                    print(f"  [{video_num}/{total}] 🚫 RATE LIMIT during verification")
+                else:
+                    print(f"  [{video_num}/{total}] ⚠️ Verification error: {error}")
+                # Record verification error
+                add_ai_verification(db, video['video_url'], fingerprint, dup_url, f'ERROR_{error}')
+                # On error, treat as duplicate (conservative approach)
+                return (None, f'duplicate_fingerprint_verify_error: {error}')
+            
+            if is_same:
+                print(f"  [{video_num}/{total}] ⏭️  SKIP - Duplicate confirmed by AI")
+                print(f"      Fingerprint: {fingerprint}")
+                print(f"      Dup: {dup_url[:80]}...")
+                # Record AI confirmed duplicate
+                add_ai_verification(db, video['video_url'], fingerprint, dup_url, 'MATCH')
+                return (None, 'duplicate_fingerprint')
+            else:
+                print(f"  [{video_num}/{total}] ✨ Different watch! (same attributes but different design)")
+                # Record AI said different
+                add_ai_verification(db, video['video_url'], fingerprint, dup_url, 'NO')
+                # Mark this as a special case - will be tracked in stats
+                fingerprint_match_but_different = True
         
         # Step 6: Unique watch found!
         print(f"  [{video_num}/{total}] ✅ UNIQUE WATCH - {fingerprint}")
@@ -336,7 +454,8 @@ def process_watch_thumbnail(model, video, db, video_num, total):
             'likes': video['likes'],
             'phash': phash,
             'fingerprint': fingerprint,
-            'attributes': attributes
+            'attributes': attributes,
+            'fingerprint_match_but_different': fingerprint_match_but_different
         }, None)
         
     except Exception as e:
@@ -464,7 +583,7 @@ def save_to_csv(unique_watches, douyin_url):
             
             # Write CSV data
             fieldnames = ['video_url', 'thumbnail_url', 'likes', 'case_shape', 'case_color', 
-                         'dial_color', 'dial_markers', 'strap_type', 'strap_color', 
+                         'dial_color', 'dial_markers', 'dial_markers_color', 'strap_type', 'strap_color', 
                          'fingerprint', 'phash']
             writer = csv.DictWriter(f, fieldnames=fieldnames)
             writer.writeheader()
@@ -478,6 +597,7 @@ def save_to_csv(unique_watches, douyin_url):
                     'case_color': watch['attributes']['CASE_COLOR'],
                     'dial_color': watch['attributes']['DIAL_COLOR'],
                     'dial_markers': watch['attributes']['DIAL_MARKERS'],
+                    'dial_markers_color': watch['attributes']['DIAL_MARKERS_COLOR'],
                     'strap_type': watch['attributes']['STRAP_TYPE'],
                     'strap_color': watch['attributes']['STRAP_COLOR'],
                     'fingerprint': watch['fingerprint'],
@@ -607,6 +727,7 @@ def main():
                 'duplicate_phash': 0,
                 'multiple_products': 0,
                 'duplicate_fingerprint': 0,
+                'fingerprint_match_but_different': 0,
                 'unique': 0,
                 'errors': 0
             }
@@ -655,6 +776,10 @@ def main():
                                 batch_unique += 1
                                 stats['unique'] += 1
                                 
+                                # Track if this was a fingerprint match that AI said was different
+                                if result.get('fingerprint_match_but_different', False):
+                                    stats['fingerprint_match_but_different'] += 1
+                                
                                 # Add to database
                                 add_to_database(db, result['phash'], result['fingerprint'], result['thumbnail_url'])
                         except Exception as e:
@@ -689,6 +814,8 @@ def main():
             print(f"   ⏭️  Duplicate images (phash): {stats['duplicate_phash']}")
             print(f"   ⏭️  Multiple products filtered: {stats['multiple_products']}")
             print(f"   ⏭️  Duplicate watches (attributes): {stats['duplicate_fingerprint']}")
+            if stats['fingerprint_match_but_different'] > 0:
+                print(f"   ✨ Same attributes but different design: {stats['fingerprint_match_but_different']}")
             print(f"   ⚠️  Errors: {stats['errors']}")
             print(f"{'=' * 50}")
             
