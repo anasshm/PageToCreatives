@@ -1,18 +1,17 @@
 #!/usr/bin/env python3
 """
-Backup Thumbnail URLs to Cloudinary
-Uploads expiring Douyin thumbnails to Cloudinary for permanent storage
+Backup Thumbnail URLs to Bunny.net
+Uploads expiring Douyin thumbnails to Bunny.net for permanent storage
 """
 
 import os
 import csv
 import sys
 from pathlib import Path
-import cloudinary
-import cloudinary.uploader
-from cloudinary.exceptions import Error as CloudinaryError
+import requests
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
+import hashlib
 
 def load_env():
     """Load environment variables from .env file"""
@@ -24,54 +23,81 @@ def load_env():
                     key, value = line.split('=', 1)
                     os.environ[key.strip()] = value.strip()
 
-def setup_cloudinary():
-    """Setup Cloudinary configuration from environment variables"""
-    cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME')
-    api_key = os.getenv('CLOUDINARY_API_KEY')
-    api_secret = os.getenv('CLOUDINARY_API_SECRET')
+def setup_bunny():
+    """Setup Bunny.net configuration from environment variables"""
+    api_key = os.getenv('BUNNY_API_KEY')
+    storage_zone = os.getenv('BUNNY_STORAGE_ZONE')
+    region = os.getenv('BUNNY_REGION', 'de')  # Default to Germany
     
-    if not all([cloud_name, api_key, api_secret]):
-        print("❌ Cloudinary credentials not found in .env file!")
+    if not all([api_key, storage_zone]):
+        print("❌ Bunny.net credentials not found in .env file!")
         print("\nPlease add these lines to your .env file:")
-        print("CLOUDINARY_CLOUD_NAME=your_cloud_name")
-        print("CLOUDINARY_API_KEY=your_api_key")
-        print("CLOUDINARY_API_SECRET=your_api_secret")
-        print("\nGet your credentials from: https://cloudinary.com/console")
-        return False
+        print("BUNNY_API_KEY=your_api_key")
+        print("BUNNY_STORAGE_ZONE=your_storage_zone_name")
+        print("BUNNY_REGION=de  # or ny, la, sg, etc.")
+        print("\nGet your credentials from: https://panel.bunny.net/storage")
+        return None
     
-    try:
-        cloudinary.config(
-            cloud_name=cloud_name,
-            api_key=api_key,
-            api_secret=api_secret,
-            secure=True
-        )
-        print("✅ Cloudinary configured successfully")
-        return True
-    except Exception as e:
-        print(f"❌ Error configuring Cloudinary: {e}")
-        return False
+    config = {
+        'api_key': api_key,
+        'storage_zone': storage_zone,
+        'storage_endpoint': f'https://storage.bunnycdn.com/{storage_zone}',
+        'cdn_url': f'https://{storage_zone}.b-cdn.net'
+    }
+    
+    print("✅ Bunny.net configured successfully")
+    print(f"   Storage Zone: {storage_zone}")
+    print(f"   CDN URL: {config['cdn_url']}")
+    return config
 
-def upload_to_cloudinary(image_url, retries=3):
-    """Upload image URL to Cloudinary and return permanent URL"""
+def upload_to_bunny(image_url, bunny_config, retries=3):
+    """Upload image URL to Bunny.net and return permanent CDN URL"""
+    
+    # Generate unique filename from URL
+    url_hash = hashlib.md5(image_url.encode()).hexdigest()
+    filename = f"douyin_thumbnails/{url_hash}.jpg"
+    
     for attempt in range(retries):
         try:
-            response = cloudinary.uploader.upload(
-                image_url,
-                folder='douyin_thumbnails',  # Organize in a folder
-                resource_type='image'
+            # Download the image
+            img_response = requests.get(image_url, timeout=30)
+            if img_response.status_code != 200:
+                print(f"  ❌ Failed to download image: HTTP {img_response.status_code}")
+                return None
+            
+            # Upload to Bunny Storage
+            upload_url = f"{bunny_config['storage_endpoint']}/{filename}"
+            headers = {
+                'AccessKey': bunny_config['api_key'],
+                'Content-Type': 'application/octet-stream'
+            }
+            
+            upload_response = requests.put(
+                upload_url,
+                headers=headers,
+                data=img_response.content,
+                timeout=30
             )
-            return response['secure_url']
-        except CloudinaryError as e:
+            
+            if upload_response.status_code == 201:
+                # Return CDN URL
+                cdn_url = f"{bunny_config['cdn_url']}/{filename}"
+                return cdn_url
+            else:
+                if attempt < retries - 1:
+                    print(f"  ⚠️ Upload failed (attempt {attempt + 1}/{retries}), retrying...")
+                    continue
+                else:
+                    print(f"  ❌ Upload failed after {retries} attempts: HTTP {upload_response.status_code}")
+                    return None
+                    
+        except Exception as e:
             if attempt < retries - 1:
-                print(f"  ⚠️ Upload failed (attempt {attempt + 1}/{retries}), retrying...")
+                print(f"  ⚠️ Error (attempt {attempt + 1}/{retries}): {e}, retrying...")
                 continue
             else:
-                print(f"  ❌ Upload failed after {retries} attempts: {e}")
+                print(f"  ❌ Unexpected error after {retries} attempts: {e}")
                 return None
-        except Exception as e:
-            print(f"  ❌ Unexpected error: {e}")
-            return None
     return None
 
 def read_csv_with_comments(csv_path):
@@ -125,7 +151,7 @@ def write_csv_with_comments(csv_path, comments, fieldnames, rows, delimiter=',')
         writer.writeheader()
         writer.writerows(rows)
 
-def backup_thumbnails(csv_path):
+def backup_thumbnails(csv_path, bunny_config):
     """Main function to backup thumbnails from CSV"""
     
     print(f"📂 Processing CSV: {csv_path}")
@@ -177,7 +203,7 @@ def backup_thumbnails(csv_path):
         with lock:
             print(f"  [{index + 1}/{len(rows)}] Uploading thumbnail...")
         
-        backup_url = upload_to_cloudinary(thumbnail_url)
+        backup_url = upload_to_bunny(thumbnail_url, bunny_config)
         
         if backup_url:
             row[backup_column] = backup_url
@@ -252,14 +278,15 @@ def backup_thumbnails(csv_path):
 
 def main():
     """Main entry point"""
-    print("🔄 Douyin Thumbnail Backup Tool")
+    print("🔄 Douyin Thumbnail Backup Tool (Bunny.net)")
     print("=" * 50)
     
     # Load environment variables
     load_env()
     
-    # Setup Cloudinary
-    if not setup_cloudinary():
+    # Setup Bunny.net
+    bunny_config = setup_bunny()
+    if not bunny_config:
         sys.exit(1)
     
     # Get CSV file paths from user
@@ -356,7 +383,7 @@ def main():
         print(f"📄 File {i}/{len(csv_paths)}: {Path(csv_path).name}")
         print(f"{'='*50}")
         
-        success = backup_thumbnails(csv_path)
+        success = backup_thumbnails(csv_path, bunny_config)
         
         if success:
             total_success += 1

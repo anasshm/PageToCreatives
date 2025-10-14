@@ -14,7 +14,7 @@ Find all videos containing a specific product in their thumbnails using AI-power
 - ✅ Chrome cookie support to bypass login
 - ✅ 30-minute time limit with progress tracking
 - ✅ **~50x faster** than sequential processing
-- ✅ **Thumbnail backup** - Save expiring URLs to Cloudinary for permanent storage
+- ✅ **Thumbnail backup** - Save expiring URLs to Bunny.net for permanent storage (~$1-10/month)
 
 ## Installation
 
@@ -106,17 +106,17 @@ Edit `find_product_videos.py` to adjust:
 ## Thumbnail Backup Tool
 
 **Problem:** Douyin thumbnail URLs expire after some time.  
-**Solution:** Backup thumbnails to Cloudinary (permanent cloud storage).
+**Solution:** Backup thumbnails to Bunny.net (permanent, affordable cloud storage).
 
 ### Quick Start
 
 1. **One-time setup:**
    ```bash
-   # Install cloudinary
-   pip3 install cloudinary
+   # Dependencies already installed in requirements.txt
    
-   # Get free Cloudinary account at https://cloudinary.com
-   # Add credentials to .env file (see BACKUP_QUICK_START.txt)
+   # Get Bunny.net account at https://bunny.net
+   # Create storage zone and add credentials to .env file
+   # See BUNNY_SETUP.md for detailed instructions
    ```
 
 2. **Backup a Research CSV:**
@@ -126,19 +126,21 @@ Edit `find_product_videos.py` to adjust:
    ```
 
 3. **Result:**
-   - Creates `{filename}_backed.csv` with new `backup_thumbnail_url` column
-   - All thumbnails permanently stored on Cloudinary
+   - Creates `Backed_{filename}.csv` with new `backup_thumbnail_url` column
+   - All thumbnails permanently stored on Bunny.net CDN
    - Shows summary: successful/failed uploads
 
 **Features:**
 - ✅ Preserves all CSV data and comments
-- ✅ Adds permanent backup URLs
+- ✅ Adds permanent CDN backup URLs
 - ✅ Smart retry on failures (up to 3 attempts)
-- ✅ Stops if 10+ consecutive failures
+- ✅ Parallel uploads (10 concurrent)
 - ✅ Skips already backed-up images
-- ✅ Free tier: 25GB storage (thousands of thumbnails)
+- ✅ Cost-effective: ~$1-10/month (vs $90/month for Cloudinary)
+  - 100GB storage: ~$1/month
+  - 500GB storage: ~$5/month
 
-**See detailed guide:** `BACKUP_THUMBNAILS_USAGE.md`
+**See detailed guide:** `BUNNY_SETUP.md`
 
 ## Watch Finder Tool (1688 Product Search)
 
@@ -277,16 +279,20 @@ A watch fingerprint is generated from:
 - `find_product_videos.py` - Main product finder script
 - `douyin_watch_scraper.py` - Watch deduplication scraper (outputs watch_sources.csv)
 - `watch_prices.py` - 1688 product finder with drag-and-drop support
-- `backup_thumbnails.py` - Thumbnail backup to Cloudinary
+- `backup_thumbnails.py` - Thumbnail backup to Bunny.net
 - `tag_research_videos.py` - Tag research videos with product taxonomy
 - `generate_research_gallery.py` - Generate gallery from research videos
 - `generate_tagged_research_gallery.py` - Generate tagged gallery
+- `consolidate_watch_prices.py` - Consolidate watch prices from multiple CSVs
+- `generate_master_watch_gallery.py` - Generate master watch gallery
+- `tag_and_merge_watch_pages.py` - Tag and merge watch pages
 - `requirements.txt` - Python dependencies
 - `README.md` - This file
+- `BUNNY_SETUP.md` - Bunny.net setup guide (NEW)
 - `WATCH_SCRAPER_USAGE.md` - Watch scraper detailed guide
 - `LOCAL_IMAGE_USAGE.md` - Watch finder local image guide
-- `BACKUP_THUMBNAILS_USAGE.md` - Detailed backup tool guide
-- `BACKUP_QUICK_START.txt` - Quick setup instructions
+- `BACKUP_THUMBNAILS_USAGE.md` - Detailed backup tool guide (legacy Cloudinary)
+- `BACKUP_QUICK_START.txt` - Quick setup instructions (legacy)
 - `TAGGING_USAGE.md` - Video tagging guide
 - `FILTER_IMPROVEMENTS.md` - Filter improvements documentation
 - `product_taxonomy.json` - Product category taxonomy
