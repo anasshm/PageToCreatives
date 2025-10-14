@@ -120,7 +120,7 @@ def migrate_json(json_path, bunny_config):
     failed = 0
     lock = threading.Lock()
     
-    print(f"\n🚀 Migrating to Bunny.net (30 concurrent uploads)...")
+    print(f"\n🚀 Migrating to Bunny.net (20 concurrent uploads)...")
     print("=" * 60)
     
     def process_migration(index, video):
@@ -142,8 +142,8 @@ def migrate_json(json_path, bunny_config):
                 print(f"  [{index + 1}/{len(cloudinary_videos)}] ❌ Failed: {error}")
             return 'failed', video
     
-    # Use ThreadPoolExecutor for parallel migrations
-    max_workers = 30
+    # Use ThreadPoolExecutor for parallel migrations (20 concurrent, CPU-friendly)
+    max_workers = 20
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         futures = {executor.submit(process_migration, i, v): i for i, v in enumerate(cloudinary_videos)}
         

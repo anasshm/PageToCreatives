@@ -171,8 +171,8 @@ def backup_json_thumbnails(json_path, bunny_config, limit=None):
                 print(f"  [{index + 1}/{len(videos)}] ❌ Failed")
             return 'failed', video
     
-    # Use ThreadPoolExecutor for parallel uploads (30 concurrent, well under Bunny.net's 50 limit)
-    max_workers = 30
+    # Use ThreadPoolExecutor for parallel uploads (20 concurrent, well under Bunny.net's 50 limit)
+    max_workers = 20
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         # Submit all upload tasks
         futures = {executor.submit(process_thumbnail, i, video): i for i, video in enumerate(videos)}
