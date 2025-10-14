@@ -584,13 +584,18 @@ def save_cheapest_high_quality_match(reference_image_url, all_products_with_scor
 
 def save_all_products_to_csv(reference_image_url, all_products_with_scores):
     """Save all products with their scores to a detailed CSV file"""
+    # Create the Watches Detailed prices folder if it doesn't exist
+    detail_folder = 'Watches Detailed prices'
+    if not os.path.exists(detail_folder):
+        os.makedirs(detail_folder)
+    
     # Auto-increment filename if exists
     base_filename = 'Watched_prices_detailed'
-    csv_file = f'{base_filename}.csv'
+    csv_file = os.path.join(detail_folder, f'{base_filename}.csv')
     counter = 1
     
     while os.path.exists(csv_file):
-        csv_file = f'{base_filename}{counter}.csv'
+        csv_file = os.path.join(detail_folder, f'{base_filename}{counter}.csv')
         counter += 1
     
     try:
