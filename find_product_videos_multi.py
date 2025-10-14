@@ -299,70 +299,141 @@ def scroll_and_extract_with_cleanup(page, page_url, page_num, total_pages, max_d
     print(f"✅ Page {page_num}/{total_pages} complete. Total extracted: {len(all_videos)} videos")
     return all_videos
 
-def save_results(all_matching_videos, all_non_matching_videos, output_csv, all_page_urls):
-    """Save matching and non-matching videos to files"""
+def save_page_to_research(videos, page_url):
+    """Save a single page's raw videos to Research folder immediately"""
+    if not videos:
+        return
     
-    # Save matches to Matches folder
-    matches_folder = 'Matches'
-    if not os.path.exists(matches_folder):
-        os.makedirs(matches_folder)
-    
-    matches_file = os.path.join(matches_folder, output_csv)
-    
-    print(f"\n💾 Saving matches to {matches_file}...")
-    with open(matches_file, 'w', newline='', encoding='utf-8') as f:
-        # Write source pages as comments
-        f.write(f"# Source Pages ({len(all_page_urls)}):\n")
-        for i, url in enumerate(all_page_urls, 1):
-            f.write(f"#   {i}. {url}\n")
-        f.write(f"# Total Matches: {len(all_matching_videos)}\n")
-        f.write(f"# Date: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
-        
-        # Write CSV data
-        writer = csv.DictWriter(f, fieldnames=['video_url', 'thumbnail_url', 'likes', 'index', 'source_page'])
-        writer.writeheader()
-        writer.writerows(all_matching_videos)
-    
-    print(f"✅ Saved {len(all_matching_videos)} matches to {matches_file}")
-    
-    # Save non-matches to Research folder (grouped by source page)
-    if all_non_matching_videos:
-        print(f"\n💾 Saving non-matches to Research folder...")
         research_folder = 'Research'
         if not os.path.exists(research_folder):
             os.makedirs(research_folder)
         
-        # Group non-matches by source page
-        non_matches_by_page = {}
-        for video in all_non_matching_videos:
-            page_url = video.get('source_page', 'unknown')
-            if page_url not in non_matches_by_page:
-                non_matches_by_page[page_url] = []
-            non_matches_by_page[page_url].append(video)
-        
-        # Save each page's non-matches
-        for page_url, videos in non_matches_by_page.items():
             user_id = extract_user_id_from_url(page_url)
             if not user_id:
                 user_id = f"unknown_{hash(page_url) % 10000}"
             
             research_file = os.path.join(research_folder, f"{user_id}.csv")
             
+    print(f"💾 Saving {len(videos)} raw videos to Research/{user_id}.csv...")
             with open(research_file, 'w', newline='', encoding='utf-8') as f:
                 f.write(f"# Source Page: {page_url}\n")
-                f.write(f"# Non-Matches: {len(videos)}\n")
+        f.write(f"# Total Videos: {len(videos)}\n")
                 f.write(f"# Date: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
                 
                 writer = csv.DictWriter(f, fieldnames=['video_url', 'thumbnail_url', 'likes', 'index', 'source_page'])
                 writer.writeheader()
                 writer.writerows(videos)
             
-            print(f"  ✅ Saved {len(videos)} non-matches from {user_id}")
+    print(f"  ✅ Saved to Research/{user_id}.csv")
+
+def analyze_videos(videos, model, reference_image):
+    """Analyze a list of videos and return matches and non-matches"""
+    if not videos:
+        return [], []
+    
+    print(f"\n🔎 Analyzing {len(videos)} videos...")
+    
+    matching_videos = []
+    non_matching_videos = []
+    error_count = 0
+    error_types = {}
+    
+    # Process in batches
+    batch_size = 50
+    total_batches = (len(videos) + batch_size - 1) // batch_size
+    
+    with ThreadPoolExecutor(max_workers=50) as executor:
+        for batch_num in range(total_batches):
+            start_idx = batch_num * batch_size
+            end_idx = min(start_idx + batch_size, len(videos))
+            batch = videos[start_idx:end_idx]
+            
+            print(f"\n📦 Processing batch {batch_num + 1}/{total_batches} ({len(batch)} videos)")
+            print(f"   Videos {start_idx + 1}-{end_idx} of {len(videos)}")
+            
+            # Submit all videos in batch
+            futures = []
+            for i, video in enumerate(batch):
+                video_num = start_idx + i + 1
+                future = executor.submit(
+                    process_single_video,
+                    model, reference_image, video, video_num, len(videos)
+                )
+                futures.append((future, video))
+            
+            # Collect results
+            batch_matches = 0
+            batch_errors = 0
+            for future, video in futures:
+                try:
+                    is_match, error = future.result(timeout=30)
+                    
+                    if error:
+                        error_count += 1
+                        batch_errors += 1
+                        error_types[error] = error_types.get(error, 0) + 1
+                    elif is_match:
+                        matching_videos.append(video)
+                        batch_matches += 1
+                    else:
+                        non_matching_videos.append(video)
+                except Exception as e:
+                    error_count += 1
+                    batch_errors += 1
+            
+            print(f"   ✅ Batch complete: {batch_matches} matches, {batch_errors} errors")
+            
+            if batch_num < total_batches - 1:
+                time.sleep(0.5)
+    
+    if error_count > 0:
+        print(f"\n⚠️  Analysis errors: {error_count} videos")
+        for error_type, count in sorted(error_types.items(), key=lambda x: x[1], reverse=True):
+            if 'rate_limit' in error_type:
+                print(f"  🚫 Rate Limit: {count} videos")
+            elif 'download_failed' in error_type:
+                print(f"  ⚠️  Download Failed: {count} thumbnails")
+            else:
+                print(f"  ⚠️  {error_type}: {count} videos")
+    
+    return matching_videos, non_matching_videos
+
+def save_matches_incrementally(matches, output_csv, page_url, is_first_page, all_page_urls):
+    """Append matches to the Matches CSV file"""
+    if not matches:
+        return
+    
+    matches_folder = 'Matches'
+    if not os.path.exists(matches_folder):
+        os.makedirs(matches_folder)
+    
+    matches_file = os.path.join(matches_folder, output_csv)
+    
+    # Write mode: 'w' for first page, 'a' for subsequent pages
+    mode = 'w' if is_first_page else 'a'
+    
+    print(f"💾 Saving {len(matches)} matches to {matches_file}...")
+    with open(matches_file, mode, newline='', encoding='utf-8') as f:
+        # Write header only for first page
+        if is_first_page:
+            f.write(f"# Source Pages:\n")
+            for i, url in enumerate(all_page_urls, 1):
+                f.write(f"#   {i}. {url}\n")
+            f.write(f"# Date: {time.strftime('%Y-%m-%d %H:%M:%S')}\n")
+            
+            writer = csv.DictWriter(f, fieldnames=['video_url', 'thumbnail_url', 'likes', 'index', 'source_page'])
+            writer.writeheader()
+        else:
+            writer = csv.DictWriter(f, fieldnames=['video_url', 'thumbnail_url', 'likes', 'index', 'source_page'])
+        
+        writer.writerows(matches)
+    
+    print(f"  ✅ Saved {len(matches)} matches")
 
 def find_matching_videos_multi(page_urls, reference_image_path, output_csv='matching_videos.csv', max_duration_minutes=30):
     """Main function to find matching videos across multiple pages"""
     
-    print("🎬 Douyin Product Finder - Multi-Page Mode")
+    print("🎬 Douyin Product Finder - Multi-Page Mode (Sequential Processing)")
     print("=" * 50)
     print(f"📄 Processing {len(page_urls)} pages")
     
@@ -459,116 +530,83 @@ def find_matching_videos_multi(page_urls, reference_image_path, output_csv='matc
             print("\n⏸️  CAPTCHA Check - MULTI-PAGE MODE")
             print("=" * 50)
             print(f"Please complete CAPTCHAs in ALL {len(pages)} tabs if needed.")
-            print("When ALL CAPTCHAs are done, press ENTER to start scrolling...")
+            print("When ALL CAPTCHAs are done, press ENTER to start processing...")
             input()
             
-            # Phase 2: Process each page one by one (scroll → extract batches → close)
-            print("\n🔄 Phase 2: Processing pages with periodic extraction...")
+            # Phase 2: Process each page SEQUENTIALLY (scroll → save → analyze → close)
+            print("\n🔄 Phase 2: Sequential Processing (scroll → save → analyze → close)")
             print("=" * 50)
             
-            all_videos = []
             successfully_loaded_urls = [url for url in page_urls if url not in failed_urls]
             
+            total_matching_videos = []
+            total_non_matching_videos = []
+            total_videos_processed = 0
+            
             for i, page in enumerate(pages, 1):
-                print(f"\n📄 Processing Page {i}/{len(pages)}...")
+                current_page_url = successfully_loaded_urls[i-1]
+                
+                print(f"\n{'='*60}")
+                print(f"📄 PROCESSING PAGE {i}/{len(pages)}")
+                print(f"🔗 URL: {current_page_url}")
+                print(f"{'='*60}")
                 
                 page.bring_to_front()
                 
-                # Scroll and extract with periodic DOM cleanup
-                videos = scroll_and_extract_with_cleanup(page, successfully_loaded_urls[i-1], i, len(pages), max_duration_minutes)
-                all_videos.extend(videos)
+                # Step 1: Scroll and extract videos from THIS page
+                videos = scroll_and_extract_with_cleanup(page, current_page_url, i, len(pages), max_duration_minutes)
                 
-                print(f"✅ Page {i}/{len(pages)} extracted: {len(videos)} videos")
+                if not videos:
+                    print(f"⚠️  No videos found on page {i}. Skipping...")
+                    page.close()
+                    continue
                 
-                # Close tab to free RAM
-                print(f"🗑️  Closing Tab {i} to free RAM...")
+                print(f"✅ Extracted {len(videos)} videos from page {i}")
+                
+                # Step 2: Save raw videos to Research folder immediately
+                save_page_to_research(videos, current_page_url)
+                
+                # Step 3: Analyze videos from THIS page
+                page_matches, page_non_matches = analyze_videos(videos, model, reference_image)
+                
+                print(f"\n📊 Page {i} Results:")
+                print(f"   ✅ Matches: {len(page_matches)}")
+                print(f"   ❌ Non-matches: {len(page_non_matches)}")
+                
+                # Step 4: Save matches incrementally
+                if page_matches:
+                    is_first_page = (i == 1)
+                    save_matches_incrementally(page_matches, output_csv, current_page_url, is_first_page, successfully_loaded_urls)
+                
+                # Step 5: Accumulate totals
+                total_matching_videos.extend(page_matches)
+                total_non_matching_videos.extend(page_non_matches)
+                total_videos_processed += len(videos)
+                
+                # Step 6: Close tab to free RAM
+                print(f"\n🗑️  Closing Page {i} to free RAM...")
                 page.close()
-                print(f"✅ Tab {i} closed. Moving to next page...")
+                print(f"✅ Page {i} complete and closed")
+                
+                # Show cumulative progress
+                print(f"\n📈 CUMULATIVE PROGRESS:")
+                print(f"   Pages processed: {i}/{len(pages)}")
+                print(f"   Total videos: {total_videos_processed}")
+                print(f"   Total matches: {len(total_matching_videos)}")
+                print(f"   Total non-matches: {len(total_non_matching_videos)}")
             
-            print(f"\n✅ All pages processed! Total videos collected: {len(all_videos)}")
-            print(f"💾 All tabs closed. RAM freed.")
-            
-            if not all_videos:
-                print("❌ No videos found across all pages!")
-                browser.close()
-                return False
-            
-            # Now analyze ALL videos from ALL pages
-            print(f"\n🔎 Analyzing {len(all_videos)} videos from {len(pages)} pages...")
-            print("=" * 50)
-            
-            all_matching_videos = []
-            all_non_matching_videos = []
-            error_count = 0
-            error_types = {}
-            
-            # Process in batches
-            batch_size = 50
-            total_batches = (len(all_videos) + batch_size - 1) // batch_size
-            
-            with ThreadPoolExecutor(max_workers=50) as executor:
-                for batch_num in range(total_batches):
-                    start_idx = batch_num * batch_size
-                    end_idx = min(start_idx + batch_size, len(all_videos))
-                    batch = all_videos[start_idx:end_idx]
-                    
-                    print(f"\n📦 Processing batch {batch_num + 1}/{total_batches} ({len(batch)} videos)")
-                    print(f"   Videos {start_idx + 1}-{end_idx} of {len(all_videos)}")
-                    
-                    # Submit all videos in batch
-                    futures = []
-                    for i, video in enumerate(batch):
-                        video_num = start_idx + i + 1
-                        future = executor.submit(
-                            process_single_video,
-                            model, reference_image, video, video_num, len(all_videos)
-                        )
-                        futures.append((future, video))
-                    
-                    # Collect results
-                    batch_matches = 0
-                    batch_errors = 0
-                    for future, video in futures:
-                        try:
-                            is_match, error = future.result(timeout=30)
-                            
-                            if error:
-                                error_count += 1
-                                batch_errors += 1
-                                error_types[error] = error_types.get(error, 0) + 1
-                            elif is_match:
-                                all_matching_videos.append(video)
-                                batch_matches += 1
-                            else:
-                                all_non_matching_videos.append(video)
-                        except Exception as e:
-                            error_count += 1
-                            batch_errors += 1
-                    
-                    print(f"   ✅ Batch complete: {batch_matches} matches, {batch_errors} errors")
-                    
-                    if batch_num < total_batches - 1:
-                        time.sleep(0.5)
-            
-            # Save all results
-            save_results(all_matching_videos, all_non_matching_videos, output_csv, successfully_loaded_urls)
-            
-            # Print summary
-            print(f"\n🎉 Multi-page search complete!")
-            print(f"📊 Total pages processed: {len(pages)}")
-            print(f"📊 Total videos analyzed: {len(all_videos)}")
-            print(f"✅ Total matches: {len(all_matching_videos)}")
-            print(f"❌ Total non-matches: {len(all_non_matching_videos)}")
-            
-            if error_count > 0:
-                print(f"\n⚠️  ERRORS ENCOUNTERED: {error_count} videos failed")
-                for error_type, count in sorted(error_types.items(), key=lambda x: x[1], reverse=True):
-                    if 'rate_limit' in error_type:
-                        print(f"  🚫 Rate Limit: {count} videos")
-                    elif 'download_failed' in error_type:
-                        print(f"  ⚠️  Download Failed: {count} thumbnails")
-                    else:
-                        print(f"  ⚠️  {error_type}: {count} videos")
+            # Final summary
+            print(f"\n{'='*60}")
+            print(f"🎉 ALL PAGES COMPLETE!")
+            print(f"{'='*60}")
+            print(f"📊 Final Statistics:")
+            print(f"   ✅ Pages processed: {len(pages)}")
+            print(f"   📹 Total videos analyzed: {total_videos_processed}")
+            print(f"   ✅ Total matches: {len(total_matching_videos)}")
+            print(f"   ❌ Total non-matches: {len(total_non_matching_videos)}")
+            print(f"\n💾 Results saved:")
+            print(f"   Matches: Matches/{output_csv}")
+            print(f"   Non-matches: Research/ folder (by user ID)")
             
             # Save cookies for future use
             if not os.path.exists('douyin_cookies.json'):
