@@ -216,8 +216,8 @@ def backup_thumbnails(csv_path, bunny_config):
                 print(f"  [{index + 1}/{len(rows)}] ❌ Failed")
             return 'failed', row
     
-    # Use ThreadPoolExecutor for parallel uploads (10 concurrent uploads recommended by Cloudinary)
-    max_workers = 10
+    # Use ThreadPoolExecutor for parallel uploads (30 concurrent, well under Bunny.net's 50 limit)
+    max_workers = 30
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         # Submit all upload tasks
         futures = {executor.submit(process_thumbnail, i, row): i for i, row in enumerate(rows)}
