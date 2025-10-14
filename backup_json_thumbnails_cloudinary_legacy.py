@@ -1,17 +1,18 @@
 #!/usr/bin/env python3
 """
-Backup JSON Thumbnail URLs to Bunny.net
-Uploads expiring Douyin thumbnails to Bunny.net and generates HTML gallery
+Backup JSON Thumbnail URLs to Cloudinary
+Uploads expiring Douyin thumbnails to Cloudinary and generates HTML gallery
 """
 
 import os
 import sys
 import json
 from pathlib import Path
-import requests
+import cloudinary
+import cloudinary.uploader
+from cloudinary.exceptions import Error as CloudinaryError
 from concurrent.futures import ThreadPoolExecutor, as_completed
 import threading
-import hashlib
 
 def load_env():
     """Load environment variables from .env file"""
@@ -23,81 +24,54 @@ def load_env():
                     key, value = line.split('=', 1)
                     os.environ[key.strip()] = value.strip()
 
-def setup_bunny():
-    """Setup Bunny.net configuration from environment variables"""
-    api_key = os.getenv('BUNNY_API_KEY')
-    storage_zone = os.getenv('BUNNY_STORAGE_ZONE')
-    region = os.getenv('BUNNY_REGION', 'de')
+def setup_cloudinary():
+    """Setup Cloudinary configuration from environment variables"""
+    cloud_name = os.getenv('CLOUDINARY_CLOUD_NAME')
+    api_key = os.getenv('CLOUDINARY_API_KEY')
+    api_secret = os.getenv('CLOUDINARY_API_SECRET')
     
-    if not all([api_key, storage_zone]):
-        print("❌ Bunny.net credentials not found in .env file!")
+    if not all([cloud_name, api_key, api_secret]):
+        print("❌ Cloudinary credentials not found in .env file!")
         print("\nPlease add these lines to your .env file:")
-        print("BUNNY_API_KEY=your_api_key")
-        print("BUNNY_STORAGE_ZONE=your_storage_zone_name")
-        print("BUNNY_REGION=de  # or ny, la, sg, etc.")
-        print("\nGet your credentials from: https://panel.bunny.net/storage")
-        return None
+        print("CLOUDINARY_CLOUD_NAME=your_cloud_name")
+        print("CLOUDINARY_API_KEY=your_api_key")
+        print("CLOUDINARY_API_SECRET=your_api_secret")
+        print("\nGet your credentials from: https://cloudinary.com/console")
+        return False
     
-    config = {
-        'api_key': api_key,
-        'storage_zone': storage_zone,
-        'storage_endpoint': f'https://storage.bunnycdn.com/{storage_zone}',
-        'cdn_url': f'https://{storage_zone}.b-cdn.net'
-    }
-    
-    print("✅ Bunny.net configured successfully")
-    print(f"   Storage Zone: {storage_zone}")
-    print(f"   CDN URL: {config['cdn_url']}")
-    return config
+    try:
+        cloudinary.config(
+            cloud_name=cloud_name,
+            api_key=api_key,
+            api_secret=api_secret,
+            secure=True
+        )
+        print("✅ Cloudinary configured successfully")
+        return True
+    except Exception as e:
+        print(f"❌ Error configuring Cloudinary: {e}")
+        return False
 
-def upload_to_bunny(image_url, bunny_config, retries=3):
-    """Upload image URL to Bunny.net and return permanent CDN URL"""
-    
-    # Generate unique filename from URL
-    url_hash = hashlib.md5(image_url.encode()).hexdigest()
-    filename = f"douyin_thumbnails/{url_hash}.jpg"
-    
+def upload_to_cloudinary(image_url, retries=3):
+    """Upload image URL to Cloudinary and return permanent URL"""
     for attempt in range(retries):
         try:
-            # Download the image
-            img_response = requests.get(image_url, timeout=30)
-            if img_response.status_code != 200:
-                print(f"  ❌ Failed to download image: HTTP {img_response.status_code}")
-                return None
-            
-            # Upload to Bunny Storage
-            upload_url = f"{bunny_config['storage_endpoint']}/{filename}"
-            headers = {
-                'AccessKey': bunny_config['api_key'],
-                'Content-Type': 'application/octet-stream'
-            }
-            
-            upload_response = requests.put(
-                upload_url,
-                headers=headers,
-                data=img_response.content,
-                timeout=30
+            response = cloudinary.uploader.upload(
+                image_url,
+                folder='douyin_thumbnails',  # Organize in a folder
+                resource_type='image'
             )
-            
-            if upload_response.status_code == 201:
-                # Return CDN URL
-                cdn_url = f"{bunny_config['cdn_url']}/{filename}"
-                return cdn_url
-            else:
-                if attempt < retries - 1:
-                    print(f"  ⚠️ Upload failed (attempt {attempt + 1}/{retries}), retrying...")
-                    continue
-                else:
-                    print(f"  ❌ Upload failed after {retries} attempts: HTTP {upload_response.status_code}")
-                    return None
-                    
-        except Exception as e:
+            return response['secure_url']
+        except CloudinaryError as e:
             if attempt < retries - 1:
-                print(f"  ⚠️ Error (attempt {attempt + 1}/{retries}): {e}, retrying...")
+                print(f"  ⚠️ Upload failed (attempt {attempt + 1}/{retries}), retrying...")
                 continue
             else:
-                print(f"  ❌ Unexpected error after {retries} attempts: {e}")
+                print(f"  ❌ Upload failed after {retries} attempts: {e}")
                 return None
+        except Exception as e:
+            print(f"  ❌ Unexpected error: {e}")
+            return None
     return None
 
 def load_taxonomy():
@@ -108,7 +82,7 @@ def load_taxonomy():
     except:
         return None
 
-def backup_json_thumbnails(json_path, bunny_config, limit=None):
+def backup_json_thumbnails(json_path, limit=None):
     """Main function to backup thumbnails from JSON and generate HTML"""
     
     print(f"📂 Processing JSON: {json_path}")
@@ -136,7 +110,7 @@ def backup_json_thumbnails(json_path, bunny_config, limit=None):
     failed = 0
     lock = threading.Lock()
     
-    print(f"\n🔄 Uploading thumbnails to Bunny.net (parallel processing)...")
+    print(f"\n🔄 Uploading thumbnails to Cloudinary (parallel processing)...")
     print("=" * 50)
     
     def process_thumbnail(index, video):
@@ -158,7 +132,7 @@ def backup_json_thumbnails(json_path, bunny_config, limit=None):
         with lock:
             print(f"  [{index + 1}/{len(videos)}] Uploading thumbnail...")
         
-        backup_url = upload_to_bunny(thumbnail_url, bunny_config)
+        backup_url = upload_to_cloudinary(thumbnail_url)
         
         if backup_url:
             video['backup_thumbnail_url'] = backup_url
@@ -171,8 +145,8 @@ def backup_json_thumbnails(json_path, bunny_config, limit=None):
                 print(f"  [{index + 1}/{len(videos)}] ❌ Failed")
             return 'failed', video
     
-    # Use ThreadPoolExecutor for parallel uploads (30 concurrent, well under Bunny.net's 50 limit)
-    max_workers = 30
+    # Use ThreadPoolExecutor for parallel uploads
+    max_workers = 10
     with ThreadPoolExecutor(max_workers=max_workers) as executor:
         # Submit all upload tasks
         futures = {executor.submit(process_thumbnail, i, video): i for i, video in enumerate(videos)}
@@ -194,9 +168,9 @@ def backup_json_thumbnails(json_path, bunny_config, limit=None):
     if failure_rate > 0.5 and failed > 10:
         print(f"\n⚠️  WARNING: High failure rate detected ({failed}/{len(videos)} failed)!")
         print("Possible causes:")
-        print("  - Bunny.net API quota exceeded")
+        print("  - Cloudinary API quota exceeded")
         print("  - Network connection issues")
-        print("  - Invalid Bunny.net credentials")
+        print("  - Invalid Cloudinary credentials")
         return False
     
     # Create output filenames
@@ -595,7 +569,7 @@ def generate_html_gallery(videos, output_path):
 </head>
 <body>
     <h1>☁️ Backed Research Gallery</h1>
-    <div class="subtitle">Using Bunny.net CDN backup URLs - thumbnails won't expire!</div>
+    <div class="subtitle">Using Cloudinary backup URLs - thumbnails won't expire!</div>
     
     <div class="search-section">
         <div class="search-box">
@@ -1060,15 +1034,14 @@ def generate_html_gallery(videos, output_path):
 
 def main():
     """Main entry point"""
-    print("🔄 Douyin JSON Thumbnail Backup Tool (Bunny.net)")
+    print("🔄 Douyin JSON Thumbnail Backup Tool")
     print("=" * 50)
     
     # Load environment variables
     load_env()
     
-    # Setup Bunny.net
-    bunny_config = setup_bunny()
-    if not bunny_config:
+    # Setup Cloudinary
+    if not setup_cloudinary():
         sys.exit(1)
     
     # Check for command line arguments
@@ -1114,7 +1087,7 @@ def main():
         sys.exit(1)
     
     # Process JSON
-    success = backup_json_thumbnails(json_path, bunny_config, limit=limit)
+    success = backup_json_thumbnails(json_path, limit=limit)
     
     if not success:
         print("\n❌ Failed to backup thumbnails")
