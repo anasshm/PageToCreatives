@@ -1,0 +1,12 @@
+{
+  "manifest_version": 3,
+  "name": "AliPrice Image Search",
+  "version": "1.0",
+  "description": "Search images on AliPrice via right-click context menu with AI comparison",
+  "permissions": ["contextMenus", "downloads", "activeTab", "scripting"],
+  "host_permissions": ["https://www.aliprice.com/*", "https://*/*"],
+  "background": {
+    "service_worker": "background.js"
+  }
+}
+
